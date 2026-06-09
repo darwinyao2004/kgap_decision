@@ -1,0 +1,7 @@
+variant,action_macro_f1,gap_type_macro_f1,score,delta_action_macro_f1,delta_score
+Full - no gap type classifier,1.0,1.0,0.94225,0.0,0.0
+Full - no evidence sufficiency verifier,1.0,1.0,0.94225,0.0,0.0
+Full - no self-consistency features,1.0,1.0,0.94225,0.0,0.0
+Full - no question utility ranker,1.0,1.0,0.94225,0.0,0.0
+Full - no evidence-side features,1.0,1.0,0.94225,0.0,0.0
+Full - no model uncertainty features,1.0,1.0,0.94225,0.0,0.0

@@ -1,0 +1,5 @@
+{
+  "note": "API did not pass strict JSON probe; offline fallback used.",
+  "zai_api_available": false,
+  "zai_api_key_present": true
+}

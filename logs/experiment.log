@@ -1,0 +1,169 @@
+2026-06-07 12:09:44,749 INFO knowledge_gap_decision.data_build: Wrote dataset with 100 records
+2026-06-07 12:09:44,750 INFO __main__: Loaded splits: train=60 val=20 test=20
+2026-06-07 12:09:44,791 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 1: ConnectError
+2026-06-07 12:09:46,316 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 2: ConnectError
+2026-06-07 12:09:49,333 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 3: ConnectError
+2026-06-07 12:09:50,121 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 12:10:09,720 INFO knowledge_gap_decision.data_build: Wrote dataset with 100 records
+2026-06-07 12:10:09,721 INFO __main__: Loaded splits: train=60 val=20 test=20
+2026-06-07 12:10:10,419 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 12:10:33,515 INFO knowledge_gap_decision.data_build: Wrote dataset with 100 records
+2026-06-07 12:10:33,516 INFO __main__: Loaded splits: train=60 val=20 test=20
+2026-06-07 12:10:34,113 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 12:10:34,867 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 12:10:35,039 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 12:10:35,210 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 12:10:35,382 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 12:10:35,553 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 12:10:35,725 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 12:10:45,813 INFO __main__: Experiment finished
+2026-06-07 12:10:51,693 INFO knowledge_gap_decision.data_build: Wrote dataset with 100 records
+2026-06-07 12:10:51,694 INFO __main__: Loaded splits: train=60 val=20 test=20
+2026-06-07 12:10:51,727 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 1: ConnectError
+2026-06-07 12:10:53,247 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 2: ConnectError
+2026-06-07 12:10:56,263 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 3: ConnectError
+2026-06-07 12:10:57,020 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 12:10:57,504 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 12:10:57,676 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 12:10:57,848 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 12:10:58,020 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 12:10:58,193 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 12:10:58,367 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 12:11:08,396 INFO __main__: Experiment finished
+2026-06-07 12:11:52,823 INFO knowledge_gap_decision.data_build: Wrote dataset with 100 records
+2026-06-07 12:11:52,825 INFO knowledge_gap_decision.run_experiment: Loaded splits: train=60 val=20 test=20
+2026-06-07 12:11:53,531 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 12:11:54,002 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 12:11:54,170 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 12:11:54,334 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 12:11:54,498 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 12:11:54,663 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 12:11:54,831 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 12:12:04,675 INFO knowledge_gap_decision.run_experiment: Experiment finished
+2026-06-07 12:12:15,979 INFO knowledge_gap_decision.data_build: Wrote dataset with 100 records
+2026-06-07 12:12:15,980 INFO __main__: Loaded splits: train=60 val=20 test=20
+2026-06-07 12:12:16,016 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 1: ConnectError
+2026-06-07 12:12:17,535 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 2: ConnectError
+2026-06-07 12:12:20,552 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 3: ConnectError
+2026-06-07 12:12:21,325 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 12:12:21,906 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 12:12:22,079 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 12:12:22,250 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 12:12:22,422 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 12:12:22,596 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 12:12:22,770 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 12:12:32,867 INFO __main__: Experiment finished
+2026-06-07 12:13:06,919 INFO knowledge_gap_decision.data_build: Wrote dataset with 100 records
+2026-06-07 12:13:06,920 INFO __main__: Loaded splits: train=60 val=20 test=20
+2026-06-07 12:13:06,953 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 1: ConnectError
+2026-06-07 12:13:08,473 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 2: ConnectError
+2026-06-07 12:13:11,492 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 3: ConnectError
+2026-06-07 12:13:12,231 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 12:13:12,693 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 12:13:12,862 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 12:13:13,027 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 12:13:13,193 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 12:13:13,355 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 12:13:13,520 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 12:13:23,281 INFO __main__: Experiment finished
+2026-06-07 12:13:44,061 INFO knowledge_gap_decision.data_build: Wrote dataset with 100 records
+2026-06-07 12:13:44,062 INFO knowledge_gap_decision.run_experiment: Loaded splits: train=60 val=20 test=20
+2026-06-07 12:13:44,752 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 12:13:45,221 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 12:13:45,388 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 12:13:45,554 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 12:13:45,720 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 12:13:45,886 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 12:13:46,050 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 12:13:55,836 INFO knowledge_gap_decision.run_experiment: Experiment finished
+2026-06-07 12:14:02,494 INFO knowledge_gap_decision.data_build: Wrote dataset with 100 records
+2026-06-07 12:14:02,495 INFO __main__: Loaded splits: train=60 val=20 test=20
+2026-06-07 12:14:02,524 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 1: ConnectError
+2026-06-07 12:14:04,048 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 2: ConnectError
+2026-06-07 12:14:07,063 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 3: ConnectError
+2026-06-07 12:14:07,788 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 12:14:08,249 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 12:14:08,416 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 12:14:08,583 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 12:14:08,755 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 12:14:08,929 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 12:14:09,097 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 12:14:18,796 INFO __main__: Experiment finished
+2026-06-07 12:14:33,328 INFO knowledge_gap_decision.data_build: Wrote dataset with 800 records
+2026-06-07 12:14:33,333 INFO __main__: Loaded splits: train=480 val=160 test=160
+2026-06-07 12:14:33,362 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 1: ConnectError
+2026-06-07 12:14:34,880 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 2: ConnectError
+2026-06-07 12:14:37,898 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 3: ConnectError
+2026-06-07 12:14:39,374 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 12:14:39,891 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 12:14:40,095 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 12:14:40,299 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 12:14:40,507 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 12:14:40,702 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 12:14:40,906 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 12:14:54,530 INFO __main__: Experiment finished
+2026-06-07 12:15:27,404 INFO knowledge_gap_decision.data_build: Wrote dataset with 800 records
+2026-06-07 12:15:27,409 INFO __main__: Loaded splits: train=480 val=160 test=160
+2026-06-07 12:15:27,440 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 1: ConnectError
+2026-06-07 12:15:28,960 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 2: ConnectError
+2026-06-07 12:15:31,980 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 3: ConnectError
+2026-06-07 12:15:33,455 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 12:15:33,969 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 12:15:34,174 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 12:15:34,376 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 12:15:34,580 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 12:15:34,777 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 12:15:34,979 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 12:15:48,423 INFO __main__: Experiment finished
+2026-06-07 12:16:49,318 INFO knowledge_gap_decision.data_build: Wrote dataset with 800 records
+2026-06-07 12:16:49,328 INFO __main__: Loaded splits: train=480 val=160 test=160
+2026-06-07 12:16:49,367 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 1: ConnectError
+2026-06-07 12:16:50,886 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 2: ConnectError
+2026-06-07 12:16:53,903 WARNING knowledge_gap_decision.zai_client: Z.ai request failed on attempt 3: ConnectError
+2026-06-07 12:16:55,376 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 12:16:55,890 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 12:16:56,094 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 12:16:56,294 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 12:16:56,497 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 12:16:56,696 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 12:16:56,897 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 12:17:10,419 INFO __main__: Experiment finished
+2026-06-07 16:40:05,862 INFO knowledge_gap_decision.data_build: Wrote dataset with 800 records
+2026-06-07 16:40:05,868 INFO __main__: Loaded splits: train=480 val=160 test=160
+2026-06-07 16:40:07,339 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 16:40:07,856 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 16:40:08,059 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 16:40:08,257 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 16:40:08,457 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 16:40:08,652 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 16:40:08,852 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 16:40:22,944 INFO knowledge_gap_decision.models: Full Method seed 13 predictions generated
+2026-06-07 16:40:23,607 INFO knowledge_gap_decision.models: Full Method seed 42 predictions generated
+2026-06-07 16:40:24,266 INFO knowledge_gap_decision.models: Full Method seed 101 predictions generated
+2026-06-07 16:40:24,274 INFO __main__: Experiment finished
+2026-06-07 16:41:05,728 INFO knowledge_gap_decision.data_build: Wrote dataset with 800 records
+2026-06-07 16:41:05,734 INFO __main__: Loaded splits: train=480 val=160 test=160
+2026-06-07 16:41:07,212 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 16:41:07,716 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 16:41:07,918 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 16:41:08,119 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 16:41:08,320 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 16:41:08,524 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 16:41:08,725 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 16:41:22,848 INFO knowledge_gap_decision.models: Full Method seed 13 predictions generated
+2026-06-07 16:41:23,520 INFO knowledge_gap_decision.models: Full Method seed 42 predictions generated
+2026-06-07 16:41:24,208 INFO knowledge_gap_decision.models: Full Method seed 101 predictions generated
+2026-06-07 16:41:24,215 INFO __main__: Experiment finished
+2026-06-07 16:42:21,316 INFO knowledge_gap_decision.data_build: Wrote dataset with 800 records
+2026-06-07 16:42:21,321 INFO __main__: Loaded splits: train=480 val=160 test=160
+2026-06-07 16:42:22,777 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-07 16:42:23,284 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-07 16:42:23,487 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-07 16:42:23,688 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-07 16:42:23,892 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-07 16:42:24,091 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-07 16:42:24,290 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-07 16:42:38,417 INFO knowledge_gap_decision.models: Full Method seed 13 predictions generated
+2026-06-07 16:42:39,097 INFO knowledge_gap_decision.models: Full Method seed 42 predictions generated
+2026-06-07 16:42:39,783 INFO knowledge_gap_decision.models: Full Method seed 101 predictions generated
+2026-06-07 16:42:39,790 INFO __main__: Experiment finished

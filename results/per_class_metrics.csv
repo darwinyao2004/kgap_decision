@@ -1,0 +1,121 @@
+method,task,label,precision,recall,f1,support
+Always Answer,gap_type,sufficient_information,0.3,1.0,0.46153846153846156,48
+Always Answer,gap_type,user_info_missing,0.0,0.0,0.0,14
+Always Answer,gap_type,evidence_missing,0.0,0.0,0.0,26
+Always Answer,gap_type,ambiguous_question,0.0,0.0,0.0,18
+Always Answer,gap_type,false_premise,0.0,0.0,0.0,14
+Always Answer,gap_type,time_sensitive,0.0,0.0,0.0,34
+Always Answer,gap_type,high_risk_or_expert_needed,0.0,0.0,0.0,6
+Always Answer,action,answer,0.3,1.0,0.46153846153846156,48
+Always Answer,action,ask,0.0,0.0,0.0,32
+Always Answer,action,retrieve,0.0,0.0,0.0,48
+Always Answer,action,abstain,0.0,0.0,0.0,18
+Always Answer,action,challenge_premise,0.0,0.0,0.0,14
+Always Ask,gap_type,sufficient_information,0.3,1.0,0.46153846153846156,48
+Always Ask,gap_type,user_info_missing,0.0,0.0,0.0,14
+Always Ask,gap_type,evidence_missing,0.0,0.0,0.0,26
+Always Ask,gap_type,ambiguous_question,0.0,0.0,0.0,18
+Always Ask,gap_type,false_premise,0.0,0.0,0.0,14
+Always Ask,gap_type,time_sensitive,0.0,0.0,0.0,34
+Always Ask,gap_type,high_risk_or_expert_needed,0.0,0.0,0.0,6
+Always Ask,action,answer,0.0,0.0,0.0,48
+Always Ask,action,ask,0.2,1.0,0.3333333333333333,32
+Always Ask,action,retrieve,0.0,0.0,0.0,48
+Always Ask,action,abstain,0.0,0.0,0.0,18
+Always Ask,action,challenge_premise,0.0,0.0,0.0,14
+RAG Similarity Threshold,gap_type,sufficient_information,0.0,0.0,0.0,48
+RAG Similarity Threshold,gap_type,user_info_missing,0.18421052631578946,0.5,0.2692307692307692,14
+RAG Similarity Threshold,gap_type,evidence_missing,0.0,0.0,0.0,26
+RAG Similarity Threshold,gap_type,ambiguous_question,0.0,0.0,0.0,18
+RAG Similarity Threshold,gap_type,false_premise,0.25,1.0,0.4,14
+RAG Similarity Threshold,gap_type,time_sensitive,1.0,1.0,1.0,34
+RAG Similarity Threshold,gap_type,high_risk_or_expert_needed,1.0,1.0,1.0,6
+RAG Similarity Threshold,action,answer,0.0,0.0,0.0,48
+RAG Similarity Threshold,action,ask,0.42105263157894735,0.5,0.45714285714285713,32
+RAG Similarity Threshold,action,retrieve,0.5666666666666667,0.7083333333333334,0.6296296296296297,48
+RAG Similarity Threshold,action,abstain,1.0,0.3333333333333333,0.5,18
+RAG Similarity Threshold,action,challenge_premise,0.25,1.0,0.4,14
+Self-Consistency Baseline,gap_type,sufficient_information,0.0,0.0,0.0,48
+Self-Consistency Baseline,gap_type,user_info_missing,0.0,0.0,0.0,14
+Self-Consistency Baseline,gap_type,evidence_missing,0.28888888888888886,1.0,0.4482758620689655,26
+Self-Consistency Baseline,gap_type,ambiguous_question,0.5625,0.5,0.5294117647058824,18
+Self-Consistency Baseline,gap_type,false_premise,1.0,1.0,1.0,14
+Self-Consistency Baseline,gap_type,time_sensitive,1.0,1.0,1.0,34
+Self-Consistency Baseline,gap_type,high_risk_or_expert_needed,1.0,1.0,1.0,6
+Self-Consistency Baseline,action,answer,0.0,0.0,0.0,48
+Self-Consistency Baseline,action,ask,1.0,0.5,0.6666666666666666,32
+Self-Consistency Baseline,action,retrieve,0.3870967741935484,1.0,0.5581395348837209,48
+Self-Consistency Baseline,action,abstain,1.0,0.3333333333333333,0.5,18
+Self-Consistency Baseline,action,challenge_premise,1.0,1.0,1.0,14
+Prompted LLM Baseline,gap_type,sufficient_information,0.3,1.0,0.46153846153846156,48
+Prompted LLM Baseline,gap_type,user_info_missing,0.0,0.0,0.0,14
+Prompted LLM Baseline,gap_type,evidence_missing,0.0,0.0,0.0,26
+Prompted LLM Baseline,gap_type,ambiguous_question,0.0,0.0,0.0,18
+Prompted LLM Baseline,gap_type,false_premise,0.0,0.0,0.0,14
+Prompted LLM Baseline,gap_type,time_sensitive,0.0,0.0,0.0,34
+Prompted LLM Baseline,gap_type,high_risk_or_expert_needed,0.0,0.0,0.0,6
+Prompted LLM Baseline,action,answer,0.3,1.0,0.46153846153846156,48
+Prompted LLM Baseline,action,ask,0.0,0.0,0.0,32
+Prompted LLM Baseline,action,retrieve,0.0,0.0,0.0,48
+Prompted LLM Baseline,action,abstain,0.0,0.0,0.0,18
+Prompted LLM Baseline,action,challenge_premise,0.0,0.0,0.0,14
+Logistic Regression,gap_type,sufficient_information,1.0,1.0,1.0,48
+Logistic Regression,gap_type,user_info_missing,1.0,1.0,1.0,14
+Logistic Regression,gap_type,evidence_missing,1.0,1.0,1.0,26
+Logistic Regression,gap_type,ambiguous_question,1.0,1.0,1.0,18
+Logistic Regression,gap_type,false_premise,1.0,1.0,1.0,14
+Logistic Regression,gap_type,time_sensitive,1.0,1.0,1.0,34
+Logistic Regression,gap_type,high_risk_or_expert_needed,1.0,1.0,1.0,6
+Logistic Regression,action,answer,1.0,1.0,1.0,48
+Logistic Regression,action,ask,1.0,1.0,1.0,32
+Logistic Regression,action,retrieve,1.0,1.0,1.0,48
+Logistic Regression,action,abstain,1.0,1.0,1.0,18
+Logistic Regression,action,challenge_premise,1.0,1.0,1.0,14
+Random Forest,gap_type,sufficient_information,1.0,1.0,1.0,48
+Random Forest,gap_type,user_info_missing,1.0,1.0,1.0,14
+Random Forest,gap_type,evidence_missing,1.0,1.0,1.0,26
+Random Forest,gap_type,ambiguous_question,1.0,1.0,1.0,18
+Random Forest,gap_type,false_premise,1.0,1.0,1.0,14
+Random Forest,gap_type,time_sensitive,1.0,1.0,1.0,34
+Random Forest,gap_type,high_risk_or_expert_needed,1.0,1.0,1.0,6
+Random Forest,action,answer,1.0,1.0,1.0,48
+Random Forest,action,ask,1.0,1.0,1.0,32
+Random Forest,action,retrieve,1.0,1.0,1.0,48
+Random Forest,action,abstain,1.0,1.0,1.0,18
+Random Forest,action,challenge_premise,1.0,1.0,1.0,14
+GBDT,gap_type,sufficient_information,1.0,1.0,1.0,48
+GBDT,gap_type,user_info_missing,1.0,1.0,1.0,14
+GBDT,gap_type,evidence_missing,1.0,1.0,1.0,26
+GBDT,gap_type,ambiguous_question,1.0,1.0,1.0,18
+GBDT,gap_type,false_premise,1.0,1.0,1.0,14
+GBDT,gap_type,time_sensitive,1.0,1.0,1.0,34
+GBDT,gap_type,high_risk_or_expert_needed,1.0,1.0,1.0,6
+GBDT,action,answer,1.0,1.0,1.0,48
+GBDT,action,ask,1.0,1.0,1.0,32
+GBDT,action,retrieve,1.0,1.0,1.0,48
+GBDT,action,abstain,1.0,1.0,1.0,18
+GBDT,action,challenge_premise,1.0,1.0,1.0,14
+Text Encoder Classifier,gap_type,sufficient_information,1.0,1.0,1.0,48
+Text Encoder Classifier,gap_type,user_info_missing,1.0,1.0,1.0,14
+Text Encoder Classifier,gap_type,evidence_missing,1.0,1.0,1.0,26
+Text Encoder Classifier,gap_type,ambiguous_question,1.0,1.0,1.0,18
+Text Encoder Classifier,gap_type,false_premise,1.0,1.0,1.0,14
+Text Encoder Classifier,gap_type,time_sensitive,1.0,1.0,1.0,34
+Text Encoder Classifier,gap_type,high_risk_or_expert_needed,1.0,1.0,1.0,6
+Text Encoder Classifier,action,answer,1.0,1.0,1.0,48
+Text Encoder Classifier,action,ask,1.0,1.0,1.0,32
+Text Encoder Classifier,action,retrieve,1.0,1.0,1.0,48
+Text Encoder Classifier,action,abstain,1.0,1.0,1.0,18
+Text Encoder Classifier,action,challenge_premise,1.0,1.0,1.0,14
+Full Method,gap_type,sufficient_information,1.0,1.0,1.0,48
+Full Method,gap_type,user_info_missing,1.0,1.0,1.0,14
+Full Method,gap_type,evidence_missing,1.0,1.0,1.0,26
+Full Method,gap_type,ambiguous_question,1.0,1.0,1.0,18
+Full Method,gap_type,false_premise,1.0,1.0,1.0,14
+Full Method,gap_type,time_sensitive,1.0,1.0,1.0,34
+Full Method,gap_type,high_risk_or_expert_needed,1.0,1.0,1.0,6
+Full Method,action,answer,1.0,1.0,1.0,48
+Full Method,action,ask,1.0,1.0,1.0,32
+Full Method,action,retrieve,1.0,1.0,1.0,48
+Full Method,action,abstain,1.0,1.0,1.0,18
+Full Method,action,challenge_premise,1.0,1.0,1.0,14

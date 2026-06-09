@@ -1,0 +1,13 @@
+label_type,label,count
+gap_type,sufficient_information,218
+gap_type,ambiguous_question,74
+gap_type,user_info_missing,74
+gap_type,time_sensitive,146
+gap_type,false_premise,72
+gap_type,evidence_missing,144
+gap_type,high_risk_or_expert_needed,72
+gold_action,answer,218
+gold_action,ask,148
+gold_action,retrieve,218
+gold_action,challenge_premise,72
+gold_action,abstain,144

@@ -1,0 +1,37 @@
+{
+  "api_status": {
+    "note": "API did not pass strict JSON probe; offline fallback used.",
+    "zai_api_available": false,
+    "zai_api_key_present": true
+  },
+  "best_method_by_score": "Logistic Regression",
+  "manifest": {
+    "group_counts": {
+      "test": 80,
+      "train": 240,
+      "val": 80
+    },
+    "no_group_leakage": true,
+    "seed": 42,
+    "sources": {
+      "ambigqa_asqa_fallback": 74,
+      "campus_dynamic_synthetic": 72,
+      "course_qa_synthetic": 74,
+      "evidence_missing_synthetic": 72,
+      "false_premise_synthetic": 72,
+      "freshqa_fallback": 74,
+      "high_risk_synthetic": 72,
+      "low_risk_life_course": 72,
+      "sufficient_context_fallback": 72,
+      "technical_doc_synthetic": 72,
+      "user_condition_synthetic": 74
+    },
+    "split_sizes": {
+      "test": 160,
+      "train": 480,
+      "val": 160
+    },
+    "target_size": 800
+  },
+  "mode": "full"
+}

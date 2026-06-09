@@ -1,0 +1,4 @@
+seed,test_size,gap_type_macro_f1,action_macro_f1,action_accuracy,wrong_answer_rate,score
+13,160,1.0,1.0,1.0,0.0,0.94675
+42,160,1.0,1.0,1.0,0.0,0.94225
+101,160,1.0,1.0,1.0,0.0,0.94675
