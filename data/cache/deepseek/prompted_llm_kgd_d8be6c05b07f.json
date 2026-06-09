@@ -1,0 +1,5 @@
+{
+  "gap_type": "false_premise",
+  "action": "challenge_premise",
+  "explanation": "用户问题基于一个错误前提（DeepSeek在2024年关闭了所有服务），而检索证据表明该前提不成立，因此需要质疑前提。"
+}

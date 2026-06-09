@@ -47,18 +47,18 @@ Self-Consistency Baseline,action,ask,1.0,0.5,0.6666666666666666,32
 Self-Consistency Baseline,action,retrieve,0.3870967741935484,1.0,0.5581395348837209,48
 Self-Consistency Baseline,action,abstain,1.0,0.3333333333333333,0.5,18
 Self-Consistency Baseline,action,challenge_premise,1.0,1.0,1.0,14
-Prompted LLM Baseline,gap_type,sufficient_information,0.3,1.0,0.46153846153846156,48
-Prompted LLM Baseline,gap_type,user_info_missing,0.0,0.0,0.0,14
-Prompted LLM Baseline,gap_type,evidence_missing,0.0,0.0,0.0,26
-Prompted LLM Baseline,gap_type,ambiguous_question,0.0,0.0,0.0,18
-Prompted LLM Baseline,gap_type,false_premise,0.0,0.0,0.0,14
-Prompted LLM Baseline,gap_type,time_sensitive,0.0,0.0,0.0,34
-Prompted LLM Baseline,gap_type,high_risk_or_expert_needed,0.0,0.0,0.0,6
-Prompted LLM Baseline,action,answer,0.3,1.0,0.46153846153846156,48
-Prompted LLM Baseline,action,ask,0.0,0.0,0.0,32
-Prompted LLM Baseline,action,retrieve,0.0,0.0,0.0,48
-Prompted LLM Baseline,action,abstain,0.0,0.0,0.0,18
-Prompted LLM Baseline,action,challenge_premise,0.0,0.0,0.0,14
+Prompted LLM Baseline,gap_type,sufficient_information,1.0,0.9375,0.967741935483871,48
+Prompted LLM Baseline,gap_type,user_info_missing,0.4827586206896552,1.0,0.6511627906976745,14
+Prompted LLM Baseline,gap_type,evidence_missing,0.3870967741935484,0.46153846153846156,0.42105263157894735,26
+Prompted LLM Baseline,gap_type,ambiguous_question,0.5882352941176471,0.5555555555555556,0.5714285714285714,18
+Prompted LLM Baseline,gap_type,false_premise,1.0,1.0,1.0,14
+Prompted LLM Baseline,gap_type,time_sensitive,1.0,0.5588235294117647,0.7169811320754716,34
+Prompted LLM Baseline,gap_type,high_risk_or_expert_needed,1.0,0.8333333333333334,0.9090909090909091,6
+Prompted LLM Baseline,action,answer,1.0,0.9375,0.967741935483871,48
+Prompted LLM Baseline,action,ask,0.6382978723404256,0.9375,0.759493670886076,32
+Prompted LLM Baseline,action,retrieve,0.6938775510204082,0.7083333333333334,0.7010309278350515,48
+Prompted LLM Baseline,action,abstain,1.0,0.2777777777777778,0.43478260869565216,18
+Prompted LLM Baseline,action,challenge_premise,1.0,1.0,1.0,14
 Logistic Regression,gap_type,sufficient_information,1.0,1.0,1.0,48
 Logistic Regression,gap_type,user_info_missing,1.0,1.0,1.0,14
 Logistic Regression,gap_type,evidence_missing,1.0,1.0,1.0,26

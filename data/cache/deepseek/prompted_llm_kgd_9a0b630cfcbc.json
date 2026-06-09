@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "用户未提供预算、用途、便携性等关键信息，无法给出合理推荐，需要进一步询问。"
+}

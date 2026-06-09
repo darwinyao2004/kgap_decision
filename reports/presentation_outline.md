@@ -15,13 +15,13 @@
 - 数据标准化后按 group_id 划分，避免同源改写进入不同 split
 - 问题侧特征：长度、时间词、主观词、条件词、实体、错误前提模式、高风险关键词
 - 证据侧特征：TF-IDF 相似度、token overlap、覆盖率、冲突启发式
-- 模型侧特征：API 不可用时使用离线扰动近似 self-consistency
+- 模型侧特征：当前使用离线扰动近似 self-consistency；DeepSeek API 用于 Prompted LLM Baseline
 - Full Method：分类器给出基础预测，规则优先处理错误前提、高风险、时间敏感和证据不足
 
 ## 实验设置
 - 数据规模与标签分布
 - baselines 与模型参数
-- GLM-5.1 API 探测未通过时保留 baseline 状态行，但不把 skipped 结果当有效比较
+- DeepSeek API 探测未通过时保留 baseline 状态行，但不把 skipped 结果当有效比较
 - 重复划分：使用多个随机种子检查 Full Method 稳定性
 
 ## 结果

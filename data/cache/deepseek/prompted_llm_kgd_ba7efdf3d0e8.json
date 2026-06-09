@@ -1,0 +1,5 @@
+{
+  "gap_type": "false_premise",
+  "action": "challenge_premise",
+  "explanation": "用户的前提'CampusNet 已停止运营'与检索到的证据（仅调整产品线）矛盾，需要挑战该前提。"
+}

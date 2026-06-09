@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The query is a straightforward calculation with a known formula and all necessary parameters provided; the candidate answer is correct and safe to deliver."
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The retrieved evidence directly states that Python logs default to /var/log/python, which supports the candidate answer. No missing information or risks."
+}

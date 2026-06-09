@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "The question 'HTTP 怎么配置？' is ambiguous as it lacks details about the specific HTTP software, operating system, and desired configuration. The candidate answer is too generic. Asking for clarification is the appropriate action."
+}

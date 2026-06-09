@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "The query is too broad without specifying what aspect of Linux configuration is needed (e.g., network, desktop environment, server). Asking for clarification will help provide a targeted answer."
+}

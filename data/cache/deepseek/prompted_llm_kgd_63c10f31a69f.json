@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "The user's query is too vague; it's unclear whether they want to use HTTP as a client, set up a server, or something else. Need to ask for specifics."
+}

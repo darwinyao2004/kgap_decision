@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The user's question is clear, the retrieved evidence supports the candidate answer, and the answer directly addresses the query with actionable steps. No additional information or retrieval is needed."
+}

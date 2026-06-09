@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The question is time-sensitive as leadership may change, and the retrieved evidence indicates that static knowledge may be outdated. The candidate answer assumes unchanged leadership without verification, so updated retrieval is needed."
+}

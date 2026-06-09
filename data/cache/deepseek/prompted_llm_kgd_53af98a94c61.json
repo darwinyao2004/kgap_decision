@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "The query asks for the standard answer to exam question 5, but the user only provided the course name without the actual question. Retrieved evidence lacks the question and answer. Therefore, we need to ask the user for the specific question."
+}

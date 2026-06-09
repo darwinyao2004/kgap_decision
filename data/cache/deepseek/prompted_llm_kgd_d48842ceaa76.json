@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "ask",
+  "explanation": "The user has not provided the legal contract text, which is essential for evaluating a high-risk legal document. Without it, any answer would be unsafe. We need to ask the user to provide the contract or consult a professional."
+}

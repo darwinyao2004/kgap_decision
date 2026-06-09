@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "The query 'Python 怎么配置？' is vague; configuration depends on OS, version, and task. The candidate answer is too generic. Need to ask for specific constraints like operating system or intended use."
+}

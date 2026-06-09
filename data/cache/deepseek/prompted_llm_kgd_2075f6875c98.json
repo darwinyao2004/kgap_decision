@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "The question is too broad; Docker configuration varies by OS, version, and purpose. Need more specifics."
+}

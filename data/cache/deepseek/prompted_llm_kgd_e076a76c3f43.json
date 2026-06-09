@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "所有必要信息均已提供，证据明确，候选答案正确，可以直接回答。"
+}

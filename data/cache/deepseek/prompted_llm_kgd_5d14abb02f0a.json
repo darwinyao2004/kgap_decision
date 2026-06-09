@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The retrieved evidence directly states that Docker logs are written to /var/log/docker, matching the candidate answer. No additional information, clarification, or retrieval is needed."
+}

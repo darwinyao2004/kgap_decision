@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The retrieved evidence provides the correct AMAT formula, and the candidate answer correctly computes the average access time. No gaps exist."
+}

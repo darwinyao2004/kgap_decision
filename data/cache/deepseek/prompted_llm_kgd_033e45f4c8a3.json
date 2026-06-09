@@ -1,0 +1,5 @@
+{
+  "gap_type": "high_risk_or_expert_needed",
+  "action": "abstain",
+  "explanation": "The query involves legal contract evaluation, which is a high-risk domain requiring expert judgment. The user has not provided the contract text, and the candidate answer is unsupported. The system should abstain and recommend consulting a qualified lawyer."
+}

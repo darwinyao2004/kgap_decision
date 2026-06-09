@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "检索到的证据未提及离线部署，无法支持候选答案。"
+}

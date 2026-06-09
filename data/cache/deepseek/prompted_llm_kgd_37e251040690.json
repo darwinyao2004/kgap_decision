@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The query asks for the CEO in 2023, but the retrieved evidence indicates that the static knowledge base may be outdated; current evidence does not confirm who the CEO was in that specific year."
+}

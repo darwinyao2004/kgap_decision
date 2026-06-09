@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The question is clear, the required formula is provided in the evidence, and the candidate answer correctly applies it. Low risk and no ambiguity, so direct answer is appropriate."
+}

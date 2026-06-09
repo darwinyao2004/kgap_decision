@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "The user asks about Python configuration without specifying OS, version, or use case, making it impossible to give a specific answer. The current answer is too generic and may not be helpful."
+}

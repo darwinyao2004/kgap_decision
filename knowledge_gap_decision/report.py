@@ -94,6 +94,10 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
     always = metrics[metrics["method"] == "Always Answer"].iloc[0]
     rag = metrics[metrics["method"] == "RAG Similarity Threshold"].iloc[0]
     llm = metrics[metrics["method"] == "Prompted LLM Baseline"].iloc[0]
+    provider = api_status.get("provider", "deepseek")
+    model_name = api_status.get("model", api_status.get("deepseek_model", "unknown"))
+    key_present = api_status.get("deepseek_api_key_present", api_status.get("api_key_present", False))
+    api_available = api_status.get("deepseek_api_available", api_status.get("api_available", False))
     mode = "quick" if manifest["target_size"] <= 120 else "full"
     has_error_cases = "## 案例" in errors_md
 
@@ -131,14 +135,14 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         _table(label_dist, ["label_type", "label", "count"], 20),
         "",
         "## 5. 方法",
-        "整体流程包括：先标准化样本，再计算问题侧、证据侧和模型侧不确定性特征；随后训练 gap_type 分类器和 action 分类器，并在 Full Method 中使用规则优先级处理错误前提、高风险和时间敏感场景。申请书里写到的 BM25、embedding 相似度和 NLI 在当前实现中降级为 TF-IDF、token overlap、覆盖率和冲突启发式。Self-consistency 特征在 API 不可用时由离线模板扰动生成，记录在 `data/cache/llm_samples.jsonl`。",
+        "整体流程包括：先标准化样本，再计算问题侧、证据侧和模型侧不确定性特征；随后训练 gap_type 分类器和 action 分类器，并在 Full Method 中使用规则优先级处理错误前提、高风险和时间敏感场景。申请书里写到的 BM25、embedding 相似度和 NLI 在当前实现中降级为 TF-IDF、token overlap、覆盖率和冲突启发式。Self-consistency 特征当前仍由离线模板扰动生成，记录在 `data/cache/llm_samples.jsonl`；Prompted LLM Baseline 在 API 可用时会调用 DeepSeek 生成结构化动作预测。",
         "",
         "Full Method 的最终决策逻辑是：错误前提或证据冲突优先 `challenge_premise`，高风险优先 `abstain`，时间敏感优先 `retrieve`；如果用户问的是“资料能否证明/是否支持某结论”，而证据与候选肯定答案相冲突，则拒绝确认该结论；其他证据不足场景再根据用户条件缺失倾向选择 `ask` 或 `retrieve`。对 `ask` 样本，question utility ranker 生成候选追问，并按 slot coverage、预期不确定性降低、具体性、可回答性、礼貌性和诱导性惩罚排序。",
         "",
         "## 6. 实验设置",
-        f"运行模式：{mode}。训练/验证/测试比例为 6:2:2，随机种子为 42。运行环境为 Python {platform.python_version()} / {platform.system()}。GLM-5.1 API key 是否存在：{api_status['zai_api_key_present']}；API 是否通过严格 JSON 探测：{api_status['zai_api_available']}。本次 API 状态说明：{api_status['note']}",
+        f"运行模式：{mode}。训练/验证/测试比例为 6:2:2，随机种子为 42。运行环境为 Python {platform.python_version()} / {platform.system()}。{provider} 模型：{model_name}；API key 是否存在：{key_present}；API 是否通过严格 JSON 探测：{api_available}。本次 API 状态说明：{api_status['note']}",
         "",
-        "对照方法包括 Always Answer、Always Ask、RAG Similarity Threshold、Self-Consistency Baseline、Prompted LLM Baseline、Logistic Regression、Random Forest、GBDT、TF-IDF Text Encoder Classifier 和 Full Method。Prompted LLM Baseline 在 API 未通过时保留状态行但不参与有效比较。",
+        f"对照方法包括 Always Answer、Always Ask、RAG Similarity Threshold、Self-Consistency Baseline、Prompted LLM Baseline、Logistic Regression、Random Forest、GBDT、TF-IDF Text Encoder Classifier 和 Full Method。Prompted LLM Baseline 的本次状态为 `{llm['status']}`；只有状态为 `ok` 时才进入有效方法排序、效用图和显著性检验。",
         "",
         "## 7. 结果",
         "总体指标如下：",
@@ -177,16 +181,16 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         "- 高风险问题只做动作决策，不提供专业判断。",
         "- API 不稳定或成本会影响 self-consistency 特征规模。",
         "- 如果使用启发式 NLI proxy，其证据冲突判断能力有限。",
-        "- 当前 Prompted LLM Baseline 在 API 未通过严格 JSON 探测时不会强行运行，因此不能伪造与 GLM-5.1 的直接比较。",
+        "- 当前 Prompted LLM Baseline 在 DeepSeek API 未通过严格 JSON 探测时不会强行运行；若批量预测出现解析失败，会用回退动作补齐并在状态中记录失败数。",
         "",
         "## 13. 可复现性说明",
         "主要运行命令：",
         "```bash",
-        "python scripts/check_zai_api_fixed.py",
-        "python -m pytest -q",
-        "python -m knowledge_gap_decision.run_experiment --quick",
-        "python -m knowledge_gap_decision.run_experiment --target-size 800",
-        "python -m knowledge_gap_decision.report",
+        ".venv/bin/python scripts/check_deepseek_api.py",
+        ".venv/bin/python -m pytest -q",
+        ".venv/bin/python -m knowledge_gap_decision.run_experiment --quick",
+        ".venv/bin/python -m knowledge_gap_decision.run_experiment --target-size 800",
+        ".venv/bin/python -m knowledge_gap_decision.report",
         "```",
         "随机种子固定为 42。主要依赖见 `requirements.txt`。输出路径包括 `data/processed/`、`results/` 和 `reports/`。",
         "",
@@ -229,13 +233,13 @@ def generate_outline(path: str = "reports/presentation_outline.md") -> None:
 - 数据标准化后按 group_id 划分，避免同源改写进入不同 split
 - 问题侧特征：长度、时间词、主观词、条件词、实体、错误前提模式、高风险关键词
 - 证据侧特征：TF-IDF 相似度、token overlap、覆盖率、冲突启发式
-- 模型侧特征：API 不可用时使用离线扰动近似 self-consistency
+- 模型侧特征：当前使用离线扰动近似 self-consistency；DeepSeek API 用于 Prompted LLM Baseline
 - Full Method：分类器给出基础预测，规则优先处理错误前提、高风险、时间敏感和证据不足
 
 ## 实验设置
 - 数据规模与标签分布
 - baselines 与模型参数
-- GLM-5.1 API 探测未通过时保留 baseline 状态行，但不把 skipped 结果当有效比较
+- DeepSeek API 探测未通过时保留 baseline 状态行，但不把 skipped 结果当有效比较
 - 重复划分：使用多个随机种子检查 Full Method 稳定性
 
 ## 结果

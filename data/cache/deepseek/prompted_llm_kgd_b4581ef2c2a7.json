@@ -1,0 +1,5 @@
+{
+  "gap_type": "false_premise",
+  "action": "challenge_premise",
+  "explanation": "The question assumes that DeepSeek closed all services in 2024, but retrieved evidence contradicts this, indicating only product line adjustments. The candidate answer relies on this false premise."
+}

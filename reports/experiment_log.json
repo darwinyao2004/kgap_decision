@@ -1,8 +1,12 @@
 {
   "api_status": {
-    "note": "API did not pass strict JSON probe; offline fallback used.",
-    "zai_api_available": false,
-    "zai_api_key_present": true
+    "api_available": true,
+    "api_key_present": true,
+    "deepseek_api_available": true,
+    "deepseek_api_key_present": true,
+    "model": "deepseek-v4-flash",
+    "note": "DeepSeek API available.",
+    "provider": "deepseek"
   },
   "best_method_by_score": "Logistic Regression",
   "manifest": {

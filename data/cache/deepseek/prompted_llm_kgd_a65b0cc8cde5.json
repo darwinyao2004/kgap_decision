@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "用户没有指定操作系统、版本等关键信息，导致无法提供具体配置方案，需要询问用户以获取更多细节。"
+}

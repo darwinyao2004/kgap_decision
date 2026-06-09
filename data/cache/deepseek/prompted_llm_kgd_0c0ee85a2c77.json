@@ -1,0 +1,5 @@
+{
+  "gap_type": "false_premise",
+  "action": "challenge_premise",
+  "explanation": "用户前提 'CampusNet 已停止运营' 缺乏证据支持；检索到的资料显示该平台仅调整了部分产品线，并未全面关闭。因此，建议指出前提不成立，而非直接提供迁移建议。"
+}

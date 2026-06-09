@@ -1,0 +1,5 @@
+{
+  "gap_type": "false_premise",
+  "action": "challenge_premise",
+  "explanation": "The query assumes NorthwindDB has stopped operations, but retrieved evidence shows no such closure; the candidate answer perpetuates the false premise."
+}

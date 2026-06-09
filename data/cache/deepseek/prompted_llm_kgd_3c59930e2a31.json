@@ -1,0 +1,5 @@
+{
+  "gap_type": "high_risk_or_expert_needed",
+  "action": "abstain",
+  "explanation": "该查询涉及胸痛和呼吸困难，属于高风险的医疗症状，用户未提供完整病史，且候选答案建议自行服药可能带来危险。此类情况需要专业医生根据完整材料进行判断，因此应放弃回答。"
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The retrieved evidence discusses configuration dependencies, not how to use NumPy. The candidate answer is too generic and lacks actionable steps. To provide a concise, actionable answer, specific usage instructions are needed."
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The query is about preparing for machine learning experiments with basic grammar skills. The retrieved evidence supports a standard preparation approach, and the candidate answer aligns with it. Risk is low and no additional constraints or missing info."
+}

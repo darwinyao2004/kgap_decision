@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "用户询问最新政策，但候选答案仅提供截止日期且未验证，应检索教务处最新公告。"
+}

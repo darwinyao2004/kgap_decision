@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "用户未说明预算、用途和便携需求，直接推荐特定电脑不合适，需先询问这些信息。"
+}

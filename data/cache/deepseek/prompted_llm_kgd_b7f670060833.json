@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The question asks for the current head of CampusNet, which is time-sensitive. The retrieved evidence indicates that static knowledge may be outdated, and the candidate answer assumes no change without verification. To provide an accurate and up-to-date answer, fresh retrieval is required."
+}

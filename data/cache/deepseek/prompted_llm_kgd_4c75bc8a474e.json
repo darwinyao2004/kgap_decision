@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The candidate answer 'deadline is tomorrow' lacks specific evidence from current official sources. The retrieved evidence only states that policies may change, so further retrieval of the latest announcement is needed to confirm the correct deadline."
+}

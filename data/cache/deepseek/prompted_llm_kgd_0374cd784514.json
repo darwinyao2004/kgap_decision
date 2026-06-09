@@ -1,0 +1,5 @@
+{
+  "gap_type": "high_risk_or_expert_needed",
+  "action": "abstain",
+  "explanation": "涉及法律合同签署的高风险问题，且用户未提供合同文本，系统无法判断，应建议咨询专业人士。"
+}

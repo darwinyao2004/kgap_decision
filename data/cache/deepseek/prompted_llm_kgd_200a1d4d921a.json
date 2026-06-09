@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "The user did not specify their operating system or environment, which is necessary to give a precise configuration guide. The retrieved evidence indicates configuration depends on OS, version, task, and permissions, so more details are needed."
+}

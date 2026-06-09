@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "用户的问题过于宽泛，需要更多具体信息（如操作系统、目标用途）才能给出可执行指导。"
+}

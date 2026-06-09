@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The retrieved evidence is generic and does not confirm the current deadline; due to time sensitivity, the system should retrieve the latest official announcement."
+}

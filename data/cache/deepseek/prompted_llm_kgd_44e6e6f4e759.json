@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The query has a clear, complete question with all necessary parameters. The retrieved evidence provides the correct formula, and the candidate answer correctly applies it with no ambiguity, low risk, and no false premise."
+}

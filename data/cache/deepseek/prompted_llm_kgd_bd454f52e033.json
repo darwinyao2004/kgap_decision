@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The query has all necessary information, the retrieved evidence confirms the formula, and the candidate answer correctly applies it. The risk is low, and the answer is safe to provide."
+}

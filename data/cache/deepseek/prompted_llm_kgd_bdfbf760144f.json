@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "用户未提供第5题的具体题面，导致无法确认所问问题，需进一步询问以获取完整信息。"
+}

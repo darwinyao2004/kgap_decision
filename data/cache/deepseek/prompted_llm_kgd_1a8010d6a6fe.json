@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The question is time-sensitive and the retrieved evidence does not provide the specific deadline for the current semester. The candidate answer cannot be verified without up-to-date information."
+}

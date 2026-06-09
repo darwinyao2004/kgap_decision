@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "用户只提供了课程名，没有提供第5题的题面，无法确认候选答案的准确性，需要用户提供具体题目信息。"
+}

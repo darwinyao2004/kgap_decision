@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "The query '我应该怎么用 Docker？' is too broad; the user's operating system, version, and specific task are not provided. The candidate answer is too simplistic given the dependency on these factors. We need to ask for more details to give a precise, actionable response."
+}

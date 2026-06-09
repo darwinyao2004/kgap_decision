@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The query is time-sensitive and the retrieved evidence indicates potential outdatedness. The candidate answer asserts a static fact without current verification, so fresh evidence should be retrieved."
+}

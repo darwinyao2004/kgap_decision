@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "The question is too broad; HTTP configuration depends on operating system, version, task, and permissions. Need to ask for specific constraints."
+}

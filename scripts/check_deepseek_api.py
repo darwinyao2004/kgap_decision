@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Check Z.ai API connectivity for glm-5.1.
-
-This version uses httpx with HTTP/2 disabled and ignores proxy env vars,
-which avoids common Python SSL EOF issues when curl works but urllib/openai fails.
-"""
+"""Check DeepSeek chat-completions connectivity with strict JSON output."""
 
 import json
 import os
@@ -16,15 +12,15 @@ except ImportError:
     raise SystemExit(1)
 
 
-BASE_URL = "https://api.z.ai/api/coding/paas/v4"
-MODEL = "glm-5.1"
+BASE_URL = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com").rstrip("/")
+MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
 EXPECTED = {"status": "ok", "model": MODEL}
 
 
 def main() -> int:
-    api_key = os.environ.get("ZAI_API_KEY")
+    api_key = os.environ.get("DEEPSEEK_API_KEY")
     if not api_key:
-        print("ERROR: ZAI_API_KEY is not set", file=sys.stderr)
+        print("ERROR: DEEPSEEK_API_KEY is not set", file=sys.stderr)
         return 1
 
     payload = {
@@ -32,24 +28,16 @@ def main() -> int:
         "messages": [
             {
                 "role": "system",
-                "content": (
-                    "Return only strict JSON. Do not include markdown, prose, "
-                    "or extra fields."
-                ),
+                "content": "Return only strict JSON. Do not include markdown, prose, or extra fields.",
             },
             {
                 "role": "user",
-                "content": 'Return exactly this JSON object: {"status":"ok","model":"glm-5.1"}',
+                "content": f"Return exactly this JSON object: {json.dumps(EXPECTED, ensure_ascii=False)}",
             },
         ],
         "temperature": 0,
-        "max_tokens": 512,
+        "max_tokens": 256,
         "response_format": {"type": "json_object"},
-    }
-
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json",
     }
 
     try:
@@ -57,7 +45,10 @@ def main() -> int:
             http2=False,
             timeout=60,
             trust_env=False,
-            headers=headers,
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
         ) as client:
             response = client.post(f"{BASE_URL}/chat/completions", json=payload)
             response.raise_for_status()

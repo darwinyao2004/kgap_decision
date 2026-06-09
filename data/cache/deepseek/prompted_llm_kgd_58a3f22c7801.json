@@ -1,0 +1,5 @@
+{
+  "gap_type": "insufficient_information",
+  "action": "retrieve",
+  "explanation": "The candidate answer is safe but too generic; the retrieved evidence lacks specific instructions for using NumPy, and the user expects a concise, actionable response."
+}

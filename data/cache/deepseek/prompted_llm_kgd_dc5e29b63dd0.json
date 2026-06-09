@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The evidence only mentions online API support for NorthwindDB, with no information about offline deployment. The candidate answer claiming it can be deployed offline is unsupported by the evidence, so additional retrieval is needed."
+}

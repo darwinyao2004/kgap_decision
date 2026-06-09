@@ -16,7 +16,7 @@ SEED = 42
 
 COURSES = ["计算机组成原理", "操作系统", "机器学习", "数据库系统", "编译原理", "计算机网络"]
 TECHS = ["Python", "Docker", "Git", "Linux", "NumPy", "HTTP"]
-ENTITIES = ["AlphaBank", "NorthwindDB", "CampusNet", "GraphQL", "GLM-5.1", "OpenMP"]
+ENTITIES = ["AlphaBank", "NorthwindDB", "CampusNet", "GraphQL", "DeepSeek", "OpenMP"]
 YEARS = [2022, 2023, 2024, 2025, 2026]
 
 

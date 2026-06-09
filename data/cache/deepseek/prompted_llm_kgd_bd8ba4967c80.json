@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The retrieved evidence only mentions online API, not offline deployment, so additional evidence is needed to determine if OpenMP supports offline deployment."
+}

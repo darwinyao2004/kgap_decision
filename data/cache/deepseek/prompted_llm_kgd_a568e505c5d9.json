@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The query is clear, the user's constraints are stated, the retrieved evidence supports the candidate answer, and the risk is low. No gaps or issues detected."
+}

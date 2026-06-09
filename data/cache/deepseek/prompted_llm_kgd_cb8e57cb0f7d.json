@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "The query is ambiguous because the user only provided the course name and question number, not the actual question text. Retrieved evidence lacks the question or answer, so we cannot verify the candidate answer. Asking for the full question is necessary."
+}

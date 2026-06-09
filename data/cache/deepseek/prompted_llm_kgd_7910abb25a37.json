@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "资料仅提及在线API，未涉及离线部署，无法支持候选答案，需要检索更多信息。"
+}

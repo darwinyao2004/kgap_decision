@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "用户只提供了课程名，没有提供考题的具体题面，无法确认答案是否正确。"
+}

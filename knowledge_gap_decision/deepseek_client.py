@@ -7,13 +7,15 @@ from typing import Any
 
 import httpx
 
-BASE_URL = "https://api.z.ai/api/coding/paas/v4"
-MODEL = "glm-5.1"
+DEFAULT_BASE_URL = "https://api.deepseek.com"
+DEFAULT_MODEL = "deepseek-chat"
 
 
-class ZAIClient:
-    def __init__(self, cache_dir: str | Path = "data/cache", timeout: int = 90) -> None:
-        self.api_key = os.environ.get("ZAI_API_KEY")
+class DeepSeekClient:
+    def __init__(self, cache_dir: str | Path = "data/cache/deepseek", timeout: int = 90) -> None:
+        self.api_key = os.environ.get("DEEPSEEK_API_KEY")
+        self.model = os.environ.get("DEEPSEEK_MODEL", DEFAULT_MODEL)
+        self.base_url = os.environ.get("DEEPSEEK_BASE_URL", DEFAULT_BASE_URL).rstrip("/")
         self.timeout = max(timeout, 60)
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
@@ -27,7 +29,7 @@ class ZAIClient:
 
     def _client(self) -> httpx.Client:
         if not self.api_key:
-            raise RuntimeError("ZAI_API_KEY is not set")
+            raise RuntimeError("DEEPSEEK_API_KEY is not set")
         return httpx.Client(
             http2=False,
             timeout=self.timeout,
@@ -43,17 +45,17 @@ class ZAIClient:
         messages: list[dict[str, str]],
         *,
         temperature: float = 0.0,
-        max_tokens: int = 2048,
+        max_tokens: int = 1024,
         cache_key: str | None = None,
     ) -> dict[str, Any] | None:
         if not self.enabled:
             return None
-        cache_path = self.cache_dir / f"{cache_key}.json" if cache_key else None
+        cache_path = self.cache_dir / f"{self._safe_cache_name(cache_key)}.json" if cache_key else None
         if cache_path and cache_path.exists():
             return json.loads(cache_path.read_text(encoding="utf-8"))
 
         payload = {
-            "model": MODEL,
+            "model": self.model,
             "messages": messages,
             "temperature": temperature,
             "max_tokens": max_tokens,
@@ -63,7 +65,7 @@ class ZAIClient:
         for attempt in range(3):
             try:
                 with self._client() as client:
-                    response = client.post(f"{BASE_URL}/chat/completions", json=payload)
+                    response = client.post(f"{self.base_url}/chat/completions", json=payload)
                     response.raise_for_status()
                     raw_text = response.text
                 data = json.loads(raw_text)
@@ -76,7 +78,9 @@ class ZAIClient:
                     cache_path.write_text(json.dumps(parsed, ensure_ascii=False, indent=2), encoding="utf-8")
                 return parsed
             except (httpx.RequestError, httpx.HTTPStatusError, KeyError, IndexError, json.JSONDecodeError) as exc:
-                self.logger.warning("Z.ai request failed on attempt %s: %s", attempt + 1, type(exc).__name__)
+                self.logger.warning("DeepSeek request failed on attempt %s: %s", attempt + 1, type(exc).__name__)
+                if isinstance(exc, httpx.HTTPStatusError):
+                    self._write_debug(cache_key or "http_error", exc.response.text)
                 if attempt < 2:
                     time.sleep(1.5 * (attempt + 1))
         if raw_text:
@@ -84,15 +88,19 @@ class ZAIClient:
         return None
 
     def is_available(self) -> bool:
+        expected = {"status": "ok", "model": self.model}
         result = self.chat_json(
             [
-                {"role": "system", "content": "Return only strict JSON."},
-                {"role": "user", "content": 'Return {"status":"ok","model":"glm-5.1"} as strict JSON.'},
+                {"role": "system", "content": "Return only strict JSON with no markdown or extra fields."},
+                {
+                    "role": "user",
+                    "content": f'Return exactly this JSON object: {json.dumps(expected, ensure_ascii=False)}',
+                },
             ],
-            max_tokens=2048,
-            cache_key="api_probe",
+            max_tokens=256,
+            cache_key=f"api_probe_{self.model}",
         )
-        return result == {"status": "ok", "model": MODEL}
+        return result == expected
 
     def _parse_json(self, text: str) -> dict[str, Any] | None:
         text = text.strip()
@@ -113,7 +121,10 @@ class ZAIClient:
                     return None
         return None
 
+    def _safe_cache_name(self, name: str | None) -> str:
+        raw = name or "uncached"
+        return "".join(ch if ch.isalnum() or ch in "-_" else "_" for ch in raw)[:120]
+
     def _write_debug(self, name: str, raw_text: str) -> None:
-        safe_name = "".join(ch if ch.isalnum() or ch in "-_" else "_" for ch in name)[:80]
-        path = self.debug_dir / f"{safe_name}.txt"
+        path = self.debug_dir / f"{self._safe_cache_name(name)}.txt"
         path.write_text(raw_text, encoding="utf-8")

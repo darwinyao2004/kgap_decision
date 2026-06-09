@@ -209,7 +209,7 @@ def full_method_predict(
     return PredictionResult(method_name, gaps, actions, explanations=explanations)
 
 
-def prompted_llm_placeholder(records: list[dict[str, Any]], api_available: bool) -> PredictionResult:
+def prompted_llm_baseline(records: list[dict[str, Any]], client: Any, api_available: bool) -> PredictionResult:
     if not api_available:
         return PredictionResult(
             "Prompted LLM Baseline",
@@ -218,11 +218,98 @@ def prompted_llm_placeholder(records: list[dict[str, Any]], api_available: bool)
             status="skipped_api_unavailable",
             explanations=["API unavailable; baseline skipped"] * len(records),
         )
-    # The project keeps the interface but avoids costly batch calls in default runs.
-    return PredictionResult(
-        "Prompted LLM Baseline",
-        [GapType.SUFFICIENT.value] * len(records),
-        [Action.ANSWER.value] * len(records),
-        status="implemented_not_run_default",
-        explanations=["GLM baseline implemented; not run in default offline experiment"] * len(records),
+    gaps: list[str] = []
+    actions: list[str] = []
+    explanations: list[str] = []
+    failures = 0
+    system = (
+        "You are evaluating a QA system's decision policy. Return only strict JSON in the final message content. "
+        "Do not include chain-of-thought, markdown, or prose outside the JSON object. "
+        f"`gap_type` must be one of: {', '.join(GAP_TYPES)}. "
+        f"`action` must be one of: {', '.join(ACTION_TYPES)}. "
+        "Use `answer` only when the candidate answer is safe and sufficiently supported; "
+        "use `ask` when user constraints or ambiguity are missing; "
+        "use `retrieve` when evidence is missing or freshness is required; "
+        "use `abstain` for high-risk expert judgment; "
+        "use `challenge_premise` when the question premise is unsupported or contradicted."
     )
+    for record in records:
+        payload = {
+            "query": record["user_initial_query"],
+            "dialogue_context": record["dialogue_context"],
+            "retrieved_evidence": record["retrieved_evidence"],
+            "candidate_answer": record["candidate_answer"],
+            "risk_level": record["risk_level"],
+            "time_sensitive_flag": record["time_sensitive_flag"],
+            "false_premise_flag": record["false_premise_flag"],
+        }
+        result = client.chat_json(
+            [
+                {"role": "system", "content": system},
+                {
+                    "role": "user",
+                    "content": (
+                        "Classify this sample and return JSON with keys "
+                        "`gap_type`, `action`, and `explanation`.\n"
+                        + json_dumps(payload)
+                    ),
+                },
+            ],
+            temperature=0.0,
+            max_tokens=2048,
+            cache_key=f"prompted_llm_{record['id']}",
+        )
+        gap = _normalize_gap(result.get("gap_type") if isinstance(result, dict) else None)
+        action = _normalize_action(result.get("action") if isinstance(result, dict) else None)
+        explanation = result.get("explanation") if isinstance(result, dict) else None
+        if gap not in GAP_TYPES:
+            gap = GapType.SUFFICIENT.value
+            failures += 1
+        if action not in ACTION_TYPES:
+            action = action_from_gap(gap)
+            failures += 1
+        gaps.append(gap)
+        actions.append(action)
+        explanations.append(str(explanation or "DeepSeek prediction"))
+    status = "ok" if failures == 0 else f"partial_api_or_parse_failures_{failures}"
+    return PredictionResult("Prompted LLM Baseline", gaps, actions, status=status, explanations=explanations)
+
+
+def _normalize_gap(value: Any) -> str | None:
+    if not isinstance(value, str):
+        return None
+    normalized = value.strip().lower().replace("-", "_").replace(" ", "_")
+    aliases = {
+        "insufficient_information": GapType.EVIDENCE_MISSING.value,
+        "missing_evidence": GapType.EVIDENCE_MISSING.value,
+        "needs_retrieval": GapType.EVIDENCE_MISSING.value,
+        "needs_clarification": GapType.USER_INFO_MISSING.value,
+        "user_information_missing": GapType.USER_INFO_MISSING.value,
+        "ambiguous": GapType.AMBIGUOUS.value,
+        "false_assumption": GapType.FALSE_PREMISE.value,
+        "outdated_information": GapType.TIME_SENSITIVE.value,
+        "expert_needed": GapType.HIGH_RISK.value,
+    }
+    return normalized if normalized in GAP_TYPES else aliases.get(normalized)
+
+
+def _normalize_action(value: Any) -> str | None:
+    if not isinstance(value, str):
+        return None
+    normalized = value.strip().lower().replace("-", "_").replace(" ", "_")
+    aliases = {
+        "clarify": Action.ASK.value,
+        "ask_user": Action.ASK.value,
+        "search": Action.RETRIEVE.value,
+        "look_up": Action.RETRIEVE.value,
+        "refuse": Action.ABSTAIN.value,
+        "challenge": Action.CHALLENGE.value,
+        "correct_premise": Action.CHALLENGE.value,
+    }
+    return normalized if normalized in ACTION_TYPES else aliases.get(normalized)
+
+
+def json_dumps(value: Any) -> str:
+    import json
+
+    return json.dumps(value, ensure_ascii=False, indent=2)

@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "用户问题明确，候选答案基于检索证据给出了合理的建议，风险低，无时间敏感或错误前提，可以回答。"
+}

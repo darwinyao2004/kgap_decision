@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The candidate answer 'tomorrow' cannot be confirmed because the deadline may have changed. The query is time-sensitive, and the retrieved evidence only indicates that policies may vary per semester. It is necessary to retrieve the most recent official announcement to provide an accurate answer."
+}

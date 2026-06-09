@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The candidate answer specifies a deadline, but the retrieved evidence suggests that policies change each semester and users should rely on the latest announcements. Therefore, more current and specific evidence is needed to confirm the deadline."
+}

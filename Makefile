@@ -1,19 +1,24 @@
+PYTHON ?= .venv/bin/python
+
 .PHONY: install test quick full report smoke
 
-install:
-	python -m pip install -r requirements.txt
+.venv/bin/python:
+	python3 -m venv .venv
+
+install: .venv/bin/python
+	$(PYTHON) -m pip install -r requirements.txt
 
 test:
-	python -m pytest -q
+	$(PYTHON) -m pytest -q
 
 quick:
-	python -m knowledge_gap_decision.run_experiment --quick
+	$(PYTHON) -m knowledge_gap_decision.run_experiment --quick
 
 full:
-	python -m knowledge_gap_decision.run_experiment --target-size 800
+	$(PYTHON) -m knowledge_gap_decision.run_experiment --target-size 800
 
 report:
-	python -m knowledge_gap_decision.report
+	$(PYTHON) -m knowledge_gap_decision.report
 
 smoke:
-	python scripts/smoke_test.py
+	$(PYTHON) scripts/smoke_test.py

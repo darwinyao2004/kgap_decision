@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The retrieved evidence directly states that Git logs default to /var/log/git, which matches the candidate answer. There are no missing constraints, no false premise, and the risk is low."
+}

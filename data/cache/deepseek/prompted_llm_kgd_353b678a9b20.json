@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The query asks for the current head of GraphQL, which is time-sensitive. The retrieved evidence indicates that the static knowledge may be outdated, and the candidate answer asserts a fixed person without recent confirmation. Therefore, retrieval of up-to-date information is required."
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The retrieved evidence does not provide the specific deadline; it indicates policies change per semester. The candidate answer is unsupported."
+}

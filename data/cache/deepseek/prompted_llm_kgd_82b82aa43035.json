@@ -1,0 +1,5 @@
+{
+  "gap_type": "false_premise",
+  "action": "challenge_premise",
+  "explanation": "The question assumes CampusNet closed all services in 2024, but retrieved evidence indicates no such closure; only product line adjustments were made. Therefore, the premise is false."
+}

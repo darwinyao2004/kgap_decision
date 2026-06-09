@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The query is clear, evidence supports the candidate answer, and risk is low."
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The candidate answer provides a specific deadline, but the retrieved evidence indicates that policies change each semester and the latest announcement should be consulted. Given the time-sensitive nature, retrieval of current information is needed."
+}

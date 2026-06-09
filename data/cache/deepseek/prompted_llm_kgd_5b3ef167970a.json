@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The query asks for the latest policy requirements, which are time-sensitive. The candidate answer states a specific deadline, but the retrieved evidence indicates that policies adjust each semester and should be based on the latest official announcement. Therefore, the system should retrieve the most current information from the academic affairs office before providing an answer."
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The query asks about the CEO of CampusNet in 2026, which is a future time. The retrieved evidence indicates that organizational leadership may change over time, and the static knowledge base may be outdated. Therefore, the answer cannot be provided without current or updated information."
+}

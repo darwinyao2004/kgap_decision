@@ -1,0 +1,5 @@
+{
+  "gap_type": "false_premise",
+  "action": "challenge_premise",
+  "explanation": "The candidate answer assumes OpenMP has stopped operations, but retrieved evidence indicates only product line adjustments, not a full shutdown."
+}

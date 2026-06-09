@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The user seeks preparation advice for a computer network experiment given basic skills. Retrieved evidence supports a step-by-step approach (review concepts, configure environment, debug). Candidate answer aligns with that and is safe and sufficient. No risk, time sensitivity, or false premise."
+}

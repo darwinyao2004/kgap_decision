@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "The query lacks specific context such as operating system, version, or permissions, which are necessary to provide a precise configuration method. The current answer is too generic and not actionable."
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The query asks for the CEO in 2026, which is time-sensitive. Retrieved evidence indicates static knowledge may be outdated, and the candidate answer assumes no change. Current information is needed."
+}

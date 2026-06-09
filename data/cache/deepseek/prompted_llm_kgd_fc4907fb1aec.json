@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "The question '我应该怎么用 Python？' is too broad; it could refer to installation, writing code, or specific tasks. The candidate answer is generic and may not meet the user's actual need. Asking for clarification on the specific aspect of Python usage is appropriate."
+}

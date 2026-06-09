@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The query asks about the CEO of NorthwindDB in 2024, but the retrieved evidence indicates that organizational leadership may change over time, making static knowledge potentially outdated. Therefore, fresh retrieval is required to provide an accurate answer."
+}

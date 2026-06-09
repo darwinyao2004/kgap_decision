@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "The user asks for the standard answer to question 5 of a machine learning final exam, but does not provide the question statement. Without the question, it is impossible to determine the correct answer. The retrieved evidence also lacks the specific question. Therefore, we need to ask the user to provide the question."
+}

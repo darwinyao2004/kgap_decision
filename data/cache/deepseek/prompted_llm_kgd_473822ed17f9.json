@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "用户已提供基础水平和目标，检索到的证据和候选答案给出一般性建议，风险低，无歧义或错误前提，可直接回答。"
+}

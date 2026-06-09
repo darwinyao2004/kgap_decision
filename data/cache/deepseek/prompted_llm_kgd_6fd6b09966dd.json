@@ -1,0 +1,5 @@
+{
+  "gap_type": "false_premise",
+  "action": "challenge_premise",
+  "explanation": "The premise that NorthwindDB closed all services in 2024 is false; evidence shows only product line adjustments."
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The retrieved evidence does not confirm the specific deadline of 'tomorrow' provided in the candidate answer, and the query is time-sensitive, requiring up-to-date information from the official source."
+}

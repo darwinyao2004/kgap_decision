@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The query is clear, the candidate answer aligns with the retrieved evidence, and the risk is low, so answering directly is appropriate."
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The query asks about the CEO in 2025, which is future information. The retrieved evidence warns that static knowledge may be outdated, and the candidate answer is unverified. Since the answer likely depends on current or future data, fresh retrieval is needed."
+}

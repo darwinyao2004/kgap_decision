@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "The query is too broad; we need to know the user's operating system, version, and intended use to give a specific answer."
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The retrieved evidence does not specify the current deadline; it only mentions that it may vary each semester. Given the time-sensitive nature, the system should retrieve the latest announcement from the academic affairs office to provide an accurate answer."
+}

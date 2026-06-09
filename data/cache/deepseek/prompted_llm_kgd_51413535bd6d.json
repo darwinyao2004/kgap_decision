@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The retrieved evidence clearly states that Docker's log directory is /var/log/docker, which matches the candidate answer. There is no ambiguity, missing information, false premise, or high risk, so the system can directly answer."
+}

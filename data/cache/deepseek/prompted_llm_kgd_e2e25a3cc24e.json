@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The retrieved evidence provides the correct formula, and the candidate answer correctly calculates the AMAT using the given values."
+}

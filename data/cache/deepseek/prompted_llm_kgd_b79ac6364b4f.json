@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "The query '我应该怎么用 HTTP？' is too broad; it lacks specifics such as the operating system, version, or target task. The user needs to clarify the context for a concise and actionable answer."
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "The user's specific knowledge level (only basic syntax) may require more tailored advice than the generic answer provided. Asking for more details about their current understanding would help give a more targeted response."
+}

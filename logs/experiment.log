@@ -167,3 +167,246 @@
 2026-06-07 16:42:39,097 INFO knowledge_gap_decision.models: Full Method seed 42 predictions generated
 2026-06-07 16:42:39,783 INFO knowledge_gap_decision.models: Full Method seed 101 predictions generated
 2026-06-07 16:42:39,790 INFO __main__: Experiment finished
+2026-06-09 10:25:34,330 INFO knowledge_gap_decision.data_build: Wrote dataset with 100 records
+2026-06-09 10:25:34,332 INFO __main__: Loaded splits: train=60 val=20 test=20
+2026-06-09 10:25:35,332 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-09 10:25:36,007 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-09 10:25:36,240 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-09 10:25:36,473 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-09 10:25:36,709 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-09 10:25:36,944 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-09 10:25:37,181 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-09 10:25:51,278 INFO knowledge_gap_decision.models: Full Method seed 13 predictions generated
+2026-06-09 10:25:51,600 INFO knowledge_gap_decision.models: Full Method seed 42 predictions generated
+2026-06-09 10:25:51,925 INFO knowledge_gap_decision.models: Full Method seed 101 predictions generated
+2026-06-09 10:25:51,933 INFO __main__: Experiment finished
+2026-06-09 10:27:59,364 INFO knowledge_gap_decision.data_build: Wrote dataset with 100 records
+2026-06-09 10:27:59,365 INFO __main__: Loaded splits: train=60 val=20 test=20
+2026-06-09 10:27:59,548 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:00,647 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:04,095 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:07,251 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:11,331 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:14,226 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:17,646 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:24,301 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:27,149 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:30,046 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:34,289 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:39,013 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:43,541 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:48,677 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:52,118 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:54,832 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:28:58,194 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:29:03,369 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:29:07,372 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:29:12,594 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:29:15,417 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:29:18,184 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-09 10:29:18,855 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-09 10:29:19,089 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-09 10:29:19,321 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-09 10:29:19,556 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-09 10:29:19,792 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-09 10:29:20,031 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-09 10:29:34,201 INFO knowledge_gap_decision.models: Full Method seed 13 predictions generated
+2026-06-09 10:29:34,524 INFO knowledge_gap_decision.models: Full Method seed 42 predictions generated
+2026-06-09 10:29:34,847 INFO knowledge_gap_decision.models: Full Method seed 101 predictions generated
+2026-06-09 10:29:34,855 INFO __main__: Experiment finished
+2026-06-09 10:30:24,411 INFO knowledge_gap_decision.data_build: Wrote dataset with 100 records
+2026-06-09 10:30:24,412 INFO __main__: Loaded splits: train=60 val=20 test=20
+2026-06-09 10:30:24,669 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:30:30,127 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-09 10:30:30,791 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-09 10:30:31,027 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-09 10:30:31,262 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-09 10:30:31,497 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-09 10:30:31,731 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-09 10:30:31,970 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-09 10:30:47,878 INFO knowledge_gap_decision.models: Full Method seed 13 predictions generated
+2026-06-09 10:30:48,201 INFO knowledge_gap_decision.models: Full Method seed 42 predictions generated
+2026-06-09 10:30:48,522 INFO knowledge_gap_decision.models: Full Method seed 101 predictions generated
+2026-06-09 10:30:48,530 INFO __main__: Experiment finished
+2026-06-09 10:31:57,224 INFO knowledge_gap_decision.data_build: Wrote dataset with 800 records
+2026-06-09 10:31:57,231 INFO __main__: Loaded splits: train=480 val=160 test=160
+2026-06-09 10:31:58,152 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:01,139 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:06,274 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:09,086 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:11,337 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:14,328 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:16,342 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:18,502 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:20,859 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:24,082 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:28,100 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:30,445 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:33,697 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:37,284 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:38,891 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:41,949 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:46,055 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:51,258 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:55,357 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:32:57,975 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:00,745 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:04,302 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:08,179 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:10,155 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:12,370 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:16,161 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:19,058 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:21,662 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:25,411 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:28,288 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:30,292 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:33,540 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:35,605 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:39,416 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:42,652 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:45,745 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:48,146 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:50,362 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:52,313 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:33:56,486 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:00,188 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:04,136 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:08,191 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:10,241 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:13,340 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:17,103 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:19,188 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:27,572 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:30,197 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:32,178 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:34,607 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:37,217 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:40,240 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:42,646 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:47,085 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:49,630 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:51,892 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:34:55,400 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:00,388 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:03,652 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:07,180 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:09,457 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:12,184 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:15,790 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:18,248 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:20,635 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:23,158 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:27,164 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:31,371 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:35,051 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:38,659 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:44,039 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:48,551 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:51,983 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:55,588 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:35:58,472 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:00,870 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:03,616 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:05,319 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:11,036 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:13,363 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:18,160 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:21,323 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:24,032 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:27,550 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:32,069 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:36,305 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:40,073 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:42,209 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:46,881 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:49,478 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:52,687 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:54,842 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:36:59,834 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:04,434 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:07,256 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:12,348 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:14,173 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:16,735 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:18,845 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:22,090 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:25,054 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:28,326 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:32,172 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:34,460 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:36,815 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:39,936 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:42,436 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:44,309 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:49,212 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:53,675 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:37:55,952 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:00,480 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:03,531 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:06,047 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:11,083 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:15,750 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:18,544 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:22,722 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:26,665 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:30,438 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:34,333 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:38,654 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:44,341 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:46,962 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:49,273 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:55,725 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:38:57,506 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:00,040 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:03,641 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:06,824 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:11,235 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:15,543 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:19,445 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:22,261 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:25,676 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:30,220 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:32,563 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:35,618 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:38,738 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:41,600 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:44,192 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:51,542 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:53,540 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:39:58,072 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:40:01,599 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:40:06,653 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:40:09,046 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:40:11,173 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:40:12,926 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:40:14,806 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:40:17,859 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:40:20,761 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:40:25,450 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:40:31,194 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:40:33,373 INFO httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-09 10:40:36,433 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-09 10:40:37,306 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-09 10:40:37,599 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-09 10:40:37,892 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-09 10:40:38,184 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-09 10:40:38,469 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-09 10:40:38,759 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-09 10:40:59,222 INFO knowledge_gap_decision.models: Full Method seed 13 predictions generated
+2026-06-09 10:41:00,198 INFO knowledge_gap_decision.models: Full Method seed 42 predictions generated
+2026-06-09 10:41:01,169 INFO knowledge_gap_decision.models: Full Method seed 101 predictions generated
+2026-06-09 10:41:01,179 INFO __main__: Experiment finished
+2026-06-09 10:41:47,671 INFO knowledge_gap_decision.data_build: Wrote dataset with 800 records
+2026-06-09 10:41:47,678 INFO __main__: Loaded splits: train=480 val=160 test=160
+2026-06-09 10:41:49,823 INFO knowledge_gap_decision.models: Full Method predictions generated
+2026-06-09 10:41:50,561 INFO knowledge_gap_decision.models: Full - no gap type classifier predictions generated
+2026-06-09 10:41:50,858 INFO knowledge_gap_decision.models: Full - no evidence sufficiency verifier predictions generated
+2026-06-09 10:41:51,152 INFO knowledge_gap_decision.models: Full - no self-consistency features predictions generated
+2026-06-09 10:41:51,443 INFO knowledge_gap_decision.models: Full - no question utility ranker predictions generated
+2026-06-09 10:41:51,730 INFO knowledge_gap_decision.models: Full - no evidence-side features predictions generated
+2026-06-09 10:41:52,058 INFO knowledge_gap_decision.models: Full - no model uncertainty features predictions generated
+2026-06-09 10:42:14,975 INFO knowledge_gap_decision.models: Full Method seed 13 predictions generated
+2026-06-09 10:42:15,949 INFO knowledge_gap_decision.models: Full Method seed 42 predictions generated
+2026-06-09 10:42:16,932 INFO knowledge_gap_decision.models: Full Method seed 101 predictions generated
+2026-06-09 10:42:16,942 INFO __main__: Experiment finished

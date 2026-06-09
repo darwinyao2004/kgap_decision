@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The query is time-sensitive, asking about a future event (2025 CEO of GraphQL). Retrieved evidence indicates static knowledge may be outdated, and the candidate answer lacks supporting evidence. Therefore, the system should retrieve up-to-date information."
+}

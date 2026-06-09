@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "用户只提供了课程名，没有提供第5题的具体题面，因此无法确认标准答案是否匹配。需要用户补充题面信息。"
+}

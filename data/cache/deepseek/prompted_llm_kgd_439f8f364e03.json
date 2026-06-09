@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The candidate answer claims a specific deadline (tomorrow) but the retrieved evidence only states that policies and deadlines may change each semester and to check the latest announcement. There is no specific evidence supporting the deadline, so we need to retrieve the official policy."
+}

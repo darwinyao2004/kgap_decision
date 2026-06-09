@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "用户只提供了课程名和题号，但未给出第5题的题面，导致问题不明确。无法确认考生想要的具体题目，需要用户提供完整的题目内容。"
+}

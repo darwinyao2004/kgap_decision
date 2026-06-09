@@ -1,0 +1,5 @@
+{
+  "gap_type": "false_premise",
+  "action": "challenge_premise",
+  "explanation": "The query assumes AlphaBank has stopped operations, but retrieved evidence indicates no such closure, only product line adjustments. The premise is false, so the candidate answer is invalid."
+}

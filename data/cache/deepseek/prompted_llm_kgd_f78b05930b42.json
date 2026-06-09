@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The retrieved evidence directly states that HTTP logs default to /var/log/http, which matches and supports the candidate answer."
+}

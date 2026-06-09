@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The query asks for the CEO of NorthwindDB in 2022, but the retrieved evidence indicates that organizational leaders can change over time and static knowledge may be outdated. Therefore, the candidate answer claiming that Alex Chen has always been the CEO may be incorrect. Fresh retrieval is needed to verify the CEO for 2022."
+}

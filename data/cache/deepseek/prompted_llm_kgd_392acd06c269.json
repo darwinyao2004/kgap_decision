@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The retrieved evidence only mentions online API and does not address offline deployment, so the candidate answer lacks support. Additional evidence is needed."
+}

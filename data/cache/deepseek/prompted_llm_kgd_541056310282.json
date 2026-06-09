@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The retrieved evidence and candidate answer are sufficient and correct for the query, with low risk and no missing constraints."
+}

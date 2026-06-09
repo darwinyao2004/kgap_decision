@@ -22,13 +22,13 @@ from .models import (
     TextClassifier,
     always_baseline,
     full_method_predict,
-    prompted_llm_placeholder,
+    prompted_llm_baseline,
     rag_threshold,
     self_consistency_baseline,
 )
 from .question_ranker import rank_questions
 from .schema import ACTION_TYPES, GAP_TYPES
-from .zai_client import ZAIClient
+from .deepseek_client import DeepSeekClient
 
 
 def _load_splits() -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
@@ -154,16 +154,21 @@ def run(target_size: int = 800, quick: bool = False, probe_api: bool = True) -> 
     train_all = train + val
     logger.info("Loaded splits: train=%s val=%s test=%s", len(train), len(val), len(test))
 
+    llm_client = DeepSeekClient()
     api_available = False
     if probe_api:
         try:
-            api_available = ZAIClient().is_available()
+            api_available = llm_client.is_available()
         except Exception as exc:
             logger.warning("API probe failed and will use offline fallback: %s", type(exc).__name__)
     api_status = {
-        "zai_api_key_present": bool(ZAIClient().enabled),
-        "zai_api_available": api_available,
-        "note": "API did not pass strict JSON probe; offline fallback used." if not api_available else "API available.",
+        "provider": "deepseek",
+        "model": llm_client.model,
+        "deepseek_api_key_present": bool(llm_client.enabled),
+        "deepseek_api_available": api_available,
+        "api_key_present": bool(llm_client.enabled),
+        "api_available": api_available,
+        "note": "DeepSeek API did not pass strict JSON probe; offline fallback used." if not api_available else "DeepSeek API available.",
     }
     write_json("results/api_status.json", api_status)
 
@@ -182,7 +187,7 @@ def run(target_size: int = 800, quick: bool = False, probe_api: bool = True) -> 
         always_baseline(test, "Always Ask", "ask", train_all),
         rag_threshold(test, test_features),
         self_consistency_baseline(test, test_features),
-        prompted_llm_placeholder(test, api_available),
+        prompted_llm_baseline(test, llm_client, api_available),
     ]
 
     cols = feature_columns(train_features)

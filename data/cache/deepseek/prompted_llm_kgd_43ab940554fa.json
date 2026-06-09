@@ -1,0 +1,5 @@
+{
+  "gap_type": "time_sensitive",
+  "action": "retrieve",
+  "explanation": "The query is time-sensitive (time_sensitive_flag is true) and the retrieved evidence indicates that the information may be outdated. The candidate answer assumes a static head, which could be incorrect. Therefore, retrieving current evidence is necessary before answering."
+}

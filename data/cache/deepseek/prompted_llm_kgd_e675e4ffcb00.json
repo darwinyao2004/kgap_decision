@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "用户没有提供操作系统、版本等具体信息，导致无法给出精确的Docker使用指导，需要询问用户的具体环境。"
+}

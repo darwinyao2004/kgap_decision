@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "检索到的证据明确支持候选答案，风险低且无歧义，可直接回答。"
+}

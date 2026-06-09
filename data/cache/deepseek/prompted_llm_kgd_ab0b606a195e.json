@@ -1,0 +1,5 @@
+{
+  "gap_type": "user_info_missing",
+  "action": "ask",
+  "explanation": "The question is too broad; the user's specific use case (e.g., desktop, server, programming) is unknown, so a concise actionable answer cannot be given without further clarification."
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The retrieved evidence directly states that Docker logs default to /var/log/docker, supporting the candidate answer."
+}

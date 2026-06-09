@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "查询提供完整参数和明确公式，证据支持候选答案，可直接回答。"
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The query asks for a specific deadline date, but the retrieved evidence only indicates that deadlines may change and refers to the latest announcement. To provide an accurate answer, we need to retrieve the current official deadline from the academic affairs office."
+}

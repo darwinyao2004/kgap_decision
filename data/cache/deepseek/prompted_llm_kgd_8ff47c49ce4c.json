@@ -1,0 +1,5 @@
+{
+  "gap_type": "evidence_missing",
+  "action": "retrieve",
+  "explanation": "The query asks for the latest policy requirements, but the retrieved evidence only states that policies may change and to refer to the official announcement. The candidate answer provides a specific deadline without supporting evidence, and the time-sensitive flag indicates that information changes. Therefore, more recent and specific evidence is needed."
+}

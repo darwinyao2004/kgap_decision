@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The retrieved evidence directly provides the log directory, and the candidate answer matches it. No gaps, risk, or ambiguity."
+}

@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "The question 'How should I use HTTP?' is too broad; the system needs more specific information about the user's operating system, version, and context to provide a useful answer."
+}

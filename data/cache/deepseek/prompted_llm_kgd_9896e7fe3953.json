@@ -1,0 +1,5 @@
+{
+  "gap_type": "sufficient_information",
+  "action": "answer",
+  "explanation": "The query is clearly defined, the retrieved evidence provides the correct formula, and the candidate answer correctly applies it. No missing user info, no ambiguity, and risk is low."
+}

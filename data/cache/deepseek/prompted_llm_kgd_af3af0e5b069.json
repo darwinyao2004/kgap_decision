@@ -1,0 +1,5 @@
+{
+  "gap_type": "ambiguous_question",
+  "action": "ask",
+  "explanation": "The user query is ambiguous about what aspect of NumPy configuration is needed (installation, environment, settings). No prior context clarifies. Therefore, asking for specific requirements is appropriate."
+}
