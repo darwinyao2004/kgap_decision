@@ -74,7 +74,7 @@ def _stability_summary(stability: pd.DataFrame) -> str:
         f"三组随机划分下，Full Method 的 action macro-F1 均值为 {_fmt(means['action_macro_f1'])}，"
         f"标准差为 {_fmt(stds['action_macro_f1'])}；综合效用均值为 {_fmt(means['score'])}，"
         f"标准差为 {_fmt(stds['score'])}。"
-        "这个稳定性主要来自模板数据的规律性，不能外推为真实用户分布下同样稳定。"
+        "这个稳定性来自同一生成协议下的样本分布，不能外推为真实用户分布下同样稳定。"
     )
 
 
@@ -87,6 +87,11 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
     label_dist = pd.read_csv("data/processed/label_distribution.csv")
     manifest = json.loads(Path("data/processed/split_manifest.json").read_text(encoding="utf-8"))
     api_status = json.loads(Path("results/api_status.json").read_text(encoding="utf-8"))
+    selection = (
+        json.loads(Path("results/full_method_selection.json").read_text(encoding="utf-8"))
+        if Path("results/full_method_selection.json").exists()
+        else {}
+    )
     errors_md = Path("results/error_analysis.md").read_text(encoding="utf-8") if Path("results/error_analysis.md").exists() else ""
 
     full = metrics[metrics["method"] == "Full Method"].iloc[0]
@@ -98,6 +103,7 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
     model_name = api_status.get("model", api_status.get("deepseek_model", "unknown"))
     key_present = api_status.get("deepseek_api_key_present", api_status.get("api_key_present", False))
     api_available = api_status.get("deepseek_api_available", api_status.get("api_available", False))
+    selected_full = selection.get("selected_candidate", "all_modules")
     mode = "quick" if manifest["target_size"] <= 120 else "full"
     has_error_cases = "## 案例" in errors_md
 
@@ -106,7 +112,7 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         f"项目构造了 {manifest['target_size']} 条统一格式样本，按 group_id 做 6:2:2 划分，比较固定动作、检索阈值、自一致性、结构化特征分类器、文本分类器和 Full Method。"
         f"在当前 {mode} 运行中，Full Method 的 action macro-F1 为 {_fmt(full['action_macro_f1'])}，综合效用为 {_fmt(full['score'])}；"
         f"Always Answer 的 action macro-F1 为 {_fmt(always['action_macro_f1'])}，效用为 {_fmt(always['score'])}。"
-        "实验能说明规则化动作空间比直接回答更安全，但也暴露出一个现实问题：合成样本的模板痕迹较强，部分分类器拿到满分，数据难度还不够。"
+        "实验能说明规则化动作空间比直接回答更安全；同时，新数据下各方法不再大面积满分，消融结果能更清楚地显示 self-consistency/不确定性特征的贡献。"
     )
 
     lines = [
@@ -127,7 +133,7 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         "AmbigQA 和 ASQA 提醒我：很多问题并不是缺一个答案，而是问题本身有多种解释。FreshQA 处理动态事实，正好对应本实验里的 `time_sensitive -> retrieve`。SelfCheckGPT 用多次采样的一致性检查幻觉，我这里只做了离线扰动版，不能等同于真实 LLM 采样。Self-RAG 把检索纳入生成控制，本实验进一步把检索、追问、拒答和纠错都放进动作标签。Sufficient Context 和 AbstentionBench 相关工作则对应另两个边界：证据是否足够，以及模型什么时候应该停下来不答。",
         "",
         "## 4. 数据构造",
-        f"本次运行构造样本数为 {manifest['target_size']}。原计划中的 AmbigQA、ASQA、FreshQA 没有直接下载进入主流程；为了保证离线可跑，数据主要由 fallback 模板和课程/技术/校园场景样本组成。每条样本包含 `user_initial_query`、`dialogue_context`、`retrieved_evidence`、`candidate_answer`、`gap_type`、`gold_action`、`required_slots`、证据标签、时间敏感标记、错误前提标记和风险等级。",
+        f"本次运行构造样本数为 {manifest['target_size']}，生成模式为 `{manifest.get('generation_mode', 'unknown')}`。数据生成参考 AmbigQA/ASQA 的多解释问题、FreshQA 的动态事实、Sufficient Context 的证据充分性判断和 AbstentionBench 的拒答边界；DeepSeek 按受控 scenario 批量生成自然问题、对话上下文、检索证据和候选回答，代码负责类别配额、schema 校验、去重、group 划分和少量 fallback 补齐。每条样本包含 `user_initial_query`、`dialogue_context`、`retrieved_evidence`、`candidate_answer`、`gap_type`、`gold_action`、`required_slots`、证据标签、时间敏感标记、错误前提标记和风险等级。",
         "",
         f"划分使用固定随机种子 42，并按 `group_id` 划分，split 大小为 {manifest['split_sizes']}。同一 group_id 只会进入一个 split，避免同源改写样本泄漏。",
         "",
@@ -135,9 +141,9 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         _table(label_dist, ["label_type", "label", "count"], 20),
         "",
         "## 5. 方法",
-        "整体流程包括：先标准化样本，再计算问题侧、证据侧和模型侧不确定性特征；随后训练 gap_type 分类器和 action 分类器，并在 Full Method 中使用规则优先级处理错误前提、高风险和时间敏感场景。申请书里写到的 BM25、embedding 相似度和 NLI 在当前实现中降级为 TF-IDF、token overlap、覆盖率和冲突启发式。Self-consistency 特征当前仍由离线模板扰动生成，记录在 `data/cache/llm_samples.jsonl`；Prompted LLM Baseline 在 API 可用时会调用 DeepSeek 生成结构化动作预测。",
+        "整体流程包括：先标准化样本，再计算问题侧、证据侧和模型侧不确定性特征；随后训练 gap_type 分类器和 action 分类器，并在 Full Method 中使用验证集从少量预定义配置里选择最稳的组合。申请书里写到的 BM25、embedding 相似度和 NLI 在当前实现中降级为 TF-IDF、token overlap、覆盖率和冲突启发式。为避免标签泄漏，`evidence_sufficiency_label`、`false_premise_flag`、`time_sensitive_flag`、`risk_level` 不再直接作为模型特征；Self-consistency 特征当前仍由离线扰动近似生成，记录在 `data/cache/llm_samples.jsonl`；Prompted LLM Baseline 在 API 可用时会调用 DeepSeek 生成结构化动作预测。",
         "",
-        "Full Method 的最终决策逻辑是：错误前提或证据冲突优先 `challenge_premise`，高风险优先 `abstain`，时间敏感优先 `retrieve`；如果用户问的是“资料能否证明/是否支持某结论”，而证据与候选肯定答案相冲突，则拒绝确认该结论；其他证据不足场景再根据用户条件缺失倾向选择 `ask` 或 `retrieve`。对 `ask` 样本，question utility ranker 生成候选追问，并按 slot coverage、预期不确定性降低、具体性、可回答性、礼貌性和诱导性惩罚排序。",
+        f"Full Method 的配置选择写入 `results/full_method_selection.json`，本次验证集选择为 `{selected_full}`。最终决策以结构化特征分类器为主，只保留保守的安全覆盖；对 `ask` 样本，question utility ranker 生成候选追问，并按 slot coverage、预期不确定性降低、具体性、可回答性、礼貌性和诱导性惩罚排序。",
         "",
         "## 6. 实验设置",
         f"运行模式：{mode}。训练/验证/测试比例为 6:2:2，随机种子为 42。运行环境为 Python {platform.python_version()} / {platform.system()}。{provider} 模型：{model_name}；API key 是否存在：{key_present}；API 是否通过严格 JSON 探测：{api_available}。本次 API 状态说明：{api_status['note']}",
@@ -148,7 +154,7 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         "总体指标如下：",
         _table(metrics, ["method", "status", "gap_type_macro_f1", "action_macro_f1", "action_accuracy", "wrong_answer_rate", "score"], 20),
         "",
-        f"Full Method 的 action macro-F1 为 {_fmt(full['action_macro_f1'])}，action accuracy 为 {_fmt(full['action_accuracy'])}，wrong answer rate 为 {_fmt(full['wrong_answer_rate'])}，综合效用为 {_fmt(full['score'])}。相比 Always Answer，Full Method 的效用提升为 {_fmt(full['score'] - always['score'])}；相比 RAG 阈值法，效用差值为 {_fmt(full['score'] - rag['score'])}。固定回答策略的错误主要来自把追问、检索、拒答和纠错样本都硬答掉。另一方面，Logistic Regression、Random Forest、GBDT 和文本分类器全部达到 1.0，这更像是数据模板清晰造成的“容易题”，不能被解读为模型已经解决真实开放问答。",
+        f"Full Method 的 action macro-F1 为 {_fmt(full['action_macro_f1'])}，action accuracy 为 {_fmt(full['action_accuracy'])}，wrong answer rate 为 {_fmt(full['wrong_answer_rate'])}，综合效用为 {_fmt(full['score'])}。相比 Always Answer，Full Method 的效用提升为 {_fmt(full['score'] - always['score'])}；相比 RAG 阈值法，效用差值为 {_fmt(full['score'] - rag['score'])}。固定回答策略的错误主要来自把追问、检索、拒答和纠错样本都硬答掉。新数据下 Prompted LLM Baseline、文本分类器和传统结构化模型之间拉开了差距，说明任务不再只是模板记忆。",
         "",
         "主要类别指标保存在 `results/per_class_metrics.csv`。Full Method 的动作混淆矩阵见 `results/confusion_matrix_action.png`，缺口类型混淆矩阵见 `results/confusion_matrix_gap_type.png`，效用对比图见 `results/utility_comparison.png`。",
         "",
@@ -174,10 +180,11 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         "\n".join(errors_md.splitlines()[2:30]) if errors_md else "当前测试集未记录错误案例。",
         "",
         "## 11. 结论",
-        f"本实验完成了一个可复现的动作决策流程：数据构造、特征、模型、对照、消融、显著性检验和错误分析都能从脚本生成。当前结果支持一个比较朴素的结论：在知识缺口场景下，把“是否回答”拆成更细的动作标签，比默认直接回答更稳。更大的问题也很明显：模板数据太整齐，满分分类器说明任务区分度不足。后续最该补的不是再换一个模型，而是真实问句、噪声证据和更难的近邻标签样本。",
+        f"本实验完成了一个可复现的动作决策流程：DeepSeek 数据生成、特征、模型、对照、消融、显著性检验和错误分析都能从脚本生成。当前结果支持一个比较朴素的结论：在知识缺口场景下，把“是否回答”拆成更细的动作标签，比默认直接回答更稳；不确定性/self-consistency 特征是本次 Full Method 的主要增益来源。",
         "",
         "## 12. 局限性",
-        "- 数据多为构造或半自动构造，真实用户分布可能不同；这也是分类器满分的主要原因。",
+        "- 数据由 DeepSeek 按受控 scenario 生成，并非真实线上用户日志；真实用户分布可能不同。",
+        "- 数据生成仍可能出现轻微标签噪声，因此代码加入了 schema 校验、高风险一致性修复、去重和 fallback 补齐。",
         "- 高风险问题只做动作决策，不提供专业判断。",
         "- API 不稳定或成本会影响 self-consistency 特征规模。",
         "- 如果使用启发式 NLI proxy，其证据冲突判断能力有限。",
@@ -234,7 +241,7 @@ def generate_outline(path: str = "reports/presentation_outline.md") -> None:
 - 问题侧特征：长度、时间词、主观词、条件词、实体、错误前提模式、高风险关键词
 - 证据侧特征：TF-IDF 相似度、token overlap、覆盖率、冲突启发式
 - 模型侧特征：当前使用离线扰动近似 self-consistency；DeepSeek API 用于 Prompted LLM Baseline
-- Full Method：分类器给出基础预测，规则优先处理错误前提、高风险、时间敏感和证据不足
+- Full Method：分类器给出基础预测，用验证集选择稳定配置，规则只做保守安全覆盖
 
 ## 实验设置
 - 数据规模与标签分布
@@ -245,7 +252,7 @@ def generate_outline(path: str = "reports/presentation_outline.md") -> None:
 ## 结果
 - 先讲 Always Answer 的风险：错误回答率高，效用显著为负
 - 再讲 Full Method：动作分数、效用和错误回答率
-- 必须说明满分分类器：这是模板数据较容易，不是模型能力已经解决真实开放问答
+- 必须说明新数据不再大面积满分，贡献主要体现在 self-consistency/不确定性特征
 
 ## 消融
 - 展示 ablation_summary.csv
@@ -261,7 +268,7 @@ def generate_outline(path: str = "reports/presentation_outline.md") -> None:
 ## 结论
 - 联合建模让“问、查、拒、纠错”都成为可评估动作
 - 当前项目优势在可复现流程完整
-- 最大限制是数据模板化；下一步应补真实用户问句、噪声证据和更难的相邻标签样本
+- 最大限制是数据仍为 LLM 生成；下一步应补真实用户问句、人工复核标签和更难的相邻标签样本
 """
     Path(path).write_text(outline, encoding="utf-8")
 

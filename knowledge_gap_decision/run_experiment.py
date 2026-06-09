@@ -145,11 +145,56 @@ def _write_seed_stability(target_size: int, quick: bool) -> None:
     pd.DataFrame(rows).to_csv("results/repeated_seed_summary.csv", index=False)
 
 
-def run(target_size: int = 800, quick: bool = False, probe_api: bool = True) -> dict[str, Any]:
+def _select_full_config(
+    train_records: list[dict[str, Any]],
+    val_records: list[dict[str, Any]],
+) -> dict[str, Any]:
+    train_features = compute_features(train_records, cache_samples=False)
+    val_features = compute_features(val_records, cache_samples=False)
+    candidates: list[tuple[str, dict[str, Any]]] = [
+        ("all_modules", {}),
+        ("no_evidence_sufficiency_verifier", {"use_evidence_verifier": False}),
+        ("no_evidence_side_features", {"include_evidence": False}),
+        ("no_gap_type_classifier", {"use_gap_classifier": False}),
+    ]
+    rows = []
+    best_name = candidates[0][0]
+    best_kwargs = candidates[0][1]
+    best_metric: dict[str, Any] | None = None
+    for name, kwargs in candidates:
+        pred = full_method_predict(train_features, train_records, val_features, method_name=f"Full candidate {name}", **kwargs)
+        metric = evaluate_prediction(name, val_records, pred.gap_pred, pred.action_pred, pred.status)
+        rows.append({"candidate": name, **kwargs, **metric})
+        if best_metric is None or (metric["action_macro_f1"], metric["score"]) > (
+            best_metric["action_macro_f1"],
+            best_metric["score"],
+        ):
+            best_name = name
+            best_kwargs = kwargs
+            best_metric = metric
+    selection = {
+        "selected_candidate": best_name,
+        "selected_kwargs": best_kwargs,
+        "validation_rows": rows,
+    }
+    selection = json.loads(json.dumps(selection, default=float))
+    write_json("results/full_method_selection.json", selection)
+    pd.DataFrame(rows).to_csv("results/full_method_selection.csv", index=False)
+    return best_kwargs
+
+
+def run(
+    target_size: int = 800,
+    quick: bool = False,
+    probe_api: bool = True,
+    *,
+    use_llm_data: bool = True,
+    refresh_llm_data: bool = False,
+) -> dict[str, Any]:
     setup_logging()
     ensure_dirs()
     logger = logging.getLogger(__name__)
-    manifest = write_dataset(target_size, quick)
+    manifest = write_dataset(target_size, quick, use_llm=use_llm_data, refresh_llm_cache=refresh_llm_data)
     train, val, test = _load_splits()
     train_all = train + val
     logger.info("Loaded splits: train=%s val=%s test=%s", len(train), len(val), len(test))
@@ -172,6 +217,7 @@ def run(target_size: int = 800, quick: bool = False, probe_api: bool = True) -> 
     }
     write_json("results/api_status.json", api_status)
 
+    selected_full_kwargs = _select_full_config(train, val)
     train_features = compute_features(train_all)
     test_features = compute_features(test)
     train_features.to_csv("data/processed/features_train.csv", index=False)
@@ -197,7 +243,7 @@ def run(target_size: int = 800, quick: bool = False, probe_api: bool = True) -> 
 
     text_model = TextClassifier().fit(train_all)
     baselines.append(text_model.predict(test))
-    full = full_method_predict(train_features, train_all, test_features)
+    full = full_method_predict(train_features, train_all, test_features, **selected_full_kwargs)
     baselines.append(full)
 
     for pred in baselines:
@@ -293,8 +339,16 @@ def main() -> None:
     parser.add_argument("--target-size", type=int, default=800)
     parser.add_argument("--quick", action="store_true")
     parser.add_argument("--no-api-probe", action="store_true")
+    parser.add_argument("--offline-data", action="store_true")
+    parser.add_argument("--refresh-llm-data", action="store_true")
     args = parser.parse_args()
-    run(args.target_size, args.quick, probe_api=not args.no_api_probe)
+    run(
+        args.target_size,
+        args.quick,
+        probe_api=not args.no_api_probe,
+        use_llm_data=not args.offline_data,
+        refresh_llm_data=args.refresh_llm_data,
+    )
 
 
 if __name__ == "__main__":

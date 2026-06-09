@@ -36,11 +36,11 @@ def always_baseline(test_records: list[dict[str, Any]], method: str, action: str
 def rag_threshold(records: list[dict[str, Any]], features: pd.DataFrame) -> PredictionResult:
     gaps, actions, explanations = [], [], []
     for row, (_, f) in zip(records, features.iterrows()):
-        if f["flag_false_premise"] or f["ev_contradiction_proxy"] > 0.5:
+        if f["q_has_false_premise_pattern"] or f["ev_contradiction_proxy"] > 0.55:
             gap, action, reason = GapType.FALSE_PREMISE.value, Action.CHALLENGE.value, "contradictory evidence or false-premise cue"
         elif f["risk_high"]:
             gap, action, reason = GapType.HIGH_RISK.value, Action.ABSTAIN.value, "high-risk keyword"
-        elif f["q_has_time_words"] or f["flag_time_sensitive"]:
+        elif f["q_has_time_words"]:
             gap, action, reason = GapType.TIME_SENSITIVE.value, Action.RETRIEVE.value, "time-sensitive cue"
         elif f["ev_sufficiency_score"] > 0.58 and f["ev_top1_similarity"] > 0.08:
             gap, action, reason = GapType.SUFFICIENT.value, Action.ANSWER.value, "evidence similarity above threshold"
@@ -57,11 +57,11 @@ def rag_threshold(records: list[dict[str, Any]], features: pd.DataFrame) -> Pred
 def self_consistency_baseline(records: list[dict[str, Any]], features: pd.DataFrame) -> PredictionResult:
     gaps, actions, explanations = [], [], []
     for row, (_, f) in zip(records, features.iterrows()):
-        if f["q_has_false_premise_pattern"] or f["flag_false_premise"]:
+        if f["q_has_false_premise_pattern"]:
             gap, action, reason = GapType.FALSE_PREMISE.value, Action.CHALLENGE.value, "false-premise pattern"
         elif f["risk_high"]:
             gap, action, reason = GapType.HIGH_RISK.value, Action.ABSTAIN.value, "high-risk domain"
-        elif f["q_has_time_words"] or f["flag_time_sensitive"]:
+        elif f["q_has_time_words"]:
             gap, action, reason = GapType.TIME_SENSITIVE.value, Action.RETRIEVE.value, "freshness required"
         elif f["sc_self_consistency_score"] < 0.45 and (f["q_has_subjective_words"] or f["q_has_condition_words"]):
             gap, action, reason = GapType.AMBIGUOUS.value, Action.ASK.value, "low self-consistency plus ambiguity"
@@ -174,18 +174,25 @@ def full_method_predict(
         gap = base.gap_pred[i] if use_gap_classifier else ""
         action = base.action_pred[i]
         reasons = []
-        if f.get("flag_false_premise", 0) or (
-            include_evidence and f.get("ev_contradiction_proxy", 0) > 0.5 and f.get("q_has_false_premise_pattern", 0)
+        if include_evidence and f.get("ev_contradiction_proxy", 0) > 0.65 and (
+            f.get("q_has_false_premise_pattern", 0) or f.get("q_asks_support_judgment", 0)
         ):
             gap, action = GapType.FALSE_PREMISE.value, Action.CHALLENGE.value
             reasons.append("false premise or contradiction")
-        elif f.get("risk_high", 0):
+        elif (f.get("risk_high", 0) or f.get("q_has_high_risk_keywords", 0)) and f.get("ev_sufficiency_score", 0) < 0.18:
             gap, action = GapType.HIGH_RISK.value, Action.ABSTAIN.value
             reasons.append("high-risk domain")
-        elif f.get("flag_time_sensitive", 0) or f.get("q_has_time_words", 0):
+        elif f.get("q_has_time_words", 0) and (
+            base.action_pred[i] == Action.RETRIEVE.value or f.get("ev_sufficiency_score", 0) < 0.24
+        ):
             gap, action = GapType.TIME_SENSITIVE.value, Action.RETRIEVE.value
             reasons.append("time-sensitive query")
-        elif use_evidence_verifier and include_evidence and f.get("ev_sufficiency_score", 0) < 0.05:
+        elif (
+            use_evidence_verifier
+            and include_evidence
+            and f.get("ev_sufficiency_score", 0) < 0.05
+            and base.action_pred[i] == Action.ANSWER.value
+        ):
             if f.get("ev_contradiction_proxy", 0) > 0.5 and f.get("q_asks_support_judgment", 0):
                 gap, action = base.gap_pred[i], Action.ABSTAIN.value
                 reasons.append("given evidence does not support the affirmative candidate")
@@ -239,9 +246,6 @@ def prompted_llm_baseline(records: list[dict[str, Any]], client: Any, api_availa
             "dialogue_context": record["dialogue_context"],
             "retrieved_evidence": record["retrieved_evidence"],
             "candidate_answer": record["candidate_answer"],
-            "risk_level": record["risk_level"],
-            "time_sensitive_flag": record["time_sensitive_flag"],
-            "false_premise_flag": record["false_premise_flag"],
         }
         result = client.chat_json(
             [

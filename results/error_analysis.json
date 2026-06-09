@@ -1,1 +1,172 @@
-[]
+[
+  {
+    "id": "kgd_ae20431931a8",
+    "query": "What is the procedure to apply for a parking permit on campus?",
+    "gold_gap": "evidence_missing",
+    "gold_action": "retrieve",
+    "pred_gap": "evidence_missing",
+    "pred_action": "abstain",
+    "key_features": {
+      "ev_sufficiency_score": 0.35,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.243
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_3820b3c04627",
+    "query": "清华大学今年是不是取消了文科专业？",
+    "gold_gap": "false_premise",
+    "gold_action": "challenge_premise",
+    "pred_gap": "time_sensitive",
+    "pred_action": "retrieve",
+    "key_features": {
+      "ev_sufficiency_score": 0.041,
+      "ev_contradiction_proxy": 1.0,
+      "q_has_time_words": 1,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.284
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_f01b83d4a91a",
+    "query": "我家的服务器经常蓝屏，可能是内存问题，我该换哪款内存条？",
+    "gold_gap": "high_risk_or_expert_needed",
+    "gold_action": "abstain",
+    "pred_gap": "false_premise",
+    "pred_action": "challenge_premise",
+    "key_features": {
+      "ev_sufficiency_score": 0.255,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.259
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_28934af3278c",
+    "query": "根据这些信息，这款手机防水吗？",
+    "gold_gap": "evidence_missing",
+    "gold_action": "abstain",
+    "pred_gap": "evidence_missing",
+    "pred_action": "retrieve",
+    "key_features": {
+      "ev_sufficiency_score": 0.039,
+      "ev_contradiction_proxy": 1.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.243
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "现有证据已经不足以支持候选结论时，应优先拒绝确认，不必默认追加检索。"
+  },
+  {
+    "id": "kgd_5c82f101794e",
+    "query": "如何让Windows XP获得最新安全更新？",
+    "gold_gap": "false_premise",
+    "gold_action": "challenge_premise",
+    "pred_gap": "time_sensitive",
+    "pred_action": "retrieve",
+    "key_features": {
+      "ev_sufficiency_score": 0.222,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 1,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.249
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_4e5721c43cba",
+    "query": "Does the provided log indicate a memory leak?",
+    "gold_gap": "evidence_missing",
+    "gold_action": "abstain",
+    "pred_gap": "evidence_missing",
+    "pred_action": "retrieve",
+    "key_features": {
+      "ev_sufficiency_score": 0.139,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.243
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "现有证据已经不足以支持候选结论时，应优先拒绝确认，不必默认追加检索。"
+  },
+  {
+    "id": "kgd_54196b994f95",
+    "query": "学校要求所有学生必须参加晨跑，对吗？",
+    "gold_gap": "false_premise",
+    "gold_action": "challenge_premise",
+    "pred_gap": "false_premise",
+    "pred_action": "abstain",
+    "key_features": {
+      "ev_sufficiency_score": 0.354,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.263
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_5762ee0f7c1a",
+    "query": "Does the error log indicate a memory leak?",
+    "gold_gap": "evidence_missing",
+    "gold_action": "abstain",
+    "pred_gap": "evidence_missing",
+    "pred_action": "retrieve",
+    "key_features": {
+      "ev_sufficiency_score": 0.155,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.243
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "现有证据已经不足以支持候选结论时，应优先拒绝确认，不必默认追加检索。"
+  },
+  {
+    "id": "kgd_77e67f91efff",
+    "query": "What is the tax rate table for this year's personal income tax?",
+    "gold_gap": "evidence_missing",
+    "gold_action": "retrieve",
+    "pred_gap": "evidence_missing",
+    "pred_action": "abstain",
+    "key_features": {
+      "ev_sufficiency_score": 0.214,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.243
+    },
+    "error_category": "time-sensitive 未触发 retrieve",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_ef11e82361f7",
+    "query": "根据这段日志，我的服务器是否被入侵了？",
+    "gold_gap": "evidence_missing",
+    "gold_action": "abstain",
+    "pred_gap": "evidence_missing",
+    "pred_action": "retrieve",
+    "key_features": {
+      "ev_sufficiency_score": 0.241,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.243
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "现有证据已经不足以支持候选结论时，应优先拒绝确认，不必默认追加检索。"
+  }
+]

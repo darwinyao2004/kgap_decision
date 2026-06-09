@@ -1,28 +1,38 @@
 {
+  "generation_mode": "deepseek",
+  "generator_version": "deepseek_grounded_v1",
   "group_counts": {
-    "test": 80,
-    "train": 240,
-    "val": 80
+    "test": 86,
+    "train": 253,
+    "val": 84
   },
   "no_group_leakage": true,
   "seed": 42,
   "sources": {
-    "ambigqa_asqa_fallback": 74,
-    "campus_dynamic_synthetic": 72,
-    "course_qa_synthetic": 74,
-    "evidence_missing_synthetic": 72,
-    "false_premise_synthetic": 72,
-    "freshqa_fallback": 74,
-    "high_risk_synthetic": 72,
-    "low_risk_life_course": 72,
-    "sufficient_context_fallback": 72,
-    "technical_doc_synthetic": 72,
-    "user_condition_synthetic": 74
+    "ambigqa_asqa_fallback": 6,
+    "campus_dynamic_synthetic": 2,
+    "course_qa_synthetic": 3,
+    "deepseek_abstention_high_risk": 75,
+    "deepseek_ambigqa_style": 78,
+    "deepseek_false_premise": 80,
+    "deepseek_freshqa_style": 66,
+    "deepseek_missing_evidence": 156,
+    "deepseek_sufficient_context": 153,
+    "deepseek_sufficient_context_negative": 79,
+    "deepseek_underspecified_user_need": 77,
+    "evidence_missing_synthetic": 3,
+    "false_premise_synthetic": 6,
+    "freshqa_fallback": 6,
+    "high_risk_synthetic": 2,
+    "low_risk_life_course": 2,
+    "sufficient_context_fallback": 2,
+    "technical_doc_synthetic": 2,
+    "user_condition_synthetic": 2
   },
   "split_sizes": {
-    "test": 160,
-    "train": 480,
-    "val": 160
+    "test": 161,
+    "train": 483,
+    "val": 156
   },
   "target_size": 800
 }

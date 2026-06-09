@@ -1,3 +1,6 @@
 .venv/
 __pycache__/
 *.pyc
+data/cache/deepseek/
+data/cache/deepseek_generation/
+data/cache/generated/

@@ -24,7 +24,7 @@ python3 -m venv .venv
 
 ## API 配置
 
-DeepSeek 调用从环境变量读取密钥和模型名：
+DeepSeek 调用从环境变量读取密钥和模型名。当前项目会用 DeepSeek 做两件事：生成受控合成数据，以及运行 `Prompted LLM Baseline`。
 
 ```bash
 export DEEPSEEK_API_KEY=...
@@ -34,7 +34,7 @@ export DEEPSEEK_MODEL=deepseek-chat
 
 项目代码复用该脚本的关键设置：`httpx`、`http2=False`、`trust_env=False`、超时不少于 60 秒、结构化任务使用 `response_format={"type":"json_object"}`。默认接口为 `https://api.deepseek.com/chat/completions`，如需覆盖可设置 `DEEPSEEK_BASE_URL`。代码和结果文件不会保存 API key 或 Authorization header。
 
-如果 API 不可用，实验仍会运行离线 fallback，并在报告中记录。API 可用时，`Prompted LLM Baseline` 会对测试集逐条调用 DeepSeek 并缓存结构化预测。
+如果 API 不可用，实验仍会运行离线 fallback，并在报告中记录。API 可用时，数据生成结果会缓存到 `data/cache/generated/`，`Prompted LLM Baseline` 会对测试集逐条调用 DeepSeek 并缓存结构化预测。
 
 ## 快速运行
 
@@ -45,12 +45,15 @@ export DEEPSEEK_MODEL=deepseek-chat
 ```
 
 快速模式默认构造约 100 条样本，用于验收主流程。
+如果只想跑离线模板数据，可加 `--offline-data`。
 
 ## 完整实验
 
 ```bash
 .venv/bin/python -m knowledge_gap_decision.run_experiment --target-size 800
 ```
+
+如果想强制重新调用 DeepSeek 生成数据，可加 `--refresh-llm-data`。
 
 也可以使用：
 

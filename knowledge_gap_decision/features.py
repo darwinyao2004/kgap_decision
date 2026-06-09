@@ -30,7 +30,8 @@ RISK_WORDS = {
     "合同",
     "药",
 }
-NEG_WORDS = {"not", "no", "never", "没有", "并未", "不能", "不是", "未"}
+EN_NEG_WORDS = {"not", "no", "never"}
+ZH_NEG_WORDS = {"没有", "并未", "不能", "不是", "未"}
 
 
 def _contains_any(text: str, words: set[str]) -> int:
@@ -64,18 +65,21 @@ def contradiction_proxy(query: str, answer: str, evidence: list[str]) -> float:
     joined = " ".join(evidence)
     if not joined:
         return 0.0
-    neg_ev = any(w in joined.lower() for w in NEG_WORDS)
-    affirmative_answer = not any(w in answer.lower() for w in NEG_WORDS)
+    joined_lower = joined.lower()
+    answer_lower = answer.lower()
+    ev_tokens = set(re.findall(r"\b[a-z]+\b", joined_lower))
+    ans_tokens = set(re.findall(r"\b[a-z]+\b", answer_lower))
+    neg_ev = bool(ev_tokens & EN_NEG_WORDS) or any(w in joined for w in ZH_NEG_WORDS)
+    affirmative_answer = not (bool(ans_tokens & EN_NEG_WORDS) or any(w in answer for w in ZH_NEG_WORDS))
     number_conflict = bool(_numbers(answer) and _numbers(joined) and _numbers(answer).isdisjoint(_numbers(joined)))
     date_conflict = bool(_dates(query) and _dates(joined) and _dates(query).isdisjoint(_dates(joined)))
     return float((neg_ev and affirmative_answer) or number_conflict or date_conflict)
 
 
-def evidence_sufficiency_score(row: dict[str, Any], top1: float, overlap: float, contradiction: float) -> float:
-    label_hint = {"sufficient": 0.9, "insufficient": 0.25, "contradictory": 0.1}.get(
-        row.get("evidence_sufficiency_label"), 0.4
-    )
-    raw = 0.35 * top1 + 0.25 * overlap + 0.4 * label_hint - 0.25 * contradiction
+def evidence_sufficiency_score(top1: float, query_overlap: float, answer_overlap: float, contradiction: float, evidence_count: int) -> float:
+    # This intentionally avoids annotation fields such as evidence_sufficiency_label.
+    count_bonus = min(evidence_count, 3) / 3
+    raw = 0.38 * top1 + 0.22 * query_overlap + 0.30 * answer_overlap + 0.10 * count_bonus - 0.30 * contradiction
     return float(np.clip(raw, 0.0, 1.0))
 
 
@@ -141,7 +145,7 @@ def compute_features(records: list[dict[str, Any]], cache_samples: bool = True) 
         q_ev_overlap = token_overlap(q, joined_ev)
         ans_ev_overlap = token_overlap(answer, joined_ev)
         contradiction = contradiction_proxy(q, answer, evidence)
-        suff_score = evidence_sufficiency_score(row, retrieval.top1_similarity, q_ev_overlap, contradiction)
+        suff_score = evidence_sufficiency_score(retrieval.top1_similarity, q_ev_overlap, ans_ev_overlap, contradiction, len(evidence))
         samples = pseudo_samples(row)
         sc = self_consistency_features(row, samples)
         if cache_samples:
@@ -169,10 +173,8 @@ def compute_features(records: list[dict[str, Any]], cache_samples: bool = True) 
             "ev_sufficiency_score": suff_score,
             "ev_count": len(evidence),
             "ev_total_length": len(joined_ev),
-            "flag_false_premise": int(row.get("false_premise_flag", False)),
-            "flag_time_sensitive": int(row.get("time_sensitive_flag", False)),
-            "risk_high": int(row.get("risk_level") == "high"),
-            "risk_medium": int(row.get("risk_level") == "medium"),
+            "risk_high": _contains_any(" ".join([q, ctx, answer]), RISK_WORDS),
+            "risk_medium": int(_contains_any(" ".join(evidence), {"policy", "contract", "deadline", "合规", "合同", "截止"}) and not _contains_any(" ".join([q, ctx, answer]), RISK_WORDS)),
         }
         feature.update(sc)
         rows.append(feature)
