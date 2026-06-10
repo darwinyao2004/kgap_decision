@@ -69,7 +69,8 @@ class DeepSeekClient:
                     response.raise_for_status()
                     raw_text = response.text
                 data = json.loads(raw_text)
-                content = data["choices"][0]["message"].get("content") or ""
+                message = data["choices"][0]["message"]
+                content = message.get("content") or message.get("reasoning_content") or ""
                 parsed = self._parse_json(content)
                 if parsed is None:
                     self._write_debug(cache_key or "uncached", raw_text)

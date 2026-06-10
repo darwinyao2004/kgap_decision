@@ -218,17 +218,10 @@ def full_method_predict(
 
 def prompted_llm_baseline(records: list[dict[str, Any]], client: Any, api_available: bool) -> PredictionResult:
     if not api_available:
-        return PredictionResult(
-            "Prompted LLM Baseline",
-            [GapType.SUFFICIENT.value] * len(records),
-            [Action.ANSWER.value] * len(records),
-            status="skipped_api_unavailable",
-            explanations=["API unavailable; baseline skipped"] * len(records),
-        )
+        raise RuntimeError("Prompted LLM Baseline requires an available API; experiment stops instead of using fallback predictions.")
     gaps: list[str] = []
     actions: list[str] = []
     explanations: list[str] = []
-    failures = 0
     system = (
         "You are evaluating a QA system's decision policy. Return only strict JSON in the final message content. "
         "Do not include chain-of-thought, markdown, or prose outside the JSON object. "
@@ -267,16 +260,13 @@ def prompted_llm_baseline(records: list[dict[str, Any]], client: Any, api_availa
         action = _normalize_action(result.get("action") if isinstance(result, dict) else None)
         explanation = result.get("explanation") if isinstance(result, dict) else None
         if gap not in GAP_TYPES:
-            gap = GapType.SUFFICIENT.value
-            failures += 1
+            raise RuntimeError(f"Prompted LLM Baseline returned malformed gap_type for record {record['id']}.")
         if action not in ACTION_TYPES:
-            action = action_from_gap(gap)
-            failures += 1
+            raise RuntimeError(f"Prompted LLM Baseline returned malformed action for record {record['id']}.")
         gaps.append(gap)
         actions.append(action)
         explanations.append(str(explanation or "DeepSeek prediction"))
-    status = "ok" if failures == 0 else f"partial_api_or_parse_failures_{failures}"
-    return PredictionResult("Prompted LLM Baseline", gaps, actions, status=status, explanations=explanations)
+    return PredictionResult("Prompted LLM Baseline", gaps, actions, status="ok", explanations=explanations)
 
 
 def _normalize_gap(value: Any) -> str | None:

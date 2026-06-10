@@ -1,27 +1,36 @@
 id,gold_action,pred_action,required_slots,best_clarifying_question,target_slot,question_utility_score,candidate_count,covers_required_slot,only_one_core_question,non_leading
-kgd_7016e05ae179,ask,ask,具体馆别|时间类型（日常或当前）,你的具体馆别和时间类型（日常或当前）分别是什么？,"具体馆别,时间类型（日常或当前）",0.9425,4,1,1,1
-kgd_318075c7226c,ask,ask,用户偏好（性能或性价比）|使用场景,你的用户偏好（性能或性价比）和使用场景分别是什么？,"用户偏好（性能或性价比）,使用场景",0.9425,4,1,1,1
-kgd_5a8041adaf5f,ask,ask,用户是否有工作经历和社保缴纳|用户是否持有失业证明,你的用户是否有工作经历和社保缴纳和用户是否持有失业证明分别是什么？,"用户是否有工作经历和社保缴纳,用户是否持有失业证明",0.9425,4,1,1,1
-kgd_6d5286206758,ask,ask,预算|主要用途,你的预算和主要用途分别是什么？,"预算,主要用途",0.93,4,1,1,1
-kgd_bacb48af1d12,ask,ask,budget|primary use,你的budget和primary use分别是什么？,"budget,primary use",0.9425,4,1,1,1
-kgd_b21a5522515d,ask,ask,调薪类型（年中绩效调薪或年初普调）,请补充调薪类型（年中绩效调薪或年初普调），这样我才能更准确地回答你的问题。,调薪类型（年中绩效调薪或年初普调）,0.95,2,1,1,1
+kgd_d3913b904665,ask,answer,公司类型|计划开户银行,你的公司类型和计划开户银行分别是什么？,"公司类型,计划开户银行",0.9425,4,1,1,1
+kgd_0db8f9832c2b,ask,ask,operating_system|primary_usage,你的operating_system和primary_usage分别是什么？,"operating_system,primary_usage",0.9425,4,1,1,1
+kgd_f4e183b0ccfe,abstain,ask,,请补充限定条件，这样我才能更准确地回答你的问题。,限定条件,0.3625,2,0,1,1
+kgd_e392a76fd455,ask,answer,context_type (employment or business sale),请补充context_type (employment or business sale)，这样我才能更准确地回答你的问题。,context_type (employment or business sale),0.925,2,1,1,1
 kgd_e96092af7c72,ask,ask,操作系统|目标任务,你的操作系统和目标任务分别是什么？,"操作系统,目标任务",0.9425,4,1,1,1
 kgd_e9e4c0b6d262,ask,ask,操作系统|目标任务,你的操作系统和目标任务分别是什么？,"操作系统,目标任务",0.9425,4,1,1,1
-kgd_dfbc20c86738,ask,ask,,请补充限定条件，这样我才能更准确地回答你的问题。,限定条件,0.3625,2,0,1,1
-kgd_27308017ea5e,ask,ask,产品型号,请补充产品型号，这样我才能更准确地回答你的问题。,产品型号,0.9,2,1,1,1
-kgd_9b330ce59d3f,ask,ask,用户学历|数学基础|学习目标,你的用户学历和数学基础分别是什么？,"用户学历,数学基础",0.7925,5,1,1,1
+kgd_5a8041adaf5f,ask,ask,用户是否有工作经历和社保缴纳|用户是否持有失业证明,你的用户是否有工作经历和社保缴纳和用户是否持有失业证明分别是什么？,"用户是否有工作经历和社保缴纳,用户是否持有失业证明",0.9425,4,1,1,1
 kgd_160de72e46e7,ask,ask,job_offer_status|education_level|employer_sponsorship,你的job_offer_status和education_level分别是什么？,"job_offer_status,education_level",0.7925,5,1,1,1
-kgd_5e710c01be7d,ask,ask,precise_interpretation,请补充precise_interpretation，这样我才能更准确地回答你的问题。,precise_interpretation,0.95,2,1,1,1
-kgd_f79e7ce2ca84,ask,ask,年份,请补充年份，这样我才能更准确地回答你的问题。,年份,0.875,2,1,1,1
-kgd_52246e80379f,ask,ask,cache type|browser or system,你的cache type和browser or system分别是什么？,"cache type,browser or system",0.9425,4,1,1,1
-kgd_820fa26a2aa4,ask,ask,应用规模|团队技术栈,你的应用规模和团队技术栈分别是什么？,"应用规模,团队技术栈",0.9425,4,1,1,1
-kgd_7d8de937560a,ask,ask,专业方向|兴趣偏好,你的专业方向和兴趣偏好分别是什么？,"专业方向,兴趣偏好",0.9425,4,1,1,1
-kgd_0db8f9832c2b,ask,ask,operating_system|primary_usage,你的operating_system和primary_usage分别是什么？,"operating_system,primary_usage",0.9425,4,1,1,1
-kgd_e392a76fd455,ask,ask,context_type (employment or business sale),请补充context_type (employment or business sale)，这样我才能更准确地回答你的问题。,context_type (employment or business sale),0.925,2,1,1,1
-kgd_dbb1132c4ac5,ask,ask,机器人类型|应用场景,你的机器人类型和应用场景分别是什么？,"机器人类型,应用场景",0.9425,4,1,1,1
-kgd_71a0ac5da687,ask,ask,时间类型（平常/考试期间）,请补充时间类型（平常/考试期间），这样我才能更准确地回答你的问题。,时间类型（平常/考试期间）,0.95,2,1,1,1
-kgd_d3913b904665,ask,ask,公司类型|计划开户银行,你的公司类型和计划开户银行分别是什么？,"公司类型,计划开户银行",0.9425,4,1,1,1
-kgd_fa02c61c325a,ask,ask,研究方向|应用领域,你的研究方向和应用领域分别是什么？,"研究方向,应用领域",0.9425,4,1,1,1
+kgd_9b330ce59d3f,ask,ask,用户学历|数学基础|学习目标,你的用户学历和数学基础分别是什么？,"用户学历,数学基础",0.7925,5,1,1,1
 kgd_0c8f57cf1f5c,ask,ask,超时发生的具体场景|是网络还是应用层问题,你的超时发生的具体场景和是网络还是应用层问题分别是什么？,"超时发生的具体场景,是网络还是应用层问题",0.9425,4,1,1,1
-kgd_fd6cab131cc3,ask,ask,用户需要明确所指的背景版本,请补充用户需要明确所指的背景版本，这样我才能更准确地回答你的问题。,用户需要明确所指的背景版本,0.95,2,1,1,1
 kgd_af4086e5a646,ask,ask,编程基础|偏好语言|难度偏好,你的编程基础和偏好语言分别是什么？,"编程基础,偏好语言",0.7925,5,1,1,1
+kgd_b8659cff6b2a,abstain,ask,年龄|职业|家庭状况|保障需求,你的年龄和职业分别是什么？,"年龄,职业",0.68,5,1,1,1
+kgd_dfbc20c86738,ask,retrieve,,请补充限定条件，这样我才能更准确地回答你的问题。,限定条件,0.3625,2,0,1,1
+kgd_f01b83d4a91a,abstain,ask,,请补充限定条件，这样我才能更准确地回答你的问题。,限定条件,0.3625,2,0,1,1
+kgd_65accb7a601e,answer,ask,,请补充限定条件，这样我才能更准确地回答你的问题。,限定条件,0.3625,2,0,1,1
+kgd_7d8de937560a,ask,ask,专业方向|兴趣偏好,你的专业方向和兴趣偏好分别是什么？,"专业方向,兴趣偏好",0.9425,4,1,1,1
+kgd_f79e7ce2ca84,ask,ask,年份,请补充年份，这样我才能更准确地回答你的问题。,年份,0.875,2,1,1,1
+kgd_74d305e722d0,abstain,ask,,请补充限定条件，这样我才能更准确地回答你的问题。,限定条件,0.3625,2,0,1,1
+kgd_5e710c01be7d,ask,ask,precise_interpretation,请补充precise_interpretation，这样我才能更准确地回答你的问题。,precise_interpretation,0.95,2,1,1,1
+kgd_b21a5522515d,ask,retrieve,调薪类型（年中绩效调薪或年初普调）,请补充调薪类型（年中绩效调薪或年初普调），这样我才能更准确地回答你的问题。,调薪类型（年中绩效调薪或年初普调）,0.95,2,1,1,1
+kgd_7016e05ae179,ask,ask,具体馆别|时间类型（日常或当前）,你的具体馆别和时间类型（日常或当前）分别是什么？,"具体馆别,时间类型（日常或当前）",0.9425,4,1,1,1
+kgd_41b07eb9f100,answer,ask,,请补充限定条件，这样我才能更准确地回答你的问题。,限定条件,0.3625,2,0,1,1
+kgd_27308017ea5e,ask,ask,产品型号,请补充产品型号，这样我才能更准确地回答你的问题。,产品型号,0.9,2,1,1,1
+kgd_52246e80379f,ask,answer,cache type|browser or system,你的cache type和browser or system分别是什么？,"cache type,browser or system",0.9425,4,1,1,1
+kgd_820fa26a2aa4,ask,ask,应用规模|团队技术栈,你的应用规模和团队技术栈分别是什么？,"应用规模,团队技术栈",0.9425,4,1,1,1
+kgd_318075c7226c,ask,ask,用户偏好（性能或性价比）|使用场景,你的用户偏好（性能或性价比）和使用场景分别是什么？,"用户偏好（性能或性价比）,使用场景",0.9425,4,1,1,1
+kgd_fd6cab131cc3,ask,abstain,用户需要明确所指的背景版本,请补充用户需要明确所指的背景版本，这样我才能更准确地回答你的问题。,用户需要明确所指的背景版本,0.95,2,1,1,1
+kgd_66bf2670468d,abstain,ask,,请补充限定条件，这样我才能更准确地回答你的问题。,限定条件,0.3625,2,0,1,1
+kgd_71a0ac5da687,ask,ask,时间类型（平常/考试期间）,请补充时间类型（平常/考试期间），这样我才能更准确地回答你的问题。,时间类型（平常/考试期间）,0.95,2,1,1,1
+kgd_bacb48af1d12,ask,ask,budget|primary use,你的budget和primary use分别是什么？,"budget,primary use",0.9425,4,1,1,1
+kgd_ba79c94038e7,retrieve,ask,题面|官方资料,你的题面和官方资料分别是什么？,"题面,官方资料",0.93,4,1,1,1
+kgd_dbb1132c4ac5,ask,retrieve,机器人类型|应用场景,你的机器人类型和应用场景分别是什么？,"机器人类型,应用场景",0.9425,4,1,1,1
+kgd_aabebfdea4d6,retrieve,ask,,请补充限定条件，这样我才能更准确地回答你的问题。,限定条件,0.3625,2,0,1,1
+kgd_6d5286206758,ask,ask,预算|主要用途,你的预算和主要用途分别是什么？,"预算,主要用途",0.93,4,1,1,1
+kgd_fa02c61c325a,ask,retrieve,研究方向|应用领域,你的研究方向和应用领域分别是什么？,"研究方向,应用领域",0.9425,4,1,1,1

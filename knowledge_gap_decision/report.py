@@ -130,7 +130,7 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         "- E：带缺口类型和动作标签的问答样本。",
         "",
         "## 3. 相关工作简述",
-        "AmbigQA 和 ASQA 提醒我：很多问题并不是缺一个答案，而是问题本身有多种解释。FreshQA 处理动态事实，正好对应本实验里的 `time_sensitive -> retrieve`。SelfCheckGPT 用多次采样的一致性检查幻觉，我这里只做了离线扰动版，不能等同于真实 LLM 采样。Self-RAG 把检索纳入生成控制，本实验进一步把检索、追问、拒答和纠错都放进动作标签。Sufficient Context 和 AbstentionBench 相关工作则对应另两个边界：证据是否足够，以及模型什么时候应该停下来不答。",
+        "AmbigQA 和 ASQA 提醒我：很多问题并不是缺一个答案，而是问题本身有多种解释。FreshQA 处理动态事实，正好对应本实验里的 `time_sensitive -> retrieve`。SelfCheckGPT 用多次采样的一致性检查幻觉，本实验也用 DeepSeek 多次采样得到动作投票和短理由一致性特征。Self-RAG 把检索纳入生成控制，本实验进一步把检索、追问、拒答和纠错都放进动作标签。Sufficient Context 和 AbstentionBench 相关工作则对应另两个边界：证据是否足够，以及模型什么时候应该停下来不答。",
         "",
         "## 4. 数据构造",
         f"本次运行构造样本数为 {manifest['target_size']}，生成模式为 `{manifest.get('generation_mode', 'unknown')}`。数据生成参考 AmbigQA/ASQA 的多解释问题、FreshQA 的动态事实、Sufficient Context 的证据充分性判断和 AbstentionBench 的拒答边界；DeepSeek 按受控 scenario 批量生成自然问题、对话上下文、检索证据和候选回答，代码负责类别配额、schema 校验、去重、group 划分和少量 fallback 补齐。每条样本包含 `user_initial_query`、`dialogue_context`、`retrieved_evidence`、`candidate_answer`、`gap_type`、`gold_action`、`required_slots`、证据标签、时间敏感标记、错误前提标记和风险等级。",
@@ -141,14 +141,14 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         _table(label_dist, ["label_type", "label", "count"], 20),
         "",
         "## 5. 方法",
-        "整体流程包括：先标准化样本，再计算问题侧、证据侧和模型侧不确定性特征；随后训练 gap_type 分类器和 action 分类器，并在 Full Method 中使用验证集从少量预定义配置里选择最稳的组合。申请书里写到的 BM25、embedding 相似度和 NLI 在当前实现中降级为 TF-IDF、token overlap、覆盖率和冲突启发式。为避免标签泄漏，`evidence_sufficiency_label`、`false_premise_flag`、`time_sensitive_flag`、`risk_level` 不再直接作为模型特征；Self-consistency 特征当前仍由离线扰动近似生成，记录在 `data/cache/llm_samples.jsonl`；Prompted LLM Baseline 在 API 可用时会调用 DeepSeek 生成结构化动作预测。",
+        "整体流程包括：先标准化样本，再计算问题侧、证据侧和模型侧不确定性特征；随后训练 gap_type 分类器和 action 分类器，并在 Full Method 中使用验证集从少量预定义配置里选择最稳的组合。申请书里写到的 BM25、embedding 相似度和 NLI 在当前实现中降级为 TF-IDF、token overlap、覆盖率和冲突启发式。为避免标签泄漏，`evidence_sufficiency_label`、`false_premise_flag`、`time_sensitive_flag`、`risk_level` 不再直接作为模型特征；Self-consistency 特征由 DeepSeek 基于四个输入字段多次采样生成，记录在 `data/cache/llm_self_consistency.jsonl`，缓存条目不包含 `gap_type`、`gold_action`、`final_answer`、`gold_clarifying_question` 或 `required_slots`。",
         "",
         f"Full Method 的配置选择写入 `results/full_method_selection.json`，本次验证集选择为 `{selected_full}`。最终决策以结构化特征分类器为主，只保留保守的安全覆盖；对 `ask` 样本，question utility ranker 生成候选追问，并按 slot coverage、预期不确定性降低、具体性、可回答性、礼貌性和诱导性惩罚排序。",
         "",
         "## 6. 实验设置",
-        f"运行模式：{mode}。训练/验证/测试比例为 6:2:2，随机种子为 42。运行环境为 Python {platform.python_version()} / {platform.system()}。{provider} 模型：{model_name}；API key 是否存在：{key_present}；API 是否通过严格 JSON 探测：{api_available}。本次 API 状态说明：{api_status['note']}",
+        f"运行模式：{mode}。训练/验证/测试比例为 6:2:2，随机种子为 42。运行环境为 Python {platform.python_version()} / {platform.system()}。{provider} 模型：{model_name}；API key 是否存在：{key_present}；API 是否通过严格 JSON 探测：{api_available}。本次 API 状态说明：{api_status['note']} 如果没有 API key、探测失败或批量调用失败，实验会直接停止，不再使用离线回退特征。",
         "",
-        f"对照方法包括 Always Answer、Always Ask、RAG Similarity Threshold、Self-Consistency Baseline、Prompted LLM Baseline、Logistic Regression、Random Forest、GBDT、TF-IDF Text Encoder Classifier 和 Full Method。Prompted LLM Baseline 的本次状态为 `{llm['status']}`；只有状态为 `ok` 时才进入有效方法排序、效用图和显著性检验。",
+        f"对照方法包括 Always Answer、Always Ask、RAG Similarity Threshold、Self-Consistency Baseline、Prompted LLM Baseline、Logistic Regression、Random Forest、GBDT、TF-IDF Text Encoder Classifier 和 Full Method。Prompted LLM Baseline 的本次状态为 `{llm['status']}`；LLM 调用失败会中止实验，而不是用默认动作补齐。",
         "",
         "## 7. 结果",
         "总体指标如下：",
@@ -186,9 +186,9 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         "- 数据由 DeepSeek 按受控 scenario 生成，并非真实线上用户日志；真实用户分布可能不同。",
         "- 数据生成仍可能出现轻微标签噪声，因此代码加入了 schema 校验、高风险一致性修复、去重和 fallback 补齐。",
         "- 高风险问题只做动作决策，不提供专业判断。",
-        "- API 不稳定或成本会影响 self-consistency 特征规模。",
+        "- API 不稳定或成本会影响 self-consistency 特征规模；当前实现选择硬失败，避免静默回退污染结果。",
         "- 如果使用启发式 NLI proxy，其证据冲突判断能力有限。",
-        "- 当前 Prompted LLM Baseline 在 DeepSeek API 未通过严格 JSON 探测时不会强行运行；若批量预测出现解析失败，会用回退动作补齐并在状态中记录失败数。",
+        "- 当前 Prompted LLM Baseline 和 self-consistency 采样都要求 DeepSeek API 可用；若批量预测出现解析失败，实验会停止。",
         "",
         "## 13. 可复现性说明",
         "主要运行命令：",
@@ -240,19 +240,19 @@ def generate_outline(path: str = "reports/presentation_outline.md") -> None:
 - 数据标准化后按 group_id 划分，避免同源改写进入不同 split
 - 问题侧特征：长度、时间词、主观词、条件词、实体、错误前提模式、高风险关键词
 - 证据侧特征：TF-IDF 相似度、token overlap、覆盖率、冲突启发式
-- 模型侧特征：当前使用离线扰动近似 self-consistency；DeepSeek API 用于 Prompted LLM Baseline
+- 模型侧特征：DeepSeek 基于四个输入字段多次采样 action/rationale，再计算 vote entropy、majority ratio、rationale overlap 和动作票数
 - Full Method：分类器给出基础预测，用验证集选择稳定配置，规则只做保守安全覆盖
 
 ## 实验设置
 - 数据规模与标签分布
 - baselines 与模型参数
-- DeepSeek API 探测未通过时保留 baseline 状态行，但不把 skipped 结果当有效比较
+- DeepSeek API 探测或批量调用失败时实验直接停止，不写离线回退结果
 - 重复划分：使用多个随机种子检查 Full Method 稳定性
 
 ## 结果
 - 先讲 Always Answer 的风险：错误回答率高，效用显著为负
 - 再讲 Full Method：动作分数、效用和错误回答率
-- 必须说明新数据不再大面积满分，贡献主要体现在 self-consistency/不确定性特征
+- 说明 self-consistency 特征现在来自真实 LLM 采样，不读取任何 gold label 字段
 
 ## 消融
 - 展示 ablation_summary.csv

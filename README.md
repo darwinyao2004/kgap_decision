@@ -7,7 +7,7 @@
 - `knowledge_gap_decision/`：实验主代码。
 - `data/raw/`：外部数据或缓存占位目录。
 - `data/processed/`：统一数据集、训练/验证/测试划分和标签分布。
-- `data/cache/`：LLM 或离线 self-consistency 采样缓存。
+- `data/cache/`：DeepSeek 数据生成、prompt baseline 和 self-consistency 采样缓存。
 - `results/`：指标、预测、混淆矩阵、消融、显著性检验和错误分析。
 - `reports/`：中文验收报告、Word 文档、展示提纲和实验日志。
 - `scripts/`：命令行辅助脚本，包含 DeepSeek API 探测脚本。
@@ -24,7 +24,7 @@ python3 -m venv .venv
 
 ## API 配置
 
-DeepSeek 调用从环境变量读取密钥和模型名。当前项目会用 DeepSeek 做两件事：生成受控合成数据，以及运行 `Prompted LLM Baseline`。
+DeepSeek 调用从环境变量读取密钥和模型名。当前项目会用 DeepSeek 做三件事：生成受控合成数据、运行 `Prompted LLM Baseline`，以及为 `sc_*` 特征做 5 次 action/rationale self-consistency 采样。
 
 ```bash
 export DEEPSEEK_API_KEY=...
@@ -34,7 +34,7 @@ export DEEPSEEK_MODEL=deepseek-chat
 
 项目代码复用该脚本的关键设置：`httpx`、`http2=False`、`trust_env=False`、超时不少于 60 秒、结构化任务使用 `response_format={"type":"json_object"}`。默认接口为 `https://api.deepseek.com/chat/completions`，如需覆盖可设置 `DEEPSEEK_BASE_URL`。代码和结果文件不会保存 API key 或 Authorization header。
 
-如果 API 不可用，实验仍会运行离线 fallback，并在报告中记录。API 可用时，数据生成结果会缓存到 `data/cache/generated/`，`Prompted LLM Baseline` 会对测试集逐条调用 DeepSeek 并缓存结构化预测。
+数据生成仍保留模板 fallback 以便构造样本，但完整实验的特征生成不允许离线替代 self-consistency。没有 `DEEPSEEK_API_KEY`、API 探测失败或批量调用失败时，实验会直接停止。Self-consistency 缓存写入 `data/cache/llm_self_consistency.jsonl`，每条缓存只包含四个输入字段对应的 input hash、action 投票和短理由，不包含 `gap_type`、`gold_action`、`final_answer`、`gold_clarifying_question` 或 `required_slots`。
 
 ## 快速运行
 
@@ -45,7 +45,7 @@ export DEEPSEEK_MODEL=deepseek-chat
 ```
 
 快速模式默认构造约 100 条样本，用于验收主流程。
-如果只想跑离线模板数据，可加 `--offline-data`。
+如果只想用离线模板构造数据，可加 `--offline-data`；但 self-consistency 特征和 LLM baseline 仍需要 DeepSeek API。
 
 ## 完整实验
 

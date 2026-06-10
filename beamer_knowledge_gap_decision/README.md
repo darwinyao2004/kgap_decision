@@ -19,4 +19,4 @@ From this folder:
 latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 ```
 
-The deck avoids hand-drawn flow diagrams and focuses the implementation section on code structure and main functions. It also notes that the current offline self-consistency feature is a label-conditioned proxy, not deployable black-box LLM sampling.
+The deck avoids hand-drawn flow diagrams and focuses the implementation section on code structure and main functions. It also notes that self-consistency now uses real DeepSeek multi-sampling over the four input fields and that missing or malformed API calls stop the experiment.

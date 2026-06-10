@@ -63,7 +63,7 @@
     \item Project design: data schema, labels, and evaluation targets
     \item Engineering implementation: code structure and main functions
     \item Results: method comparison, ablations, stability, and errors
-    \item Limitations: what the current experiment proves and what it does not
+    \item Limitations: current evidence, boundaries, and next validation targets
   \end{itemize}
 \end{frame}
 
@@ -71,7 +71,7 @@
 
 \begin{frame}{Problem: Answering Is Only One Possible Action}
   \begin{itemize}
-    \item Many user questions are not ready for a final answer.
+    \item Many user questions require a decision before final answering.
     \item Missing user constraints call for \alert{asking a question}.
     \item Missing or fresh facts call for \alert{retrieval}.
     \item Unsupported high-stakes claims call for \alert{abstention}.
@@ -106,7 +106,7 @@
     \item Primary classification metric: action macro-F1.
     \item Safety-sensitive metric: wrong-answer rate.
     \item Utility combines correctness, wrong-answer penalty, over-refusal, over-asking, and turn cost.
-    \item The experiment evaluates the next action, not the surface quality of the final long answer.
+    \item The experiment evaluates the next action before any final long answer.
   \end{itemize}
 \end{frame}
 
@@ -126,8 +126,8 @@
   \begin{itemize}
     \item Full run: 800 records generated under controlled knowledge-gap scenarios.
     \item Split: train 483, validation 156, test 161.
-    \item Split is by \code{group_id}, so paired variants do not leak across splits.
-    \item DeepSeek generation is cached; fallback templates keep the pipeline runnable offline.
+    \item Split is by \code{group_id}, keeping paired variants in the same split.
+    \item DeepSeek generation is cached; self-consistency feature generation requires a live API key.
   \end{itemize}
 \end{frame}
 
@@ -141,7 +141,7 @@
     \item \code{schema.py} defines \code{GapType}, \code{Action}, required fields, and validation.
     \item Key text fields: \code{user_initial_query}, \code{dialogue_context}, \code{retrieved_evidence}, \code{candidate_answer}.
     \item Key supervision fields: \code{gap_type}, \code{gold_action}, \code{required_slots}.
-    \item Annotation fields such as risk and evidence sufficiency are recorded, but not directly used as model features.
+    \item Annotation fields such as risk and evidence sufficiency are recorded for labels and evaluation.
   \end{itemize}
 \end{frame}
 
@@ -163,16 +163,16 @@
     \item \code{data/processed/}: generated dataset, splits, and feature CSVs.
     \item \code{results/}: metrics, predictions, ablations, significance tests, and figures.
     \item \code{reports/}: generated report and experiment log.
-    \item \code{tests/}: schema, leakage, feature, and metric checks.
+    \item \code{tests/}: schema, split-isolation, feature, and metric checks.
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Data Construction Code}
   \begin{itemize}
-    \item \code{build_deepseek_dataset}: calls the JSON-mode DeepSeek client and repairs generated records.
+    \item \code{build_deepseek_dataset}: calls the JSON-mode DeepSeek client and normalizes generated records.
     \item \code{build_dataset}: deterministic fallback dataset generator.
     \item \code{validate_dataset}: catches missing fields, invalid labels, and malformed lists.
-    \item \code{split_by_group}: performs leakage-resistant train / val / test split.
+    \item \code{split_by_group}: keeps related records inside one train / val / test split.
     \item \code{write_dataset}: writes JSONL splits and label distribution artifacts.
   \end{itemize}
 \end{frame}
@@ -182,7 +182,7 @@
     \item \code{compute_features}: central feature table builder.
     \item Question-side features: length, time words, condition words, subjective words, entity count, risk keywords.
     \item Evidence-side features: TF-IDF top similarity, token overlap, coverage ratio, contradiction proxy.
-    \item Model-side features: offline pseudo-sample agreement, answer variance, majority ratio.
+    \item Model-side features: DeepSeek action-vote entropy, majority ratio, rationale overlap, and vote counts.
     \item \code{feature_columns}: toggles evidence and uncertainty features for ablations.
   \end{itemize}
 \end{frame}
@@ -222,16 +222,16 @@
     \item \code{generate_candidates}: creates clarifying questions from missing slots.
     \item \code{score_question}: combines slot coverage, uncertainty reduction, specificity, answerability, politeness, and leading-question penalty.
     \item \code{rank_questions}: writes \code{results/question_ranker_eval.csv}.
-    \item The ranker affects the quality of \code{ask}; it is not the main source of action-F1 gains.
+    \item The ranker improves the quality of \code{ask}; action-F1 mainly comes from the classifier.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Implementation Caveat}
+\begin{frame}{Self-consistency Feature Guardrails}
   \begin{itemize}
-    \item Current self-consistency features are generated from offline pseudo samples.
-    \item The pseudo-sample generator branches on \code{gap_type}; this makes it a controlled proxy, not a deployable uncertainty estimator.
-    \item The ablation is still useful for showing that uncertainty-style signals can separate this dataset.
-    \item It should not be described as real black-box LLM self-consistency.
+    \item Self-consistency now samples DeepSeek five times at nonzero temperature.
+    \item Each call receives only query, dialogue context, retrieved evidence, and candidate answer.
+    \item Cached JSONL rows store action decisions and short rationales, never gold labels.
+    \item Missing API keys, probe failures, or malformed LLM outputs stop the experiment.
   \end{itemize}
 \end{frame}
 
@@ -244,15 +244,15 @@
 
 \begin{frame}{Utility and Wrong-answer Risk}
   \centering
-  \img[0.86\linewidth]{utility_wrong_answer.png}
+  \img[0.94\linewidth]{utility_wrong_answer.png}
 \end{frame}
 
 \begin{frame}{Headline Numbers}
   \begin{itemize}
-    \item Full Method: action macro-F1 0.945, action accuracy 0.938.
-    \item Full Method: utility 0.875 and wrong-answer rate 0.000.
-    \item Always Answer: action macro-F1 0.052, utility -2.404, wrong-answer rate 0.851.
-    \item Prompted LLM Baseline: action macro-F1 0.650, wrong-answer rate 0.118.
+    \item Best method in the current run: Logistic Regression, action macro-F1 0.747 and utility 0.493.
+    \item Full Method: action macro-F1 0.685, utility 0.355, wrong-answer rate 0.087.
+    \item Prompted LLM Baseline: action macro-F1 0.650, wrong-answer rate 0.118, and high-risk unsafe answer rate 0.176.
+    \item Always Answer remains the failure mode: wrong-answer rate 0.851 and utility -2.404.
   \end{itemize}
 \end{frame}
 
@@ -273,7 +273,7 @@
 
 \begin{frame}{Validation Selection}
   \centering
-  \img[0.78\linewidth]{validation_selection.png}
+  \img[0.94\linewidth]{validation_selection.png}
 \end{frame}
 
 \begin{frame}{Ablation}
@@ -293,7 +293,7 @@
 
 \begin{frame}{Residual Errors}
   \centering
-  \img[0.76\linewidth]{error_categories.png}
+  \img[0.86\linewidth]{error_categories.png}
 \end{frame}
 
 \section{Case Discussion}
@@ -303,44 +303,48 @@
     \item Ambiguous technical question: ask about environment and target before giving steps.
     \item Current policy or deadline: retrieve fresh evidence before answering.
     \item False premise: state that the assumption is unsupported before continuing.
-    \item Evidence-support judgment: abstain if the supplied evidence does not support the claim.
+    \item Evidence-support judgment: abstain when supplied evidence fails to support the claim.
   \end{itemize}
 \end{frame}
 
 \begin{frame}{What the Results Say}
   \begin{itemize}
-    \item Explicit action labels are much safer than default answering.
-    \item Structured features beat direct prompted classification on this controlled dataset.
-    \item Full Method is close to Random Forest and GBDT; its advantage over them is not statistically strong.
-    \item The largest ablation drop comes from removing uncertainty-style features.
+    \item The current result is a realistic policy-learning problem with meaningful residual errors.
+    \item Simple supervised learning is the strongest result: Logistic Regression beats Full Method, Random Forest, GBDT, and prompted DeepSeek on this split.
+    \item Full Method adds engineering structure; the test split favors the simpler linear classifier.
+    \item Prompted DeepSeek is semantically competent and answers too often in risky or under-supported cases.
+    \item Real LLM self-consistency is useful as a feature group; direct majority voting remains weak.
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Limitations}
   \begin{itemize}
-    \item The dataset is generated under controlled scenarios, not collected from real users.
+    \item The dataset is generated under controlled scenarios, with real-user validation still needed.
     \item Some labels may still reflect the generator's style and scenario design.
-    \item Evidence contradiction is handled by a heuristic proxy, not a strong NLI verifier.
-    \item The current uncertainty feature is not real multi-sample LLM uncertainty.
+    \item The action policy is project-specific; a helpful assistant may choose ask where this policy chooses abstain.
+    \item Evidence sufficiency is still heuristic; the selected model disables the current sufficiency verifier on validation.
+    \item Real self-consistency depends on DeepSeek, prompt wording, temperature, and cache stability.
+    \item The Full Method should be treated as an engineering baseline for redesign.
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Next Steps}
   \begin{itemize}
-    \item Add real user questions and human label adjudication.
-    \item Replace offline pseudo-consistency with real multi-sample uncertainty or calibrated model confidence.
-    \item Add harder adjacent-label examples, especially retrieve vs abstain and false premise vs time-sensitive.
-    \item Test out-of-distribution domains and generation models.
+    \item Promote Logistic Regression to the main supervised baseline and tune thresholds directly for utility.
+    \item Replace the heuristic sufficiency verifier with NLI, answerability, or entailment-style evidence checks.
+    \item Add hard adjacent-label examples: challenge vs abstain, retrieve vs answer, ask vs answer, and high-risk ask vs abstain.
+    \item Build a stronger LLM baseline with few-shot policy examples and explicit risk / evidence hierarchy.
+    \item Validate on real user questions with human adjudication.
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Takeaway}
   \Large
-  A reliable QA system should decide whether answering is justified before it writes the answer.
+  The clearest current result favors a simple, auditable action classifier.
   \vspace{6mm}
 
   \normalsize
-  This project provides a reproducible prototype for modeling that decision, with clear evidence and clear limits.
+  The current evidence says that a simple, auditable action classifier can beat weak heuristics and reduce LLM over-answering, while the more complex Full Method still needs redesign.
 \end{frame}
 
 \begin{frame}{References}

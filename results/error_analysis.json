@@ -1,17 +1,17 @@
 [
   {
-    "id": "kgd_ae20431931a8",
-    "query": "What is the procedure to apply for a parking permit on campus?",
-    "gold_gap": "evidence_missing",
-    "gold_action": "retrieve",
+    "id": "kgd_72b32a202511",
+    "query": "Is it true that the UK has a law requiring all citizens to register their bicycles?",
+    "gold_gap": "false_premise",
+    "gold_action": "challenge_premise",
     "pred_gap": "evidence_missing",
     "pred_action": "abstain",
     "key_features": {
-      "ev_sufficiency_score": 0.35,
-      "ev_contradiction_proxy": 0.0,
+      "ev_sufficiency_score": 0.0,
+      "ev_contradiction_proxy": 1.0,
       "q_has_time_words": 0,
       "q_has_high_risk_keywords": 0,
-      "sc_self_consistency_score": 0.243
+      "sc_self_consistency_score": 0.621
     },
     "error_category": "其他动作混淆",
     "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
@@ -28,7 +28,228 @@
       "ev_contradiction_proxy": 1.0,
       "q_has_time_words": 1,
       "q_has_high_risk_keywords": 0,
-      "sc_self_consistency_score": 0.284
+      "sc_self_consistency_score": 0.443
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_d3913b904665",
+    "query": "我需要开一个公司账户，需要准备哪些材料？",
+    "gold_gap": "user_info_missing",
+    "gold_action": "ask",
+    "pred_gap": "sufficient_information",
+    "pred_action": "answer",
+    "key_features": {
+      "ev_sufficiency_score": 0.295,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.756
+    },
+    "error_category": "ask 误判为 answer",
+    "suggestion": "先追问 公司类型、计划开户银行，再给出步骤或推荐。"
+  },
+  {
+    "id": "kgd_45c7b9a961e5",
+    "query": "我听说喝醋可以软化血管，是真的吗？",
+    "gold_gap": "false_premise",
+    "gold_action": "challenge_premise",
+    "pred_gap": "evidence_missing",
+    "pred_action": "abstain",
+    "key_features": {
+      "ev_sufficiency_score": 0.0,
+      "ev_contradiction_proxy": 1.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.461
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_31b76f96b954",
+    "query": "What is the termination notice period in this contract?",
+    "gold_gap": "high_risk_or_expert_needed",
+    "gold_action": "abstain",
+    "pred_gap": "sufficient_information",
+    "pred_action": "answer",
+    "key_features": {
+      "ev_sufficiency_score": 0.257,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.755
+    },
+    "error_category": "abstain 误判为 answer",
+    "suggestion": "高风险或不可验证问题不应给出确定结论，需要保留拒答阈值。"
+  },
+  {
+    "id": "kgd_f4e183b0ccfe",
+    "query": "What is the best way to invest my retirement savings?",
+    "gold_gap": "high_risk_or_expert_needed",
+    "gold_action": "abstain",
+    "pred_gap": "user_info_missing",
+    "pred_action": "ask",
+    "key_features": {
+      "ev_sufficiency_score": 0.0,
+      "ev_contradiction_proxy": 1.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.714
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_84439a34b35a",
+    "query": "期末考试期间图书馆是否24小时开放？",
+    "gold_gap": "false_premise",
+    "gold_action": "challenge_premise",
+    "pred_gap": "evidence_missing",
+    "pred_action": "answer",
+    "key_features": {
+      "ev_sufficiency_score": 0.424,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.864
+    },
+    "error_category": "false premise compliance",
+    "suggestion": "对“为什么/既然/已经”等前提词增加核验分支，先说明前提未被证据支持。"
+  },
+  {
+    "id": "kgd_3cebc56996aa",
+    "query": "如果我只会基础语法，怎么准备 编译原理 实验？",
+    "gold_gap": "sufficient_information",
+    "gold_action": "answer",
+    "pred_gap": "sufficient_information",
+    "pred_action": "retrieve",
+    "key_features": {
+      "ev_sufficiency_score": 0.27,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.72
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_e392a76fd455",
+    "query": "Is the non-compete clause enforceable in California?",
+    "gold_gap": "ambiguous_question",
+    "gold_action": "ask",
+    "pred_gap": "sufficient_information",
+    "pred_action": "answer",
+    "key_features": {
+      "ev_sufficiency_score": 0.218,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.728
+    },
+    "error_category": "ask 误判为 answer",
+    "suggestion": "先追问 context_type (employment or business sale)，再给出步骤或推荐。"
+  },
+  {
+    "id": "kgd_014da6bad86f",
+    "query": "Why does my laptop keep crashing after the Windows 11 update, even though it is on the supported list?",
+    "gold_gap": "false_premise",
+    "gold_action": "challenge_premise",
+    "pred_gap": "evidence_missing",
+    "pred_action": "abstain",
+    "key_features": {
+      "ev_sufficiency_score": 0.283,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.732
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_4032f4ffbbff",
+    "query": "为什么Python的GIL会导致多线程性能下降？",
+    "gold_gap": "false_premise",
+    "gold_action": "challenge_premise",
+    "pred_gap": "evidence_missing",
+    "pred_action": "abstain",
+    "key_features": {
+      "ev_sufficiency_score": 0.278,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.576
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_b8659cff6b2a",
+    "query": "我想买一份保险，哪种比较好？",
+    "gold_gap": "high_risk_or_expert_needed",
+    "gold_action": "abstain",
+    "pred_gap": "user_info_missing",
+    "pred_action": "ask",
+    "key_features": {
+      "ev_sufficiency_score": 0.174,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.693
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_898441259969",
+    "query": "How do I change the default port for a Spring Boot application?",
+    "gold_gap": "evidence_missing",
+    "gold_action": "retrieve",
+    "pred_gap": "sufficient_information",
+    "pred_action": "answer",
+    "key_features": {
+      "ev_sufficiency_score": 0.0,
+      "ev_contradiction_proxy": 1.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.698
+    },
+    "error_category": "retrieve 误判为 answer",
+    "suggestion": "时间敏感或证据缺失样本需要提高检索优先级，避免静态答案提前输出。"
+  },
+  {
+    "id": "kgd_dfbc20c86738",
+    "query": "我想买一台笔记本电脑，适合学生使用，电池续航要长。",
+    "gold_gap": "ambiguous_question",
+    "gold_action": "ask",
+    "pred_gap": "evidence_missing",
+    "pred_action": "retrieve",
+    "key_features": {
+      "ev_sufficiency_score": 0.0,
+      "ev_contradiction_proxy": 1.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.404
+    },
+    "error_category": "其他动作混淆",
+    "suggestion": "先追问 关键条件，再给出步骤或推荐。"
+  },
+  {
+    "id": "kgd_307f2e654cbc",
+    "query": "根据提供的文档，这个软件是否支持批量导出？",
+    "gold_gap": "evidence_missing",
+    "gold_action": "abstain",
+    "pred_gap": "false_premise",
+    "pred_action": "challenge_premise",
+    "key_features": {
+      "ev_sufficiency_score": 0.071,
+      "ev_contradiction_proxy": 1.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.528
     },
     "error_category": "其他动作混淆",
     "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
@@ -38,135 +259,84 @@
     "query": "我家的服务器经常蓝屏，可能是内存问题，我该换哪款内存条？",
     "gold_gap": "high_risk_or_expert_needed",
     "gold_action": "abstain",
-    "pred_gap": "false_premise",
-    "pred_action": "challenge_premise",
+    "pred_gap": "user_info_missing",
+    "pred_action": "ask",
     "key_features": {
       "ev_sufficiency_score": 0.255,
       "ev_contradiction_proxy": 0.0,
       "q_has_time_words": 0,
       "q_has_high_risk_keywords": 0,
-      "sc_self_consistency_score": 0.259
+      "sc_self_consistency_score": 0.711
     },
     "error_category": "其他动作混淆",
     "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
   },
   {
-    "id": "kgd_28934af3278c",
-    "query": "根据这些信息，这款手机防水吗？",
-    "gold_gap": "evidence_missing",
-    "gold_action": "abstain",
-    "pred_gap": "evidence_missing",
-    "pred_action": "retrieve",
+    "id": "kgd_65accb7a601e",
+    "query": "请问如何申请校园停车许可证？",
+    "gold_gap": "sufficient_information",
+    "gold_action": "answer",
+    "pred_gap": "ambiguous_question",
+    "pred_action": "ask",
     "key_features": {
-      "ev_sufficiency_score": 0.039,
+      "ev_sufficiency_score": 0.321,
+      "ev_contradiction_proxy": 0.0,
+      "q_has_time_words": 0,
+      "q_has_high_risk_keywords": 0,
+      "sc_self_consistency_score": 0.755
+    },
+    "error_category": "answer 误判为 ask",
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
+  },
+  {
+    "id": "kgd_5575482120b9",
+    "query": "学校规定学生必须购买指定品牌的笔记本电脑，对吗？",
+    "gold_gap": "false_premise",
+    "gold_action": "challenge_premise",
+    "pred_gap": "evidence_missing",
+    "pred_action": "abstain",
+    "key_features": {
+      "ev_sufficiency_score": 0.0,
       "ev_contradiction_proxy": 1.0,
       "q_has_time_words": 0,
       "q_has_high_risk_keywords": 0,
-      "sc_self_consistency_score": 0.243
-    },
-    "error_category": "其他动作混淆",
-    "suggestion": "现有证据已经不足以支持候选结论时，应优先拒绝确认，不必默认追加检索。"
-  },
-  {
-    "id": "kgd_5c82f101794e",
-    "query": "如何让Windows XP获得最新安全更新？",
-    "gold_gap": "false_premise",
-    "gold_action": "challenge_premise",
-    "pred_gap": "time_sensitive",
-    "pred_action": "retrieve",
-    "key_features": {
-      "ev_sufficiency_score": 0.222,
-      "ev_contradiction_proxy": 0.0,
-      "q_has_time_words": 1,
-      "q_has_high_risk_keywords": 0,
-      "sc_self_consistency_score": 0.249
+      "sc_self_consistency_score": 0.436
     },
     "error_category": "其他动作混淆",
     "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
   },
   {
-    "id": "kgd_4e5721c43cba",
-    "query": "Does the provided log indicate a memory leak?",
-    "gold_gap": "evidence_missing",
-    "gold_action": "abstain",
-    "pred_gap": "evidence_missing",
-    "pred_action": "retrieve",
-    "key_features": {
-      "ev_sufficiency_score": 0.139,
-      "ev_contradiction_proxy": 0.0,
-      "q_has_time_words": 0,
-      "q_has_high_risk_keywords": 0,
-      "sc_self_consistency_score": 0.243
-    },
-    "error_category": "其他动作混淆",
-    "suggestion": "现有证据已经不足以支持候选结论时，应优先拒绝确认，不必默认追加检索。"
-  },
-  {
-    "id": "kgd_54196b994f95",
-    "query": "学校要求所有学生必须参加晨跑，对吗？",
+    "id": "kgd_b18dabcac1d5",
+    "query": "为什么我的电脑开机后黑屏？我已经按照指南更新了显卡驱动。",
     "gold_gap": "false_premise",
     "gold_action": "challenge_premise",
-    "pred_gap": "false_premise",
-    "pred_action": "abstain",
-    "key_features": {
-      "ev_sufficiency_score": 0.354,
-      "ev_contradiction_proxy": 0.0,
-      "q_has_time_words": 0,
-      "q_has_high_risk_keywords": 0,
-      "sc_self_consistency_score": 0.263
-    },
-    "error_category": "其他动作混淆",
-    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
-  },
-  {
-    "id": "kgd_5762ee0f7c1a",
-    "query": "Does the error log indicate a memory leak?",
-    "gold_gap": "evidence_missing",
-    "gold_action": "abstain",
-    "pred_gap": "evidence_missing",
-    "pred_action": "retrieve",
-    "key_features": {
-      "ev_sufficiency_score": 0.155,
-      "ev_contradiction_proxy": 0.0,
-      "q_has_time_words": 0,
-      "q_has_high_risk_keywords": 0,
-      "sc_self_consistency_score": 0.243
-    },
-    "error_category": "其他动作混淆",
-    "suggestion": "现有证据已经不足以支持候选结论时，应优先拒绝确认，不必默认追加检索。"
-  },
-  {
-    "id": "kgd_77e67f91efff",
-    "query": "What is the tax rate table for this year's personal income tax?",
-    "gold_gap": "evidence_missing",
-    "gold_action": "retrieve",
     "pred_gap": "evidence_missing",
     "pred_action": "abstain",
     "key_features": {
-      "ev_sufficiency_score": 0.214,
+      "ev_sufficiency_score": 0.212,
       "ev_contradiction_proxy": 0.0,
       "q_has_time_words": 0,
       "q_has_high_risk_keywords": 0,
-      "sc_self_consistency_score": 0.243
+      "sc_self_consistency_score": 0.424
     },
-    "error_category": "time-sensitive 未触发 retrieve",
+    "error_category": "其他动作混淆",
     "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
   },
   {
-    "id": "kgd_ef11e82361f7",
-    "query": "根据这段日志，我的服务器是否被入侵了？",
-    "gold_gap": "evidence_missing",
+    "id": "kgd_74d305e722d0",
+    "query": "我的孩子发烧39度，该吃多少布洛芬？",
+    "gold_gap": "high_risk_or_expert_needed",
     "gold_action": "abstain",
-    "pred_gap": "evidence_missing",
-    "pred_action": "retrieve",
+    "pred_gap": "user_info_missing",
+    "pred_action": "ask",
     "key_features": {
-      "ev_sufficiency_score": 0.241,
+      "ev_sufficiency_score": 0.122,
       "ev_contradiction_proxy": 0.0,
       "q_has_time_words": 0,
       "q_has_high_risk_keywords": 0,
-      "sc_self_consistency_score": 0.243
+      "sc_self_consistency_score": 0.769
     },
     "error_category": "其他动作混淆",
-    "suggestion": "现有证据已经不足以支持候选结论时，应优先拒绝确认，不必默认追加检索。"
+    "suggestion": "检查该类样本的标签边界，并补充相邻动作的对比样本。"
   }
 ]

@@ -1,162 +1,162 @@
 id,query,gold_gap_type,gold_action,pred_gap_type,pred_action,explanation
-kgd_89044a026fe4,最新版Python支持哪些新特性？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_7451e9a26a27,Why did the company's profits increase by 20% last quarter?,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_9c0af34de964,如何解决Python的ModuleNotFoundError？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_ae20431931a8,What is the procedure to apply for a parking permit on campus?,evidence_missing,retrieve,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
-kgd_26472fb5c0dc,请问本学期学生宿舍的申请截止日期是什么时候？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_7cac1dede984,根据合同条款，我们是否可以在通知后立即终止协议？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_1116694fbc99,What are the reporting deadlines for quarterly earnings under SEC regulations?,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_7016e05ae179,请问学校的图书馆什么时候开放？,ambiguous_question,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_1fe6b6940c2a,我这个症状是感冒还是新冠肺炎？我该吃什么药？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_d968423b4ce7,Does the provided document state that the product is water-resistant up to 10 meters?,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
-kgd_b8659cff6b2a,我想买一份保险，哪种比较好？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_898441259969,How do I change the default port for a Spring Boot application?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_ceef03a23b20,OpenAI目前的首席技术官是谁？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_84439a34b35a,期末考试期间图书馆是否24小时开放？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_72b32a202511,Is it true that the UK has a law requiring all citizens to register their bicycles?,false_premise,challenge_premise,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
 kgd_b1f56c4e59a3,谁是目前的世界首富？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
 kgd_3820b3c04627,清华大学今年是不是取消了文科专业？,false_premise,challenge_premise,time_sensitive,retrieve,time-sensitive query
-kgd_cf011b54df3e,What is the deadline for filing 2024 federal income taxes in the US?,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_b6ce526f8281,What is the battery life of the latest iPhone model?,evidence_missing,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_d5831873914b,请问深度学习在医疗影像诊断中的最新突破是什么？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_318075c7226c,哪个品牌的无线路由器最好？,ambiguous_question,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_aabebfdea4d6,北京市的购房限购政策是什么？,time_sensitive,retrieve,time_sensitive,retrieve,gap classifier predicted time_sensitive; action classifier predicted retrieve
-kgd_67e4ea5cd04b,为什么学校不允许学生携带笔记本电脑上课？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_53c2fbd07a48,合同中的保密条款有效期是多长？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_f98bab9e9194,What are the prerequisites for CS 101?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_3727039662cb,Who is the current NBA champion?,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_420c5926c991,图书馆周末是否24小时开放？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_f01b83d4a91a,我家的服务器经常蓝屏，可能是内存问题，我该换哪款内存条？,high_risk_or_expert_needed,abstain,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_211bb50eb92b,"Based on the provided document, does our company allow remote work for full-time employees?",evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
-kgd_baa18e198f05,公司当前的注册地址是什么？,time_sensitive,retrieve,time_sensitive,retrieve,gap classifier predicted time_sensitive; action classifier predicted retrieve
-kgd_014da6bad86f,"Why does my laptop keep crashing after the Windows 11 update, even though it is on the supported list?",false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_6145ac401fc4,为什么 CampusNet 已经在 2024 年关闭了所有服务？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_6755609d974a,既然 CampusNet 已停止运营，我该迁移到哪里？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_d3913b904665,我需要开一个公司账户，需要准备哪些材料？,user_info_missing,ask,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_a64a60c8c3e1,What is the current recommended dosage for pediatric ibuprofen?,evidence_missing,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_1fe6b6940c2a,我这个症状是感冒还是新冠肺炎？我该吃什么药？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
+kgd_d968423b4ce7,Does the provided document state that the product is water-resistant up to 10 meters?,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
 kgd_99ea098c6922,Should I use a specific medication to treat my anxiety? I read about it online.,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
 kgd_4de772599692,根据提供的资料，这个药物是否对新冠肺炎有效？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_5a8041adaf5f,我如何申请失业补助？,user_info_missing,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_80ab9f7da844,2024年个人所得税的起征点是多少？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_31b76f96b954,What is the termination notice period in this contract?,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_3a6beaeb8a5b,What is the sample size used in the study by Smith et al. 2022?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_06ba9559945a,What dosage of aspirin should I take?,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_28934af3278c,根据这些信息，这款手机防水吗？,evidence_missing,abstain,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
 kgd_b949598b4af1,合同中关于知识产权归属的条款是否合理？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
 kgd_45b1e9d67537,What is the battery life of the latest iPad Pro?,evidence_missing,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_6d5286206758,推荐一台笔记本电脑,user_info_missing,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_d708112b2a37,服务器最新的固件版本是多少？,evidence_missing,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_0ee1ba4f2cff,数据库系统 期末考试第 5 题标准答案是什么？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_bacb48af1d12,Which laptop should I buy?,user_info_missing,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_1b5afbe9a7b8,这个合同的违约金条款是什么？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_45fbac076a68,2024年个人所得税起征点是多少？,time_sensitive,retrieve,time_sensitive,retrieve,gap classifier predicted time_sensitive; action classifier predicted retrieve
-kgd_8c5bafb69c49,为什么我们的系统仍然使用MD5加密密码？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_d89bd2d96346,最近发布的Python 3.12有哪些新特性？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_5c82f101794e,如何让Windows XP获得最新安全更新？,false_premise,challenge_premise,time_sensitive,retrieve,time-sensitive query
-kgd_1f68efff252b,我头痛、发烧，应该吃什么药？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_03ea74bae54c,根据这个错误日志，系统是否存在内存泄漏？,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
-kgd_d90155cdd375,我的打印机无法连接到无线网络，我已经尝试了重启路由器和打印机，但还是不行。,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_b21a5522515d,请问公司今年什么时候调薪？,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
-kgd_e96092af7c72,Docker 怎么配置？,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
-kgd_e9e4c0b6d262,我应该怎么用 Docker？,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
-kgd_f9d1c2bc27b4,请问，根据这份合同，甲方是否有权在未经乙方同意的情况下提前终止合同？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_dfbc20c86738,我想买一台笔记本电脑，适合学生使用，电池续航要长。,ambiguous_question,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_72b125cd818d,我签了一份租赁合同，但房东突然要涨租金，合同里没有明确条款，我该怎么办？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_307f2e654cbc,根据提供的文档，这个软件是否支持批量导出？,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
-kgd_4e5721c43cba,Does the provided log indicate a memory leak?,evidence_missing,abstain,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_72b32a202511,Is it true that the UK has a law requiring all citizens to register their bicycles?,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_8dad7d0d60e5,今年诺贝尔文学奖得主是谁？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_54196b994f95,学校要求所有学生必须参加晨跑，对吗？,false_premise,challenge_premise,false_premise,abstain,gap classifier predicted false_premise; action classifier predicted abstain
-kgd_fedd949dc6bc,我最近感到焦虑，可以服用什么药物来缓解？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_549c55d446fb,根据提供的文章，是否证实了咖啡因能降低糖尿病风险？,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
-kgd_9e7eff4408bd,出现轻微头痛和鼻塞，应该如何处理？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_b1ccb2423bdf,When is the application deadline for student dormitories?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_8b3ef5535662,What is the prerequisite for the Advanced Machine Learning course?,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_7b86f2dd19e3,What is the campus parking fee for visitors in 2024?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_5ac5a79a03e9,我的打印机型号是HP LaserJet Pro M404dn，最近打印时出现纵向白条，如何解决？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_e700e93d95b5,我最近总是头痛，应该怎么办？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_ecb0bb3ee1e2,请问北京市的购房限购政策中，非本市户籍家庭需要满足哪些条件？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_27308017ea5e,这款洗发水适合油性头皮吗？,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
-kgd_c668c6e72391,目前美联储的基准利率是多少？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_4032f4ffbbff,为什么Python的GIL会导致多线程性能下降？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_74d305e722d0,我的孩子发烧39度，该吃多少布洛芬？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_8e0170f65763,Does the campus policy allow overnight guests in dorms?,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
-kgd_66bf2670468d,What painkiller should I take for lower back pain?,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_a1983f3be04b,Does the provided evidence support the claim that regular exercise improves short-term memory?,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
-kgd_456490ce5090,如何在Kubernetes集群中配置Ingress以支持HTTPS？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_9b330ce59d3f,我想选修计算机系的机器学习课程，请问有什么推荐？,ambiguous_question,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_41b07eb9f100,如何重置密码？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_962c7dbf8aa0,What are the side effects of Drug X?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_c5f5ff2d1263,当前最新的iOS系统版本是多少？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_6e402a59f27b,学校的图书馆周一开门吗？听说他们周一闭馆。,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_160de72e46e7,我该申请哪种签证去美国工作？,user_info_missing,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
-kgd_4918fbfdd5ce,I have a severe headache and dizziness. What medication should I take?,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_e288de4a210f,根据这些日志，是否能确定服务器宕机是由于内存泄漏引起的？,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
-kgd_b848606884f0,请问Transformer架构中的自注意力机制相比循环神经网络有什么主要优势？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_5e710c01be7d,谁发现了引力波？,ambiguous_question,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_e3ebd75cbc14,请问我们学校的图书馆在寒假期间开放吗？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_f79e7ce2ca84,基金定投的收益率是多少？,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
-kgd_4a06a9f11167,今年诺贝尔化学奖得主是谁？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_f4e1747c39e0,申请英国学生签证需要提供雅思成绩吗？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
 kgd_32f50a77cd04,Who currently holds the record for the fastest marathon time?,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_45c7b9a961e5,我听说喝醋可以软化血管，是真的吗？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_baecf0474e38,我最近总是头痛，有什么好的止痛药推荐吗？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_cf2f5b4f05be,如何在Git中撤销最后一次提交？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_31b38e7d7b5b,Who is the current president of the university?,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_3890a4baa178,根据合同，产品交付后30天内可无条件退款吗？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_bec6bd58fcf8,How do I fix a Windows blue screen error with code 0x0000001a?,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_52246e80379f,How do I clear the cache in Windows?,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
-kgd_820fa26a2aa4,我该用什么工具来部署我的Web应用？,user_info_missing,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_f95d95a418b1,What is the current VAT rate in the UK?,evidence_missing,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_2eebfc5ef54a,现在北京购房的限购政策是什么？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_b18dabcac1d5,为什么我的电脑开机后黑屏？我已经按照指南更新了显卡驱动。,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_45c7b9a961e5,我听说喝醋可以软化血管，是真的吗？,false_premise,challenge_premise,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_0db8f9832c2b,我的电脑运行很慢，该怎么办？,user_info_missing,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
+kgd_77e67f91efff,What is the tax rate table for this year's personal income tax?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_31b76f96b954,What is the termination notice period in this contract?,high_risk_or_expert_needed,abstain,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_3a6beaeb8a5b,What is the sample size used in the study by Smith et al. 2022?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_f4e183b0ccfe,What is the best way to invest my retirement savings?,high_risk_or_expert_needed,abstain,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
+kgd_ef11e82361f7,根据这段日志，我的服务器是否被入侵了？,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
 kgd_6dfa7e3f8fd4,帮我找一些关于机器学习在医疗中应用的论文。,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
 kgd_c170c5308c2c,Transformer模型的参数量通常是多少？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_3cebc56996aa,如果我只会基础语法，怎么准备 编译原理 实验？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_c1fc0288ed07,我胸痛并且呼吸困难，应该吃什么药？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_1edc5ff76795,帮我判断这个法律合同能不能签。,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_69cf4cd57f26,What is the notice period required in this contract?,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_d75bb3fb5e27,What is the current SEC fee rate for stock trades?,evidence_missing,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_a952f9b5fe8f,我该投资哪只基金？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_4357c4e867f9,这款笔记本的重量是多少？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_c0a3d142687c,What is the prerequisite for enrolling in CS 201?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_65ed708cc33b,What is the maximum contribution limit for a 401(k) in 2024?,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_5b4822265d7b,Transformer模型中自注意力机制的时间复杂度是多少？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_65accb7a601e,请问如何申请校园停车许可证？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_7d8de937560a,我下学期应该选什么课程？,ambiguous_question,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_cb4d0481b502,这款手机的电池是可拆卸的，对吗？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_d7ecae7d3cca,我头痛两天了，该吃什么药？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_5762ee0f7c1a,Does the error log indicate a memory leak?,evidence_missing,abstain,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_0db8f9832c2b,我的电脑运行很慢，该怎么办？,user_info_missing,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
-kgd_77e67f91efff,What is the tax rate table for this year's personal income tax?,evidence_missing,retrieve,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_ceef03a23b20,OpenAI目前的首席技术官是谁？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_84439a34b35a,期末考试期间图书馆是否24小时开放？,false_premise,challenge_premise,evidence_missing,answer,gap classifier predicted evidence_missing; action classifier predicted answer
+kgd_baecf0474e38,我最近总是头痛，有什么好的止痛药推荐吗？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
+kgd_cf2f5b4f05be,如何在Git中撤销最后一次提交？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_26472fb5c0dc,请问本学期学生宿舍的申请截止日期是什么时候？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_7cac1dede984,根据合同条款，我们是否可以在通知后立即终止协议？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
+kgd_3cebc56996aa,如果我只会基础语法，怎么准备 编译原理 实验？,sufficient_information,answer,sufficient_information,retrieve,gap classifier predicted sufficient_information; action classifier predicted retrieve
 kgd_100a5ecd6191,请问今年的个税专项附加扣除标准有没有变化？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_e392a76fd455,Is the non-compete clause enforceable in California?,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
-kgd_dbb1132c4ac5,帮我找一下关于强化学习在机器人控制中应用的最新论文。,user_info_missing,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_769d667aba47,如何在Windows 10中启用远程桌面功能？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_23b7c353b41a,Transformer模型中自注意力机制的参数量是多少？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_4a2343ba1797,今年个人所得税专项附加扣除的标准是多少？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_00d2601fa00f,What are the current AML reporting thresholds in the UK?,evidence_missing,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_f2d537177d59,请审查这份合同中的自动续约条款是否对我方有利？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_71a0ac5da687,教务处的办公时间是什么？,ambiguous_question,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_5b12f766f7ec,What is the deadline for filing taxes this year?,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_513906ba5fb1,发烧38度应该吃什么药？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_d3913b904665,我需要开一个公司账户，需要准备哪些材料？,user_info_missing,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_a64a60c8c3e1,What is the current recommended dosage for pediatric ibuprofen?,evidence_missing,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_fa02c61c325a,帮我找一些关于强化学习的论文。,user_info_missing,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
-kgd_a213a4849cb0,计算机科学专业的先修课程是什么？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_f4e183b0ccfe,What is the best way to invest my retirement savings?,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_ef11e82361f7,根据这段日志，我的服务器是否被入侵了？,evidence_missing,abstain,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_ea28496585a0,为什么我的打印机一直显示缺纸，但明明有纸？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
-kgd_f72e541943e5,请问2024年个人所得税年度汇算清缴的截止日期是几号？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_0c8f57cf1f5c,如何解决服务器响应超时的问题？,ambiguous_question,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_ba79c94038e7,计算机网络 期末考试第 5 题标准答案是什么？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
-kgd_8b23aa48255e,我想买一款适合日常通勤的电动自行车，有什么推荐吗？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_fd6cab131cc3,李白的《静夜思》是在什么背景下创作的？,ambiguous_question,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
-kgd_4f52cf5adf1e,如果我只会基础语法，怎么准备 数据库系统 实验？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_5c1b86406f04,如何在 Kubernetes 中配置滚动更新？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
-kgd_47d0f1b593f0,这份合同中关于保密义务的具体条款是什么？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_ed39cfa75a12,Can I take ibuprofen with my current heart medication? I have a history of heart disease.,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_d9876b8fe99f,根据这几篇文档，可以确定学校将于下月取消所有考试吗？,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_e392a76fd455,Is the non-compete clause enforceable in California?,ambiguous_question,ask,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
 kgd_0e99ba7222d9,头疼得厉害，该吃什么药？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
-kgd_14c94bdd9f7b,Does the contract allow termination without cause?,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
-kgd_91f76f75232a,今年清华大学计算机系硕士研究生的复试分数线是多少？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
-kgd_5575482120b9,学校规定学生必须购买指定品牌的笔记本电脑，对吗？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_14c94bdd9f7b,Does the contract allow termination without cause?,high_risk_or_expert_needed,abstain,false_premise,abstain,gap classifier predicted false_premise; action classifier predicted abstain
+kgd_e96092af7c72,Docker 怎么配置？,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
+kgd_e9e4c0b6d262,我应该怎么用 Docker？,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
+kgd_8b3ef5535662,What is the prerequisite for the Advanced Machine Learning course?,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_7b86f2dd19e3,What is the campus parking fee for visitors in 2024?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_4f52cf5adf1e,如果我只会基础语法，怎么准备 数据库系统 实验？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_5a8041adaf5f,我如何申请失业补助？,user_info_missing,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
+kgd_80ab9f7da844,2024年个人所得税的起征点是多少？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_3727039662cb,Who is the current NBA champion?,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_420c5926c991,图书馆周末是否24小时开放？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_160de72e46e7,我该申请哪种签证去美国工作？,user_info_missing,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
+kgd_456490ce5090,如何在Kubernetes集群中配置Ingress以支持HTTPS？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_9b330ce59d3f,我想选修计算机系的机器学习课程，请问有什么推荐？,ambiguous_question,ask,sufficient_information,ask,gap classifier predicted sufficient_information; action classifier predicted ask
+kgd_baa18e198f05,公司当前的注册地址是什么？,time_sensitive,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_014da6bad86f,"Why does my laptop keep crashing after the Windows 11 update, even though it is on the supported list?",false_premise,challenge_premise,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_f72e541943e5,请问2024年个人所得税年度汇算清缴的截止日期是几号？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_0c8f57cf1f5c,如何解决服务器响应超时的问题？,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
+kgd_c668c6e72391,目前美联储的基准利率是多少？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_4032f4ffbbff,为什么Python的GIL会导致多线程性能下降？,false_premise,challenge_premise,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
 kgd_af4086e5a646,我想选一门适合我的编程课程，有什么推荐？,user_info_missing,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
 kgd_c679ecbcb65d,如何重启我的路由器？我忘记了默认管理密码。,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_b8659cff6b2a,我想买一份保险，哪种比较好？,high_risk_or_expert_needed,abstain,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
+kgd_898441259969,How do I change the default port for a Spring Boot application?,evidence_missing,retrieve,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_fedd949dc6bc,我最近感到焦虑，可以服用什么药物来缓解？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
+kgd_549c55d446fb,根据提供的文章，是否证实了咖啡因能降低糖尿病风险？,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_f9d1c2bc27b4,请问，根据这份合同，甲方是否有权在未经乙方同意的情况下提前终止合同？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
+kgd_dfbc20c86738,我想买一台笔记本电脑，适合学生使用，电池续航要长。,ambiguous_question,ask,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_72b125cd818d,我签了一份租赁合同，但房东突然要涨租金，合同里没有明确条款，我该怎么办？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
+kgd_307f2e654cbc,根据提供的文档，这个软件是否支持批量导出？,evidence_missing,abstain,false_premise,challenge_premise,false premise or contradiction
+kgd_0ee1ba4f2cff,数据库系统 期末考试第 5 题标准答案是什么？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_f01b83d4a91a,我家的服务器经常蓝屏，可能是内存问题，我该换哪款内存条？,high_risk_or_expert_needed,abstain,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
+kgd_211bb50eb92b,"Based on the provided document, does our company allow remote work for full-time employees?",evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_d7ecae7d3cca,我头痛两天了，该吃什么药？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
+kgd_5762ee0f7c1a,Does the error log indicate a memory leak?,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_65accb7a601e,请问如何申请校园停车许可证？,sufficient_information,answer,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
+kgd_7d8de937560a,我下学期应该选什么课程？,ambiguous_question,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
+kgd_e3ebd75cbc14,请问我们学校的图书馆在寒假期间开放吗？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_f79e7ce2ca84,基金定投的收益率是多少？,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
+kgd_91f76f75232a,今年清华大学计算机系硕士研究生的复试分数线是多少？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_5575482120b9,学校规定学生必须购买指定品牌的笔记本电脑，对吗？,false_premise,challenge_premise,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_89044a026fe4,最新版Python支持哪些新特性？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_7451e9a26a27,Why did the company's profits increase by 20% last quarter?,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_a952f9b5fe8f,我该投资哪只基金？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
+kgd_4357c4e867f9,这款笔记本的重量是多少？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_2eebfc5ef54a,现在北京购房的限购政策是什么？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_b18dabcac1d5,为什么我的电脑开机后黑屏？我已经按照指南更新了显卡驱动。,false_premise,challenge_premise,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_9e7eff4408bd,出现轻微头痛和鼻塞，应该如何处理？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_b1ccb2423bdf,When is the application deadline for student dormitories?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_c5f5ff2d1263,当前最新的iOS系统版本是多少？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_6e402a59f27b,学校的图书馆周一开门吗？听说他们周一闭馆。,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_74d305e722d0,我的孩子发烧39度，该吃多少布洛芬？,high_risk_or_expert_needed,abstain,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
+kgd_8e0170f65763,Does the campus policy allow overnight guests in dorms?,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_ea28496585a0,为什么我的打印机一直显示缺纸，但明明有纸？,false_premise,challenge_premise,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_b848606884f0,请问Transformer架构中的自注意力机制相比循环神经网络有什么主要优势？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_5e710c01be7d,谁发现了引力波？,ambiguous_question,ask,sufficient_information,ask,gap classifier predicted sufficient_information; action classifier predicted ask
+kgd_23b7c353b41a,Transformer模型中自注意力机制的参数量是多少？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_d90155cdd375,我的打印机无法连接到无线网络，我已经尝试了重启路由器和打印机，但还是不行。,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_b21a5522515d,请问公司今年什么时候调薪？,ambiguous_question,ask,time_sensitive,retrieve,time-sensitive query
+kgd_1116694fbc99,What are the reporting deadlines for quarterly earnings under SEC regulations?,sufficient_information,answer,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_7016e05ae179,请问学校的图书馆什么时候开放？,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
+kgd_c1fc0288ed07,我胸痛并且呼吸困难，应该吃什么药？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
+kgd_1edc5ff76795,帮我判断这个法律合同能不能签。,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
+kgd_41b07eb9f100,如何重置密码？,sufficient_information,answer,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
+kgd_962c7dbf8aa0,What are the side effects of Drug X?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_c0a3d142687c,What is the prerequisite for enrolling in CS 201?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_ecb0bb3ee1e2,请问北京市的购房限购政策中，非本市户籍家庭需要满足哪些条件？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_27308017ea5e,这款洗发水适合油性头皮吗？,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
+kgd_cf011b54df3e,What is the deadline for filing 2024 federal income taxes in the US?,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_b6ce526f8281,What is the battery life of the latest iPhone model?,evidence_missing,retrieve,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_bec6bd58fcf8,How do I fix a Windows blue screen error with code 0x0000001a?,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_52246e80379f,How do I clear the cache in Windows?,ambiguous_question,ask,ambiguous_question,answer,gap classifier predicted ambiguous_question; action classifier predicted answer
+kgd_820fa26a2aa4,我该用什么工具来部署我的Web应用？,user_info_missing,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
+kgd_f95d95a418b1,What is the current VAT rate in the UK?,evidence_missing,retrieve,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_8dad7d0d60e5,今年诺贝尔文学奖得主是谁？,time_sensitive,retrieve,time_sensitive,answer,gap classifier predicted time_sensitive; action classifier predicted answer
+kgd_54196b994f95,学校要求所有学生必须参加晨跑，对吗？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_6145ac401fc4,为什么 CampusNet 已经在 2024 年关闭了所有服务？,false_premise,challenge_premise,false_premise,challenge_premise,false premise or contradiction
+kgd_6755609d974a,既然 CampusNet 已停止运营，我该迁移到哪里？,false_premise,challenge_premise,false_premise,challenge_premise,false premise or contradiction
+kgd_5c1b86406f04,如何在 Kubernetes 中配置滚动更新？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_47d0f1b593f0,这份合同中关于保密义务的具体条款是什么？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
+kgd_4918fbfdd5ce,I have a severe headache and dizziness. What medication should I take?,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
+kgd_e288de4a210f,根据这些日志，是否能确定服务器宕机是由于内存泄漏引起的？,evidence_missing,abstain,false_premise,challenge_premise,false premise or contradiction
+kgd_d5831873914b,请问深度学习在医疗影像诊断中的最新突破是什么？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
+kgd_318075c7226c,哪个品牌的无线路由器最好？,ambiguous_question,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
+kgd_4e5721c43cba,Does the provided log indicate a memory leak?,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_4a2343ba1797,今年个人所得税专项附加扣除的标准是多少？,sufficient_information,answer,time_sensitive,retrieve,time-sensitive query
+kgd_00d2601fa00f,What are the current AML reporting thresholds in the UK?,evidence_missing,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_8b23aa48255e,我想买一款适合日常通勤的电动自行车，有什么推荐吗？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_fd6cab131cc3,李白的《静夜思》是在什么背景下创作的？,ambiguous_question,ask,sufficient_information,abstain,gap classifier predicted sufficient_information; action classifier predicted abstain
+kgd_65ed708cc33b,What is the maximum contribution limit for a 401(k) in 2024?,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_5b4822265d7b,Transformer模型中自注意力机制的时间复杂度是多少？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_66bf2670468d,What painkiller should I take for lower back pain?,high_risk_or_expert_needed,abstain,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
+kgd_a1983f3be04b,Does the provided evidence support the claim that regular exercise improves short-term memory?,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_5b12f766f7ec,What is the deadline for filing taxes this year?,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_513906ba5fb1,发烧38度应该吃什么药？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
+kgd_69cf4cd57f26,What is the notice period required in this contract?,high_risk_or_expert_needed,abstain,ambiguous_question,answer,gap classifier predicted ambiguous_question; action classifier predicted answer
+kgd_d75bb3fb5e27,What is the current SEC fee rate for stock trades?,evidence_missing,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_d89bd2d96346,最近发布的Python 3.12有哪些新特性？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_5c82f101794e,如何让Windows XP获得最新安全更新？,false_premise,challenge_premise,time_sensitive,retrieve,time-sensitive query
+kgd_53c2fbd07a48,合同中的保密条款有效期是多长？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
+kgd_f98bab9e9194,What are the prerequisites for CS 101?,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_4a06a9f11167,今年诺贝尔化学奖得主是谁？,time_sensitive,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_f4e1747c39e0,申请英国学生签证需要提供雅思成绩吗？,false_premise,challenge_premise,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_06ba9559945a,What dosage of aspirin should I take?,high_risk_or_expert_needed,abstain,time_sensitive,retrieve,gap classifier predicted time_sensitive; action classifier predicted retrieve
+kgd_28934af3278c,根据这些信息，这款手机防水吗？,evidence_missing,abstain,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_f2d537177d59,请审查这份合同中的自动续约条款是否对我方有利？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
+kgd_71a0ac5da687,教务处的办公时间是什么？,ambiguous_question,ask,ambiguous_question,ask,gap classifier predicted ambiguous_question; action classifier predicted ask
+kgd_bacb48af1d12,Which laptop should I buy?,user_info_missing,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
+kgd_1b5afbe9a7b8,这个合同的违约金条款是什么？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
+kgd_cb4d0481b502,这款手机的电池是可拆卸的，对吗？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_9c0af34de964,如何解决Python的ModuleNotFoundError？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_ae20431931a8,What is the procedure to apply for a parking permit on campus?,evidence_missing,retrieve,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_1f68efff252b,我头痛、发烧，应该吃什么药？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
+kgd_03ea74bae54c,根据这个错误日志，系统是否存在内存泄漏？,evidence_missing,abstain,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_ba79c94038e7,计算机网络 期末考试第 5 题标准答案是什么？,evidence_missing,retrieve,evidence_missing,ask,gap classifier predicted evidence_missing; action classifier predicted ask
+kgd_5ac5a79a03e9,我的打印机型号是HP LaserJet Pro M404dn，最近打印时出现纵向白条，如何解决？,sufficient_information,answer,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_e700e93d95b5,我最近总是头痛，应该怎么办？,high_risk_or_expert_needed,abstain,high_risk_or_expert_needed,abstain,high-risk domain
+kgd_dbb1132c4ac5,帮我找一下关于强化学习在机器人控制中应用的最新论文。,user_info_missing,ask,time_sensitive,retrieve,time-sensitive query
+kgd_769d667aba47,如何在Windows 10中启用远程桌面功能？,evidence_missing,retrieve,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_31b38e7d7b5b,Who is the current president of the university?,time_sensitive,retrieve,sufficient_information,answer,gap classifier predicted sufficient_information; action classifier predicted answer
+kgd_3890a4baa178,根据合同，产品交付后30天内可无条件退款吗？,false_premise,challenge_premise,high_risk_or_expert_needed,abstain,gap classifier predicted high_risk_or_expert_needed; action classifier predicted abstain
+kgd_ed39cfa75a12,Can I take ibuprofen with my current heart medication? I have a history of heart disease.,high_risk_or_expert_needed,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_d9876b8fe99f,根据这几篇文档，可以确定学校将于下月取消所有考试吗？,evidence_missing,abstain,evidence_missing,abstain,gap classifier predicted evidence_missing; action classifier predicted abstain
+kgd_aabebfdea4d6,北京市的购房限购政策是什么？,time_sensitive,retrieve,time_sensitive,ask,gap classifier predicted time_sensitive; action classifier predicted ask
+kgd_67e4ea5cd04b,为什么学校不允许学生携带笔记本电脑上课？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_6d5286206758,推荐一台笔记本电脑,user_info_missing,ask,user_info_missing,ask,gap classifier predicted user_info_missing; action classifier predicted ask
+kgd_d708112b2a37,服务器最新的固件版本是多少？,evidence_missing,retrieve,time_sensitive,retrieve,time-sensitive query
+kgd_45fbac076a68,2024年个人所得税起征点是多少？,time_sensitive,retrieve,time_sensitive,retrieve,gap classifier predicted time_sensitive; action classifier predicted retrieve
+kgd_8c5bafb69c49,为什么我们的系统仍然使用MD5加密密码？,false_premise,challenge_premise,false_premise,challenge_premise,gap classifier predicted false_premise; action classifier predicted challenge_premise
+kgd_fa02c61c325a,帮我找一些关于强化学习的论文。,user_info_missing,ask,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve
+kgd_a213a4849cb0,计算机科学专业的先修课程是什么？,evidence_missing,retrieve,evidence_missing,retrieve,gap classifier predicted evidence_missing; action classifier predicted retrieve

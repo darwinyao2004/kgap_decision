@@ -8,6 +8,6 @@ from knowledge_gap_decision.run_experiment import run
 from knowledge_gap_decision.report import generate_markdown
 
 if __name__ == "__main__":
-    run(100, quick=True, probe_api=False, use_llm_data=False)
+    run(100, quick=True)
     generate_markdown()
     print("smoke ok")

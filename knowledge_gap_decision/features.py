@@ -1,5 +1,8 @@
 import json
+import math
 import re
+import hashlib
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from statistics import variance
 from typing import Any
@@ -8,6 +11,7 @@ import numpy as np
 import pandas as pd
 
 from .retrieval import tfidf_scores, token_overlap, tokenize
+from .schema import ACTION_TYPES, Action
 
 TIME_WORDS = {"today", "current", "latest", "now", "recent", "今年", "现在", "最近", "最新", "今天", "目前", "截止"}
 SUBJECTIVE_WORDS = {"best", "should", "recommend", "worth", "好不好", "是否值得", "推荐", "应该", "最好"}
@@ -32,6 +36,23 @@ RISK_WORDS = {
 }
 EN_NEG_WORDS = {"not", "no", "never"}
 ZH_NEG_WORDS = {"没有", "并未", "不能", "不是", "未"}
+INPUT_FIELDS = ("user_initial_query", "dialogue_context", "retrieved_evidence", "candidate_answer")
+SUPERVISED_FIELDS = {
+    "gap_type",
+    "gold_action",
+    "final_answer",
+    "gold_clarifying_question",
+    "required_slots",
+    "evidence_sufficiency_label",
+    "false_premise_flag",
+    "time_sensitive_flag",
+    "risk_level",
+}
+SC_CACHE_SCHEMA = "llm_self_consistency_v1"
+
+
+class SelfConsistencySamplingError(RuntimeError):
+    pass
 
 
 def _contains_any(text: str, words: set[str]) -> int:
@@ -83,57 +104,257 @@ def evidence_sufficiency_score(top1: float, query_overlap: float, answer_overlap
     return float(np.clip(raw, 0.0, 1.0))
 
 
-def pseudo_samples(row: dict[str, Any]) -> list[str]:
-    base = row.get("candidate_answer", "")
-    gap = row.get("gap_type", "")
-    q = row.get("user_initial_query", "")
-    if gap == "sufficient_information":
-        return [base, base.replace("。", ""), base, row.get("final_answer", base), base]
-    if gap in {"ambiguous_question", "user_info_missing"}:
-        return [
-            base,
-            row.get("gold_clarifying_question", "需要补充条件。"),
-            "需要先确认用户条件。",
-            f"这个问题取决于 {', '.join(row.get('required_slots', []) or ['具体条件'])}。",
-            "无法在缺少限定条件时直接回答。",
-        ]
-    if gap == "false_premise":
-        return [base, row.get("final_answer", base), "前提可能不成立。", "需要先核验前提。", base]
-    if gap == "time_sensitive":
-        return [base, "需要检索最新来源。", "当前信息可能已变化。", base.replace("一直", "可能"), "应查询官方资料。"]
-    if gap == "high_risk_or_expert_needed":
-        return [base, "建议咨询专业人员。", "不能给出专业判断。", "需要完整材料和专家评估。", base]
-    return [base, "证据不足。", "需要检索更多资料。", base, "不能确认。"]
+def _input_payload(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "user_initial_query": row["user_initial_query"],
+        "dialogue_context": row["dialogue_context"],
+        "retrieved_evidence": row["retrieved_evidence"],
+        "candidate_answer": row["candidate_answer"],
+    }
 
 
-def self_consistency_features(row: dict[str, Any], samples: list[str] | None = None) -> dict[str, float]:
-    samples = samples or pseudo_samples(row)
-    lengths = [len(s) for s in samples]
-    ents = [_entity_count(s) for s in samples]
-    dates = [len(_dates(s)) for s in samples]
-    nums = [len(_numbers(s)) for s in samples]
-    normalized = [re.sub(r"\s+", "", s.lower()) for s in samples]
+def _input_hash(row: dict[str, Any]) -> str:
+    text = json.dumps(_input_payload(row), ensure_ascii=False, sort_keys=True)
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _load_sc_cache(cache_path: Path) -> dict[str, dict[str, Any]]:
+    cache: dict[str, dict[str, Any]] = {}
+    if not cache_path.exists():
+        return cache
+    for line in cache_path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        try:
+            item = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if item.get("schema") != SC_CACHE_SCHEMA:
+            continue
+        if any(field in item for field in SUPERVISED_FIELDS):
+            continue
+        key = item.get("input_hash")
+        outputs = item.get("outputs")
+        if isinstance(key, str) and isinstance(outputs, list):
+            cache[key] = item
+    return cache
+
+
+def _normalize_action(value: Any) -> str | None:
+    if not isinstance(value, str):
+        return None
+    normalized = value.strip().lower().replace("-", "_").replace(" ", "_")
+    aliases = {
+        "clarify": Action.ASK.value,
+        "ask_user": Action.ASK.value,
+        "search": Action.RETRIEVE.value,
+        "look_up": Action.RETRIEVE.value,
+        "refuse": Action.ABSTAIN.value,
+        "reject": Action.ABSTAIN.value,
+        "challenge": Action.CHALLENGE.value,
+        "correct_premise": Action.CHALLENGE.value,
+    }
+    return normalized if normalized in ACTION_TYPES else aliases.get(normalized)
+
+
+def _sample_action_decisions(
+    row: dict[str, Any],
+    client: Any,
+    *,
+    sample_count: int,
+    temperature: float,
+) -> list[dict[str, str]]:
+    if client is None or not getattr(client, "enabled", False):
+        raise SelfConsistencySamplingError("LLM self-consistency requires DEEPSEEK_API_KEY; no enabled client was provided.")
+    payload = _input_payload(row)
+    system = (
+        "You are a conservative QA decision policy sampler. Use only the four input fields in the user payload. "
+        "Do not rely on hidden labels or any supervision fields. Return strict JSON only. "
+        f"`action` must be one of: {', '.join(ACTION_TYPES)}. "
+        "Use `answer` only when the candidate answer is sufficiently supported; "
+        "use `ask` when user constraints or ambiguity are missing; "
+        "use `retrieve` when evidence is missing or freshness is required; "
+        "use `abstain` when the system should not confirm the candidate answer; "
+        "use `challenge_premise` when the query premise is unsupported or contradicted."
+    )
+    outputs: list[dict[str, str]] = []
+    base_key = _input_hash(row)
+    for i in range(sample_count):
+        result = client.chat_json(
+            [
+                {"role": "system", "content": system},
+                {
+                    "role": "user",
+                    "content": (
+                        "Return JSON with exactly these keys: `action` and `rationale`. "
+                        "The rationale must be short, one sentence, and must not mention hidden labels.\n"
+                        + json.dumps(payload, ensure_ascii=False, indent=2)
+                    ),
+                },
+            ],
+            temperature=temperature,
+            max_tokens=2048,
+            cache_key=f"self_consistency_{base_key}_{i}",
+        )
+        if not isinstance(result, dict):
+            raise SelfConsistencySamplingError(f"LLM self-consistency call failed for record {row.get('id', '<unknown>')}.")
+        action = _normalize_action(result.get("action"))
+        rationale = result.get("rationale")
+        if action not in ACTION_TYPES or not isinstance(rationale, str) or not rationale.strip():
+            raise SelfConsistencySamplingError(f"Malformed LLM self-consistency output for record {row.get('id', '<unknown>')}.")
+        outputs.append({"action": action, "rationale": rationale.strip()})
+    return outputs
+
+
+def _cache_item(row: dict[str, Any], outputs: list[dict[str, str]], sample_count: int, temperature: float) -> dict[str, Any]:
+    return {
+        "schema": SC_CACHE_SCHEMA,
+        "id": row.get("id", ""),
+        "input_hash": _input_hash(row),
+        "sample_count": sample_count,
+        "temperature": temperature,
+        "input_fields": list(INPUT_FIELDS),
+        "outputs": outputs,
+    }
+
+
+def _append_cache_item(cache_path: Path, item: dict[str, Any]) -> None:
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    with cache_path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(item, ensure_ascii=False) + "\n")
+
+
+def _ensure_llm_self_consistency_cache(
+    records: list[dict[str, Any]],
+    *,
+    client: Any,
+    cache: dict[str, dict[str, Any]],
+    cache_path: Path,
+    cache_samples: bool,
+    sample_count: int,
+    temperature: float,
+    max_workers: int,
+) -> None:
+    missing: dict[str, dict[str, Any]] = {}
+    for row in records:
+        key = _input_hash(row)
+        cached = cache.get(key)
+        if cached and len(cached.get("outputs", [])) >= sample_count:
+            continue
+        missing.setdefault(key, row)
+    if not missing:
+        return
+    workers = max(1, max_workers)
+    executor = ThreadPoolExecutor(max_workers=workers)
+    futures = {
+        executor.submit(_sample_action_decisions, row, client, sample_count=sample_count, temperature=temperature): row
+        for row in missing.values()
+    }
+    try:
+        for future in as_completed(futures):
+            row = futures[future]
+            outputs = future.result()
+            item = _cache_item(row, outputs, sample_count, temperature)
+            if cache_samples:
+                _append_cache_item(cache_path, item)
+            cache[item["input_hash"]] = item
+    except BaseException:
+        for future in futures:
+            future.cancel()
+        executor.shutdown(wait=False, cancel_futures=True)
+        raise
+    else:
+        executor.shutdown(wait=True)
+
+
+def llm_self_consistency_outputs(
+    row: dict[str, Any],
+    *,
+    client: Any,
+    cache: dict[str, dict[str, Any]],
+    cache_path: Path,
+    cache_samples: bool,
+    sample_count: int = 5,
+    temperature: float = 0.7,
+) -> list[dict[str, str]]:
+    key = _input_hash(row)
+    cached = cache.get(key)
+    if cached and len(cached.get("outputs", [])) >= sample_count:
+        return cached["outputs"][:sample_count]
+
+    outputs = _sample_action_decisions(row, client, sample_count=sample_count, temperature=temperature)
+    item = _cache_item(row, outputs, sample_count, temperature)
+    if cache_samples:
+        _append_cache_item(cache_path, item)
+    cache[key] = item
+    return outputs
+
+
+def self_consistency_features(row: dict[str, Any], outputs: list[dict[str, str]]) -> dict[str, float]:
+    rationales = [o["rationale"] for o in outputs]
+    actions = [o["action"] for o in outputs]
+    lengths = [len(s) for s in rationales]
+    ents = [_entity_count(s) for s in rationales]
+    dates = [len(_dates(s)) for s in rationales]
+    nums = [len(_numbers(s)) for s in rationales]
+    normalized = [re.sub(r"\s+", "", s.lower()) for s in rationales]
     majority = max(normalized.count(s) for s in set(normalized)) / max(1, len(normalized))
     pair_overlaps = []
-    for i, a in enumerate(samples):
-        for b in samples[i + 1 :]:
+    for i, a in enumerate(rationales):
+        for b in rationales[i + 1 :]:
             pair_overlaps.append(token_overlap(a, b))
-    agreement = float(np.mean(pair_overlaps)) if pair_overlaps else 1.0
+    rationale_overlap = float(np.mean(pair_overlaps)) if pair_overlaps else 1.0
+    action_counts = {action: actions.count(action) for action in ACTION_TYPES}
+    n = max(1, len(actions))
+    probs = [count / n for count in action_counts.values() if count]
+    entropy = -sum(p * math.log(p) for p in probs) / math.log(len(ACTION_TYPES)) if probs else 0.0
+    majority_action_ratio = max(action_counts.values()) / n
+    answer_votes = action_counts[Action.ANSWER.value]
+    non_answer_votes = n - answer_votes
+    answer_reject_disagreement = 1.0 - abs(answer_votes - non_answer_votes) / n
     return {
-        "sc_answer_embedding_disagreement": 1.0 - agreement,
+        "sc_action_vote_entropy": float(entropy),
+        "sc_majority_action_ratio": float(majority_action_ratio),
+        "sc_answer_vote_count": float(answer_votes),
+        "sc_ask_vote_count": float(action_counts[Action.ASK.value]),
+        "sc_retrieve_vote_count": float(action_counts[Action.RETRIEVE.value]),
+        "sc_abstain_vote_count": float(action_counts[Action.ABSTAIN.value]),
+        "sc_challenge_premise_vote_count": float(action_counts[Action.CHALLENGE.value]),
+        "sc_answer_reject_disagreement": float(answer_reject_disagreement),
+        "sc_rationale_text_overlap": rationale_overlap,
+        "sc_rationale_text_disagreement": 1.0 - rationale_overlap,
+        "sc_answer_embedding_disagreement": 1.0 - rationale_overlap,
         "sc_answer_length_variance": float(variance(lengths)) if len(lengths) > 1 else 0.0,
         "sc_entity_disagreement": float(np.std(ents)),
         "sc_date_disagreement": float(np.std(dates)),
         "sc_number_disagreement": float(np.std(nums)),
-        "sc_majority_answer_ratio": float(majority),
-        "sc_self_consistency_score": float(0.55 * agreement + 0.45 * majority),
+        "sc_majority_answer_ratio": float(majority_action_ratio),
+        "sc_self_consistency_score": float(0.60 * majority_action_ratio + 0.40 * rationale_overlap),
     }
 
 
-def compute_features(records: list[dict[str, Any]], cache_samples: bool = True) -> pd.DataFrame:
-    cache_path = Path("data/cache/llm_samples.jsonl")
-    cache_path.parent.mkdir(parents=True, exist_ok=True)
-    sample_lines = []
+def compute_features(
+    records: list[dict[str, Any]],
+    cache_samples: bool = True,
+    *,
+    llm_client: Any | None = None,
+    sc_cache_path: str | Path = "data/cache/llm_self_consistency.jsonl",
+    sc_sample_count: int = 5,
+    sc_temperature: float = 0.7,
+    sc_max_workers: int = 20,
+) -> pd.DataFrame:
+    cache_path = Path(sc_cache_path)
+    sc_cache = _load_sc_cache(cache_path)
+    _ensure_llm_self_consistency_cache(
+        records,
+        client=llm_client,
+        cache=sc_cache,
+        cache_path=cache_path,
+        cache_samples=cache_samples,
+        sample_count=sc_sample_count,
+        temperature=sc_temperature,
+        max_workers=sc_max_workers,
+    )
     rows = []
     for row in records:
         q = row["user_initial_query"]
@@ -146,10 +367,16 @@ def compute_features(records: list[dict[str, Any]], cache_samples: bool = True) 
         ans_ev_overlap = token_overlap(answer, joined_ev)
         contradiction = contradiction_proxy(q, answer, evidence)
         suff_score = evidence_sufficiency_score(retrieval.top1_similarity, q_ev_overlap, ans_ev_overlap, contradiction, len(evidence))
-        samples = pseudo_samples(row)
-        sc = self_consistency_features(row, samples)
-        if cache_samples:
-            sample_lines.append(json.dumps({"id": row["id"], "mode": "offline_fallback", "samples": samples}, ensure_ascii=False))
+        sc_outputs = llm_self_consistency_outputs(
+            row,
+            client=llm_client,
+            cache=sc_cache,
+            cache_path=cache_path,
+            cache_samples=cache_samples,
+            sample_count=sc_sample_count,
+            temperature=sc_temperature,
+        )
+        sc = self_consistency_features(row, sc_outputs)
         q_tokens = tokenize(q)
         ev_tokens = tokenize(joined_ev)
         coverage = len(set(q_tokens) & set(ev_tokens)) / max(1, len(set(q_tokens)))
@@ -178,8 +405,6 @@ def compute_features(records: list[dict[str, Any]], cache_samples: bool = True) 
         }
         feature.update(sc)
         rows.append(feature)
-    if cache_samples:
-        cache_path.write_text("\n".join(sample_lines) + "\n", encoding="utf-8")
     return pd.DataFrame(rows)
 
 

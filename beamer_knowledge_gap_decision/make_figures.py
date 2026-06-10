@@ -45,6 +45,21 @@ COLORS = {
     "dark": "#1f2937",
 }
 
+CANDIDATE_LABELS = {
+    "all_modules": "all modules",
+    "no_evidence_sufficiency_verifier": "no sufficiency\nverifier",
+    "no_evidence_side_features": "no evidence-side\nfeatures",
+    "no_gap_type_classifier": "no gap-type\nclassifier",
+}
+
+ACTION_LABELS = {
+    "answer": "answer",
+    "ask": "ask",
+    "retrieve": "retrieve",
+    "abstain": "abstain",
+    "challenge_premise": "challenge",
+}
+
 plt.rcParams.update(
     {
         "figure.dpi": 160,
@@ -109,7 +124,13 @@ def plot_method_comparison() -> None:
     metrics = read_csv("results/metrics_summary.csv")
     ok = metrics[metrics["status"] == "ok"].sort_values("action_macro_f1")
     colors = [
-        COLORS["green"] if m == "Full Method" else COLORS["teal"] if m in {"Random Forest", "GBDT"} else COLORS["gray"]
+        COLORS["green"]
+        if m == "Logistic Regression"
+        else COLORS["amber"]
+        if m == "Full Method"
+        else COLORS["teal"]
+        if m in {"Random Forest", "GBDT"}
+        else COLORS["gray"]
         for m in ok["method"]
     ]
     fig, ax = plt.subplots(figsize=(10.5, 5.4))
@@ -120,20 +141,48 @@ def plot_method_comparison() -> None:
 
 def plot_utility_wrong_answer() -> None:
     metrics = read_csv("results/metrics_summary.csv")
-    ok = metrics[metrics["status"] == "ok"].copy()
-    fig, ax = plt.subplots(figsize=(9.5, 5.2))
-    sizes = 120 + 600 * ok["action_macro_f1"]
-    colors = [COLORS["green"] if m == "Full Method" else COLORS["red"] if m == "Always Answer" else COLORS["teal"] for m in ok["method"]]
-    ax.scatter(ok["wrong_answer_rate"], ok["score"], s=sizes, c=colors, alpha=0.78, edgecolor="white", linewidth=1.2)
-    for _, row in ok.iterrows():
-        label = row["method"].replace(" Similarity Threshold", "").replace(" Classifier", "")
-        ax.text(row["wrong_answer_rate"] + 0.012, row["score"] + 0.025, label, fontsize=8)
-    ax.axvline(0, color=COLORS["gray"], lw=1, alpha=0.4)
-    ax.axhline(0, color=COLORS["gray"], lw=1, alpha=0.4)
-    ax.set_xlabel("Wrong-answer rate")
-    ax.set_ylabel("Utility score")
-    ax.set_title("Utility rewards correctness and penalizes premature answers")
-    ax.grid(alpha=0.16)
+    ok = metrics[metrics["status"] == "ok"].copy().sort_values("score")
+    colors = [
+        COLORS["green"]
+        if m == "Logistic Regression"
+        else COLORS["amber"]
+        if m == "Full Method"
+        else COLORS["red"]
+        if m == "Always Answer"
+        else COLORS["teal"]
+        for m in ok["method"]
+    ]
+    labels = [
+        m.replace(" Similarity Threshold", "").replace(" Classifier", "").replace(" Baseline", "")
+        for m in ok["method"]
+    ]
+    y = np.arange(len(ok))
+    fig, axs = plt.subplots(1, 2, figsize=(12.2, 5.8), gridspec_kw={"width_ratios": [1.35, 1.0]})
+    axs[0].barh(y, ok["score"], color=colors, alpha=0.92)
+    axs[0].axvline(0, color=COLORS["dark"], lw=1)
+    axs[0].set_yticks(y)
+    axs[0].set_yticklabels(labels)
+    axs[0].set_xlabel("Utility score")
+    axs[0].set_title("Utility")
+    for i, v in enumerate(ok["score"]):
+        if v < -1:
+            axs[0].text(v + 0.08, i, f"{v:.3f}", va="center", ha="left", fontsize=8, color="white")
+        else:
+            ha = "left" if v >= 0 else "right"
+            dx = 0.025 if v >= 0 else -0.025
+            axs[0].text(v + dx, i, f"{v:.3f}", va="center", ha=ha, fontsize=8)
+    axs[0].grid(axis="x", alpha=0.16)
+
+    axs[1].barh(y, ok["wrong_answer_rate"], color=colors, alpha=0.92)
+    axs[1].set_yticks(y)
+    axs[1].set_yticklabels([])
+    axs[1].set_xlim(0, max(0.20, float(ok["wrong_answer_rate"].max()) + 0.08))
+    axs[1].set_xlabel("Wrong-answer rate")
+    axs[1].set_title("Premature answer risk")
+    for i, v in enumerate(ok["wrong_answer_rate"]):
+        axs[1].text(v + 0.01, i, f"{v:.3f}", va="center", fontsize=8)
+    axs[1].grid(axis="x", alpha=0.16)
+    fig.suptitle("Utility and wrong-answer risk", fontweight="bold", fontsize=14)
     save(fig, "utility_wrong_answer.png")
 
 
@@ -146,7 +195,7 @@ def plot_per_action_f1() -> None:
     fig, ax = plt.subplots(figsize=(11.5, 5.3))
     x = np.arange(len(labels))
     width = 0.15
-    palette = [COLORS["gray"], COLORS["cyan"], COLORS["teal"], COLORS["violet"], COLORS["green"]]
+    palette = [COLORS["gray"], COLORS["green"], COLORS["teal"], COLORS["violet"], COLORS["amber"]]
     for i, method in enumerate(methods):
         ax.bar(x + (i - 2) * width, pivot[method], width=width, label=method, color=palette[i])
     ax.set_xticks(x)
@@ -200,32 +249,57 @@ def plot_stability() -> None:
 
 
 def plot_error_categories() -> None:
-    path = ROOT / "results/error_analysis.json"
-    errors = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
-    translations = {
-        "其他动作混淆": "other action\nconfusion",
-        "time-sensitive 未触发 retrieve": "time-sensitive\nmissed retrieve",
-        "time-sensitive 未触发retrieve": "time-sensitive\nmissed retrieve",
-        "false premise compliance": "false-premise\ncompliance",
-    }
-    counts = pd.Series([translations.get(e["error_category"], e["error_category"]) for e in errors]).value_counts()
+    path = ROOT / "results/predictions_test.csv"
+    if path.exists():
+        pred = pd.read_csv(path)
+        errors = pred[pred["gold_action"] != pred["pred_action"]].copy()
+        labels = [
+            f"{ACTION_LABELS.get(g, g)} -> {ACTION_LABELS.get(p, p)}"
+            for g, p in zip(errors["gold_action"], errors["pred_action"])
+        ]
+    else:
+        fallback = ROOT / "results/error_analysis.json"
+        raw = json.loads(fallback.read_text(encoding="utf-8")) if fallback.exists() else []
+        labels = [
+            f"{ACTION_LABELS.get(e.get('gold_action', ''), e.get('gold_action', 'gold'))}"
+            f" -> {ACTION_LABELS.get(e.get('pred_action', ''), e.get('pred_action', 'pred'))}"
+            for e in raw
+        ]
+    counts = pd.Series(labels).value_counts()
     if counts.empty:
         counts = pd.Series({"No action errors": 1})
-    fig, ax = plt.subplots(figsize=(8.8, 4.2))
-    hbar(ax, counts.index, counts.values, COLORS["amber"], "Full Method residual errors", "Count")
+    counts = counts.head(10).sort_values()
+    fig, ax = plt.subplots(figsize=(9.2, 4.8))
+    colors = [
+        COLORS["red"] if "-> answer" in label and not label.startswith("answer") else COLORS["amber"]
+        for label in counts.index
+    ]
+    hbar(ax, counts.index, counts.values, colors, "Full Method residual action transitions", "Count")
     save(fig, "error_categories.png")
 
 
 def plot_validation_selection() -> None:
     df = read_csv("results/full_method_selection.csv")
-    fig, ax = plt.subplots(figsize=(8.8, 4.4))
-    colors = [COLORS["green"] if c == "no_evidence_side_features" else COLORS["gray"] for c in df["candidate"]]
-    ax.bar(df["candidate"], df["action_macro_f1"], color=colors)
-    ax.set_ylim(0.72, 0.90)
-    ax.set_ylabel("Validation action macro-F1")
-    ax.set_title("Validation-selected Full Method variant")
-    ax.tick_params(axis="x", rotation=20)
-    ax.grid(axis="y", alpha=0.16)
+    selected = df.sort_values(["action_macro_f1", "score"], ascending=False).iloc[0]["candidate"]
+    labels = [CANDIDATE_LABELS.get(c, c.replace("_", "\n")) for c in df["candidate"]]
+    y = np.arange(len(df))
+    fig, ax = plt.subplots(figsize=(10.2, 4.8))
+    height = 0.34
+    action_colors = [COLORS["green"] if c == selected else COLORS["teal"] for c in df["candidate"]]
+    score_colors = [COLORS["amber"] if c == selected else COLORS["gray"] for c in df["candidate"]]
+    ax.barh(y - height / 2, df["action_macro_f1"], height=height, color=action_colors, label="action macro-F1")
+    ax.barh(y + height / 2, df["score"], height=height, color=score_colors, label="utility score")
+    for i, (action, score) in enumerate(zip(df["action_macro_f1"], df["score"])):
+        ax.text(action + 0.012, i - height / 2, f"{action:.3f}", va="center", fontsize=8)
+        ax.text(score + 0.012, i + height / 2, f"{score:.3f}", va="center", fontsize=8)
+    ax.set_yticks(y)
+    ax.set_yticklabels(labels)
+    ax.invert_yaxis()
+    ax.set_xlim(0, max(0.72, float(df[["action_macro_f1", "score"]].to_numpy().max()) + 0.08))
+    ax.set_xlabel("Validation metric")
+    ax.set_title("Validation selection: highest action macro-F1 wins")
+    ax.legend(frameon=False, loc="lower right")
+    ax.grid(axis="x", alpha=0.16)
     save(fig, "validation_selection.png")
 
 

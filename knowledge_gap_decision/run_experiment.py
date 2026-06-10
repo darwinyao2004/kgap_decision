@@ -15,7 +15,7 @@ from .evaluate import (
     plot_utility,
     significance_rows,
 )
-from .features import compute_features, feature_columns
+from .features import SelfConsistencySamplingError, compute_features, feature_columns
 from .io_utils import ensure_dirs, read_jsonl, setup_logging, write_json
 from .models import (
     DualClassifier,
@@ -119,7 +119,7 @@ def _write_error_analysis(records: list[dict[str, Any]], full_pred, features: pd
     Path("results/error_analysis.md").write_text("\n".join(lines), encoding="utf-8")
 
 
-def _write_seed_stability(target_size: int, quick: bool) -> None:
+def _write_seed_stability(target_size: int, quick: bool, llm_client: DeepSeekClient) -> None:
     size = 100 if quick else target_size
     rows = []
     for seed in [13, 42, 101]:
@@ -127,8 +127,8 @@ def _write_seed_stability(target_size: int, quick: bool) -> None:
         splits = split_by_group(records, seed)
         train_all = splits["train"] + splits["val"]
         test = splits["test"]
-        train_features = compute_features(train_all, cache_samples=False)
-        test_features = compute_features(test, cache_samples=False)
+        train_features = compute_features(train_all, llm_client=llm_client)
+        test_features = compute_features(test, llm_client=llm_client)
         pred = full_method_predict(train_features, train_all, test_features, method_name=f"Full Method seed {seed}")
         metric = evaluate_prediction("Full Method", test, pred.gap_pred, pred.action_pred, pred.status)
         rows.append(
@@ -148,9 +148,10 @@ def _write_seed_stability(target_size: int, quick: bool) -> None:
 def _select_full_config(
     train_records: list[dict[str, Any]],
     val_records: list[dict[str, Any]],
+    llm_client: DeepSeekClient,
 ) -> dict[str, Any]:
-    train_features = compute_features(train_records, cache_samples=False)
-    val_features = compute_features(val_records, cache_samples=False)
+    train_features = compute_features(train_records, llm_client=llm_client)
+    val_features = compute_features(val_records, llm_client=llm_client)
     candidates: list[tuple[str, dict[str, Any]]] = [
         ("all_modules", {}),
         ("no_evidence_sufficiency_verifier", {"use_evidence_verifier": False}),
@@ -201,11 +202,19 @@ def run(
 
     llm_client = DeepSeekClient()
     api_available = False
+    if not llm_client.enabled:
+        raise SelfConsistencySamplingError(
+            "DEEPSEEK_API_KEY is not set. LLM self-consistency features cannot be generated without an API key."
+        )
     if probe_api:
         try:
             api_available = llm_client.is_available()
         except Exception as exc:
-            logger.warning("API probe failed and will use offline fallback: %s", type(exc).__name__)
+            raise SelfConsistencySamplingError(f"DeepSeek API probe failed: {type(exc).__name__}") from exc
+        if not api_available:
+            raise SelfConsistencySamplingError("DeepSeek API probe did not return the expected strict JSON response.")
+    else:
+        api_available = True
     api_status = {
         "provider": "deepseek",
         "model": llm_client.model,
@@ -213,13 +222,13 @@ def run(
         "deepseek_api_available": api_available,
         "api_key_present": bool(llm_client.enabled),
         "api_available": api_available,
-        "note": "DeepSeek API did not pass strict JSON probe; offline fallback used." if not api_available else "DeepSeek API available.",
+        "note": "DeepSeek API available; LLM self-consistency features use cached or newly sampled model outputs.",
     }
     write_json("results/api_status.json", api_status)
 
-    selected_full_kwargs = _select_full_config(train, val)
-    train_features = compute_features(train_all)
-    test_features = compute_features(test)
+    selected_full_kwargs = _select_full_config(train, val, llm_client)
+    train_features = compute_features(train_all, llm_client=llm_client)
+    test_features = compute_features(test, llm_client=llm_client)
     train_features.to_csv("data/processed/features_train.csv", index=False)
     test_features.to_csv("data/processed/features_test.csv", index=False)
 
@@ -309,7 +318,7 @@ def run(
     rank_df = rank_questions(test, full_pred.action_pred)
     rank_df.to_csv("results/question_ranker_eval.csv", index=False)
     _write_error_analysis(test, full_pred, test_features)
-    _write_seed_stability(target_size, quick)
+    _write_seed_stability(target_size, quick, llm_client)
 
     experiment_log = {
         "mode": "quick" if quick else "full",

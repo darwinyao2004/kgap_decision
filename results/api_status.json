@@ -4,6 +4,6 @@
   "deepseek_api_available": true,
   "deepseek_api_key_present": true,
   "model": "deepseek-v4-flash",
-  "note": "DeepSeek API available.",
+  "note": "DeepSeek API available; LLM self-consistency features use cached or newly sampled model outputs.",
   "provider": "deepseek"
 }

@@ -15,19 +15,19 @@
 - 数据标准化后按 group_id 划分，避免同源改写进入不同 split
 - 问题侧特征：长度、时间词、主观词、条件词、实体、错误前提模式、高风险关键词
 - 证据侧特征：TF-IDF 相似度、token overlap、覆盖率、冲突启发式
-- 模型侧特征：当前使用离线扰动近似 self-consistency；DeepSeek API 用于 Prompted LLM Baseline
+- 模型侧特征：DeepSeek 基于四个输入字段多次采样 action/rationale，再计算 vote entropy、majority ratio、rationale overlap 和动作票数
 - Full Method：分类器给出基础预测，用验证集选择稳定配置，规则只做保守安全覆盖
 
 ## 实验设置
 - 数据规模与标签分布
 - baselines 与模型参数
-- DeepSeek API 探测未通过时保留 baseline 状态行，但不把 skipped 结果当有效比较
+- DeepSeek API 探测或批量调用失败时实验直接停止，不写离线回退结果
 - 重复划分：使用多个随机种子检查 Full Method 稳定性
 
 ## 结果
 - 先讲 Always Answer 的风险：错误回答率高，效用显著为负
 - 再讲 Full Method：动作分数、效用和错误回答率
-- 必须说明新数据不再大面积满分，贡献主要体现在 self-consistency/不确定性特征
+- 说明 self-consistency 特征现在来自真实 LLM 采样，不读取任何 gold label 字段
 
 ## 消融
 - 展示 ablation_summary.csv
