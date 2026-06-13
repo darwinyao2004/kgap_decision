@@ -242,7 +242,9 @@ def plot_stability() -> None:
     ax.plot(df["seed"].astype(str), df["score"], marker="s", lw=2.5, color=COLORS["green"], label="utility")
     ax.set_ylim(0.75, 0.88)
     ax.set_xlabel("Split seed")
-    ax.set_title("Repeated split stability")
+    modes = set(df.get("generation_mode", pd.Series(dtype=str)).dropna().astype(str))
+    title = "Fallback-template split check" if modes == {"fallback_templates"} else "Repeated split stability"
+    ax.set_title(title)
     ax.grid(axis="y", alpha=0.16)
     ax.legend(frameon=False)
     save(fig, "stability.png")

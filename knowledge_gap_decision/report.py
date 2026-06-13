@@ -46,22 +46,26 @@ def _ablation_comment(ablation: pd.DataFrame) -> str:
             "随机森林动作分类器单独就能学到主要模式，所以额外规则、gap_type 输出和 self-consistency 特征没有在测试集上拉开差距。"
             "这不是“所有模块都没用”的证明，只说明现在的数据还不够难。"
         )
-    improved = changed.sort_values("delta_score", ascending=False).iloc[0]
-    worsened = changed.sort_values("delta_score").iloc[0]
     pieces = []
-    if improved["delta_score"] > 0:
+    improved = changed[changed["delta_score"] > 0].sort_values("delta_score", ascending=False)
+    worsened = changed[changed["delta_score"] < 0].sort_values("delta_score")
+    if not improved.empty:
+        names = "、".join(f"`{row['variant']}`" for _, row in improved.iterrows())
+        top = improved.iloc[0]
         pieces.append(
-            f"`{improved['variant']}` 的分数反而高出 Full Method {_fmt(improved['delta_score'])}，"
+            f"{names} 的分数反而高于 Full Method，最高差值为 {_fmt(top['delta_score'])}，"
             "说明 Full Method 的人工规则在这批样本上有过度干预。"
         )
-    if worsened["delta_score"] < 0:
+    if not worsened.empty:
+        names = "、".join(f"`{row['variant']}`" for _, row in worsened.iterrows())
+        bottom = worsened.iloc[0]
         pieces.append(
-            f"`{worsened['variant']}` 的分数下降 {_fmt(abs(worsened['delta_score']))}，"
+            f"{names} 会拉低分数，最大下降为 {_fmt(abs(bottom['delta_score']))}，"
             "这部分模块对当前决策边界有实际贡献。"
         )
     flat = ablation[ablation["delta_score"].abs() <= 1e-9]["variant"].tolist()
     if flat:
-        pieces.append("其余变体没有造成可见变化，主要原因仍是合成数据模式较强。")
+        pieces.append(f"`{'`、`'.join(flat)}` 没有造成可见变化。")
     return "".join(pieces)
 
 
@@ -70,11 +74,22 @@ def _stability_summary(stability: pd.DataFrame) -> str:
         return "未生成重复实验结果。"
     means = stability[["gap_type_macro_f1", "action_macro_f1", "score"]].mean()
     stds = stability[["gap_type_macro_f1", "action_macro_f1", "score"]].std(ddof=0)
+    generation_modes = set(stability.get("generation_mode", pd.Series(dtype=str)).dropna().astype(str))
+    primary_modes = set(stability.get("primary_generation_mode", pd.Series(dtype=str)).dropna().astype(str))
+    if generation_modes == {"fallback_templates"} and primary_modes and primary_modes != {"fallback"}:
+        prefix = (
+            "这组结果使用内置 fallback 模板数据做补充检查，不是当前 DeepSeek 主数据集的重复抽样；"
+            "因此只能说明代码流程在另一个可复现数据源上是否稳定，不能直接作为主结果置信度。"
+        )
+    elif generation_modes == {"fallback_templates"}:
+        prefix = "这组结果使用内置 fallback 模板数据做重复划分检查。"
+    else:
+        prefix = "这组结果使用当前数据生成模式做重复划分检查。"
     return (
-        f"三组随机划分下，Full Method 的 action macro-F1 均值为 {_fmt(means['action_macro_f1'])}，"
+        prefix + f"三组划分下，Full Method 的 action macro-F1 均值为 {_fmt(means['action_macro_f1'])}，"
         f"标准差为 {_fmt(stds['action_macro_f1'])}；综合效用均值为 {_fmt(means['score'])}，"
         f"标准差为 {_fmt(stds['score'])}。"
-        "这个稳定性来自同一生成协议下的样本分布，不能外推为真实用户分布下同样稳定。"
+        "该稳定性仍不能外推为真实用户分布下同样稳定。"
     )
 
 
@@ -110,9 +125,10 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
     abstract = (
         f"本实验把知识缺口场景下的问答决策拆成两个输出：缺口类型和回答动作。"
         f"项目构造了 {manifest['target_size']} 条统一格式样本，按 group_id 做 6:2:2 划分，比较固定动作、检索阈值、自一致性、结构化特征分类器、文本分类器和 Full Method。"
-        f"在当前 {mode} 运行中，Full Method 的 action macro-F1 为 {_fmt(full['action_macro_f1'])}，综合效用为 {_fmt(full['score'])}；"
+        f"在当前 {mode} 运行中，最佳方法是 {best['method']}，action macro-F1 为 {_fmt(best['action_macro_f1'])}，综合效用为 {_fmt(best['score'])}；"
+        f"Full Method 的 action macro-F1 为 {_fmt(full['action_macro_f1'])}，综合效用为 {_fmt(full['score'])}；"
         f"Always Answer 的 action macro-F1 为 {_fmt(always['action_macro_f1'])}，效用为 {_fmt(always['score'])}。"
-        "实验能说明规则化动作空间比直接回答更安全；同时，新数据下各方法不再大面积满分，消融结果能更清楚地显示 self-consistency/不确定性特征的贡献。"
+        "实验能说明规则化动作空间比直接回答更安全；同时，Full Method 并不是本次主测试集上的最优方法，简单可审计的监督分类器更值得作为主基线。"
     )
 
     lines = [
@@ -154,7 +170,10 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         "总体指标如下：",
         _table(metrics, ["method", "status", "gap_type_macro_f1", "action_macro_f1", "action_accuracy", "wrong_answer_rate", "score"], 20),
         "",
-        f"Full Method 的 action macro-F1 为 {_fmt(full['action_macro_f1'])}，action accuracy 为 {_fmt(full['action_accuracy'])}，wrong answer rate 为 {_fmt(full['wrong_answer_rate'])}，综合效用为 {_fmt(full['score'])}。相比 Always Answer，Full Method 的效用提升为 {_fmt(full['score'] - always['score'])}；相比 RAG 阈值法，效用差值为 {_fmt(full['score'] - rag['score'])}。固定回答策略的错误主要来自把追问、检索、拒答和纠错样本都硬答掉。新数据下 Prompted LLM Baseline、文本分类器和传统结构化模型之间拉开了差距，说明任务不再只是模板记忆。",
+        f"按综合效用排序，本次最佳方法是 {best['method']}，action macro-F1 为 {_fmt(best['action_macro_f1'])}，综合效用为 {_fmt(best['score'])}。"
+        f"Full Method 的 action macro-F1 为 {_fmt(full['action_macro_f1'])}，action accuracy 为 {_fmt(full['action_accuracy'])}，wrong answer rate 为 {_fmt(full['wrong_answer_rate'])}，综合效用为 {_fmt(full['score'])}。"
+        f"相比 Always Answer，Full Method 的效用提升为 {_fmt(full['score'] - always['score'])}；相比 RAG 阈值法，效用差值为 {_fmt(full['score'] - rag['score'])}。"
+        "固定回答策略的错误主要来自把追问、检索、拒答和纠错样本都硬答掉。新数据下 Prompted LLM Baseline、文本分类器和传统结构化模型之间拉开了差距，说明任务不再只是模板记忆；同时也说明 Full Method 的规则覆盖还需要重新设计，不能把它写成当前最强方法。",
         "",
         "主要类别指标保存在 `results/per_class_metrics.csv`。Full Method 的动作混淆矩阵见 `results/confusion_matrix_action.png`，缺口类型混淆矩阵见 `results/confusion_matrix_gap_type.png`，效用对比图见 `results/utility_comparison.png`。",
         "",
@@ -163,7 +182,7 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         "",
         _ablation_comment(ablation),
         "",
-        "重复划分实验：",
+        "重复划分补充检查：",
         _table(stability, ["seed", "test_size", "gap_type_macro_f1", "action_macro_f1", "action_accuracy", "wrong_answer_rate", "score"], 10) if not stability.empty else "（未生成）",
         "",
         _stability_summary(stability),
@@ -180,7 +199,7 @@ def generate_markdown(output: str = "reports/final_report.md") -> str:
         "\n".join(errors_md.splitlines()[2:30]) if errors_md else "当前测试集未记录错误案例。",
         "",
         "## 11. 结论",
-        f"本实验完成了一个可复现的动作决策流程：DeepSeek 数据生成、特征、模型、对照、消融、显著性检验和错误分析都能从脚本生成。当前结果支持一个比较朴素的结论：在知识缺口场景下，把“是否回答”拆成更细的动作标签，比默认直接回答更稳；不确定性/self-consistency 特征是本次 Full Method 的主要增益来源。",
+        f"本实验完成了一个可复现的动作决策流程：DeepSeek 数据生成、特征、模型、对照、消融、显著性检验和错误分析都能从脚本生成。当前结果支持一个比较朴素的结论：在知识缺口场景下，把“是否回答”拆成更细的动作标签，比默认直接回答更稳。本次主测试集上最强的是 {best['method']}，Full Method 更适合作为工程化组合基线；不确定性/self-consistency 特征对 Full Method 有贡献，但人工规则覆盖仍需要重做。",
         "",
         "## 12. 局限性",
         "- 数据由 DeepSeek 按受控 scenario 生成，并非真实线上用户日志；真实用户分布可能不同。",
@@ -247,11 +266,11 @@ def generate_outline(path: str = "reports/presentation_outline.md") -> None:
 - 数据规模与标签分布
 - baselines 与模型参数
 - DeepSeek API 探测或批量调用失败时实验直接停止，不写离线回退结果
-- 重复划分：使用多个随机种子检查 Full Method 稳定性
+- 重复划分补充检查：当前文件使用 fallback 模板数据，不等同于 DeepSeek 主数据集的重复抽样
 
 ## 结果
 - 先讲 Always Answer 的风险：错误回答率高，效用显著为负
-- 再讲 Full Method：动作分数、效用和错误回答率
+- 再讲 Logistic Regression 是当前最佳主结果，Full Method 是工程化组合基线
 - 说明 self-consistency 特征现在来自真实 LLM 采样，不读取任何 gold label 字段
 
 ## 消融
@@ -268,6 +287,7 @@ def generate_outline(path: str = "reports/presentation_outline.md") -> None:
 ## 结论
 - 联合建模让“问、查、拒、纠错”都成为可评估动作
 - 当前项目优势在可复现流程完整
+- 当前主结果应以 Logistic Regression 为最佳监督基线，不能把 Full Method 写成最优
 - 最大限制是数据仍为 LLM 生成；下一步应补真实用户问句、人工复核标签和更难的相邻标签样本
 """
     Path(path).write_text(outline, encoding="utf-8")

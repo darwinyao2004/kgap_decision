@@ -1,4 +1,4 @@
-seed,test_size,gap_type_macro_f1,action_macro_f1,action_accuracy,wrong_answer_rate,score
-13,160,0.85929493748719,0.8347680145228823,0.875,0.0,0.8155
-42,160,0.8846320346320347,0.8064335664335666,0.875,0.0,0.80975
-101,160,0.8808041609399844,0.8355750487329434,0.8625,0.0,0.8015000000000001
+seed,generation_mode,primary_generation_mode,method_config,test_size,gap_type_macro_f1,action_macro_f1,action_accuracy,wrong_answer_rate,score
+13,fallback_templates,deepseek,"{""use_evidence_verifier"": false}",160,0.8823529411764707,0.8616470588235293,0.9125,0.0,0.8574999999999999
+42,fallback_templates,deepseek,"{""use_evidence_verifier"": false}",160,0.9142857142857144,0.8400000000000001,0.925,0.0,0.86575
+101,fallback_templates,deepseek,"{""use_evidence_verifier"": false}",160,0.9103313840155945,0.8744639376218324,0.9125,0.0,0.8574999999999999

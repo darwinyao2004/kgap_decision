@@ -22,11 +22,11 @@
 - 数据规模与标签分布
 - baselines 与模型参数
 - DeepSeek API 探测或批量调用失败时实验直接停止，不写离线回退结果
-- 重复划分：使用多个随机种子检查 Full Method 稳定性
+- 重复划分补充检查：当前文件使用 fallback 模板数据，不等同于 DeepSeek 主数据集的重复抽样
 
 ## 结果
 - 先讲 Always Answer 的风险：错误回答率高，效用显著为负
-- 再讲 Full Method：动作分数、效用和错误回答率
+- 再讲 Logistic Regression 是当前最佳主结果，Full Method 是工程化组合基线
 - 说明 self-consistency 特征现在来自真实 LLM 采样，不读取任何 gold label 字段
 
 ## 消融
@@ -43,4 +43,5 @@
 ## 结论
 - 联合建模让“问、查、拒、纠错”都成为可评估动作
 - 当前项目优势在可复现流程完整
+- 当前主结果应以 Logistic Regression 为最佳监督基线，不能把 Full Method 写成最优
 - 最大限制是数据仍为 LLM 生成；下一步应补真实用户问句、人工复核标签和更难的相邻标签样本

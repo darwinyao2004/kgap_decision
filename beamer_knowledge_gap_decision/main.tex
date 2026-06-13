@@ -62,7 +62,7 @@
     \item Problem: why action selection matters before generation
     \item Project design: data schema, labels, and evaluation targets
     \item Engineering implementation: code structure and main functions
-    \item Results: method comparison, ablations, stability, and errors
+    \item Results: method comparison, ablations, fallback checks, and errors
     \item Limitations: current evidence, boundaries, and next validation targets
   \end{itemize}
 \end{frame}
@@ -202,7 +202,7 @@
     \item \code{run_experiment.run}: one entry point for dataset creation, features, models, metrics, and plots.
     \item \code{_select_full_config}: picks a Full Method variant on validation data.
     \item \code{_write_error_analysis}: writes sampled real mistakes with key feature values.
-    \item \code{_write_seed_stability}: reruns the Full Method on three split seeds.
+    \item \code{_write_seed_stability}: runs a labeled fallback-template split check on three seeds.
     \item \code{scripts/run_full_experiment.py} and \code{Makefile} provide command-line wrappers.
   \end{itemize}
 \end{frame}
@@ -286,7 +286,7 @@
   \img[0.88\linewidth]{significance_forest.png}
 \end{frame}
 
-\begin{frame}{Repeated Split Stability}
+\begin{frame}{Fallback-template Split Check}
   \centering
   \img[0.78\linewidth]{stability.png}
 \end{frame}
@@ -313,6 +313,7 @@
     \item Simple supervised learning is the strongest result: Logistic Regression beats Full Method, Random Forest, GBDT, and prompted DeepSeek on this split.
     \item Full Method adds engineering structure; the test split favors the simpler linear classifier.
     \item Prompted DeepSeek is semantically competent and answers too often in risky or under-supported cases.
+    \item The fallback-template split check is only a supplementary code-path check, not evidence that the DeepSeek main split is equally stable.
     \item Real LLM self-consistency is useful as a feature group; direct majority voting remains weak.
   \end{itemize}
 \end{frame}

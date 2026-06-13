@@ -119,7 +119,21 @@ def _write_error_analysis(records: list[dict[str, Any]], full_pred, features: pd
     Path("results/error_analysis.md").write_text("\n".join(lines), encoding="utf-8")
 
 
-def _write_seed_stability(target_size: int, quick: bool, llm_client: DeepSeekClient) -> None:
+def _write_seed_stability(
+    target_size: int,
+    quick: bool,
+    llm_client: DeepSeekClient,
+    full_kwargs: dict[str, Any],
+    primary_generation_mode: str,
+) -> None:
+    """Run a lightweight split check on deterministic fallback records.
+
+    The primary full experiment may use DeepSeek-generated records, but only the
+    fallback generator can be reproduced for arbitrary seeds without spending API
+    calls and changing the benchmark. The output therefore records its scope
+    explicitly so reports do not present it as a repeated run of the main test
+    distribution.
+    """
     size = 100 if quick else target_size
     rows = []
     for seed in [13, 42, 101]:
@@ -129,11 +143,14 @@ def _write_seed_stability(target_size: int, quick: bool, llm_client: DeepSeekCli
         test = splits["test"]
         train_features = compute_features(train_all, llm_client=llm_client)
         test_features = compute_features(test, llm_client=llm_client)
-        pred = full_method_predict(train_features, train_all, test_features, method_name=f"Full Method seed {seed}")
+        pred = full_method_predict(train_features, train_all, test_features, method_name=f"Full Method seed {seed}", **full_kwargs)
         metric = evaluate_prediction("Full Method", test, pred.gap_pred, pred.action_pred, pred.status)
         rows.append(
             {
                 "seed": seed,
+                "generation_mode": "fallback_templates",
+                "primary_generation_mode": primary_generation_mode,
+                "method_config": json.dumps(full_kwargs, ensure_ascii=False, sort_keys=True),
                 "test_size": len(test),
                 "gap_type_macro_f1": metric["gap_type_macro_f1"],
                 "action_macro_f1": metric["action_macro_f1"],
@@ -318,7 +335,7 @@ def run(
     rank_df = rank_questions(test, full_pred.action_pred)
     rank_df.to_csv("results/question_ranker_eval.csv", index=False)
     _write_error_analysis(test, full_pred, test_features)
-    _write_seed_stability(target_size, quick, llm_client)
+    _write_seed_stability(target_size, quick, llm_client, selected_full_kwargs, manifest["generation_mode"])
 
     experiment_log = {
         "mode": "quick" if quick else "full",
